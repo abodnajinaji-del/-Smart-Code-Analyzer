@@ -1,0 +1,2071 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🧠 Smart Code Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root, body[data-theme="dark"]{
+    --bg:#070a14; --bg-rad1:#2a1a5e; --bg-rad2:#0d3450; --bg-rad3:#1a0f33;
+    --panel:rgba(15,22,41,.95); --panel2:rgba(10,17,34,.95);
+    --line:#1e2b4a; --txt:#e6ecff; --muted:#8b9bc9;
+    --acc:#7c5cff; --acc2:#22d3ee; --acc3:#f472b6;
+    --ok:#34d399; --warn:#fbbf24; --danger:#f87171;
+    --code-bg:#050a16; --code-txt:#d5e2ff; --code-accent:#7dd3fc;
+    --btn-bg:#141d38; --btn-hover:#1c2850; --select-bg:#0a1226;
+    --item-bg:rgba(255,255,255,.02); --item-hover:rgba(124,92,255,.06); --item-text:#cfd9f7;
+    --shadow:0 20px 60px rgba(0,0,0,.5); --inset:inset 0 1px 0 rgba(255,255,255,.03);
+    --summary-bg:linear-gradient(135deg,rgba(124,92,255,.1),rgba(34,211,238,.05));
+    --summary-border:rgba(124,92,255,.3);
+    --summary-li-bg:rgba(124,92,255,.15); --summary-li-txt:#c4b5fd;
+    --score-bg:linear-gradient(135deg,rgba(124,92,255,.12),rgba(34,211,238,.08));
+    --score-border:rgba(124,92,255,.35);
+    --code-compare-bg:#040814;
+    --info-card-bg:rgba(34,211,238,.06); --info-card-border:rgba(34,211,238,.2);
+    --fix-danger-bg:rgba(248,113,113,.05); --fix-danger-border:rgba(248,113,113,.3);
+    --fix-warn-bg:rgba(251,191,36,.05); --fix-warn-border:rgba(251,191,36,.3);
+    --fix-info-bg:rgba(52,211,153,.05); --fix-info-border:rgba(52,211,153,.3);
+    --metric-bg:rgba(124,92,255,.08); --metric-border:rgba(124,92,255,.25); --metric-val:#22d3ee;
+    --toggle-bg:#0a1226;
+  }
+  body[data-theme="light"]{
+    --bg:#f5f7fd; --bg-rad1:#e0e7ff; --bg-rad2:#cffafe; --bg-rad3:#fce7f3;
+    --panel:rgba(255,255,255,.98); --panel2:rgba(248,250,255,.98);
+    --line:#d5dcef; --txt:#0f172a; --muted:#5b678a;
+    --acc:#6366f1; --acc2:#0891b2; --acc3:#db2777;
+    --ok:#059669; --warn:#d97706; --danger:#dc2626;
+    --code-bg:#f1f5f9; --code-txt:#1e293b; --code-accent:#0369a1;
+    --btn-bg:#eef2ff; --btn-hover:#e0e7ff; --select-bg:#fff;
+    --item-bg:rgba(99,102,241,.03); --item-hover:rgba(99,102,241,.08); --item-text:#334155;
+    --shadow:0 10px 40px rgba(80,90,150,.12); --inset:inset 0 1px 0 rgba(255,255,255,.9);
+    --summary-bg:linear-gradient(135deg,rgba(99,102,241,.1),rgba(8,145,178,.06));
+    --summary-border:rgba(99,102,241,.35);
+    --summary-li-bg:rgba(99,102,241,.12); --summary-li-txt:#4338ca;
+    --score-bg:linear-gradient(135deg,rgba(99,102,241,.12),rgba(8,145,178,.08));
+    --score-border:rgba(99,102,241,.4);
+    --code-compare-bg:#f8fafc;
+    --info-card-bg:rgba(8,145,178,.07); --info-card-border:rgba(8,145,178,.25);
+    --fix-danger-bg:rgba(220,38,38,.05); --fix-danger-border:rgba(220,38,38,.3);
+    --fix-warn-bg:rgba(217,119,6,.06); --fix-warn-border:rgba(217,119,6,.3);
+    --fix-info-bg:rgba(5,150,105,.06); --fix-info-border:rgba(5,150,105,.3);
+    --metric-bg:rgba(99,102,241,.08); --metric-border:rgba(99,102,241,.25); --metric-val:#0891b2;
+    --toggle-bg:#f1f5f9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Tajawal','Inter',system-ui,sans-serif;
+    background:
+      radial-gradient(1000px 600px at 85% -5%,var(--bg-rad1) 0%,transparent 55%),
+      radial-gradient(800px 500px at 0% 100%,var(--bg-rad2) 0%,transparent 55%),
+      radial-gradient(600px 400px at 50% 50%,var(--bg-rad3) 0%,transparent 70%), var(--bg);
+    color:var(--txt);min-height:100vh;padding:18px;transition:background .35s,color .35s;
+    line-height:1.6;
+  }
+  body[dir="ltr"]{font-family:'Inter','Tajawal',system-ui,sans-serif}
+
+  /* ============ Header ============ */
+  header{text-align:center;margin-bottom:22px;position:relative;padding-top:52px}
+  header h1{
+    font-size:clamp(22px,4.5vw,38px);font-weight:800;letter-spacing:-.5px;
+    background:linear-gradient(120deg,var(--acc),var(--acc2),var(--acc3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:6px;
+  }
+  header p{color:var(--muted);font-size:14px;font-weight:500}
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+    background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.35);
+    color:var(--ok);border-radius:999px;padding:5px 15px;font-size:12.5px;font-weight:600;
+  }
+  .badge::before{content:'●';animation:pulse 1.5s infinite}
+  @keyframes pulse{50%{opacity:.35}}
+
+  /* ============ Topbar toggles ============ */
+  .topbar{
+    position:absolute;top:0;inset-inline-end:0;display:flex;gap:10px;
+    flex-wrap:wrap;justify-content:flex-end;
+  }
+  .toggleGroup{
+    display:flex;gap:4px;background:var(--toggle-bg);
+    border:1px solid var(--line);border-radius:12px;padding:4px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+  }
+  .toggleGroup button{
+    padding:7px 13px;font-size:12.5px;border:none;background:transparent;
+    color:var(--muted);border-radius:8px;font-weight:600;transition:.2s;
+    font-family:inherit;cursor:pointer;
+  }
+  .toggleGroup button:hover{background:var(--btn-hover);color:var(--txt)}
+  .toggleGroup button.active{
+    background:linear-gradient(120deg,var(--acc),var(--acc2));
+    color:#fff;font-weight:700;box-shadow:0 4px 12px rgba(124,92,255,.35);
+  }
+
+  /* ============ Layout ============ */
+  .wrap{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:18px}
+  @media(min-width:1050px){.wrap{grid-template-columns:1fr 1.1fr}}
+  .panel{
+    background:linear-gradient(180deg,var(--panel),var(--panel2));
+    border:1px solid var(--line);border-radius:18px;padding:18px;
+    display:flex;flex-direction:column;gap:14px;
+    box-shadow:var(--shadow),var(--inset);backdrop-filter:blur(10px);
+    transition:background .35s,border-color .35s;
+  }
+  .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
+  .toolbar h2{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .left{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+  /* ============ Inputs & buttons ============ */
+  select{
+    background:var(--select-bg);color:var(--txt);border:1px solid var(--line);
+    border-radius:10px;padding:10px 14px;font-family:inherit;font-size:13.5px;
+    outline:none;cursor:pointer;font-weight:600;transition:.2s;
+  }
+  select:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(124,92,255,.15)}
+
+  .btn{
+    font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;
+    border-radius:11px;padding:10px 16px;border:1px solid var(--line);
+    background:var(--btn-bg);color:var(--txt);transition:all .18s;
+    display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    white-space:nowrap;
+  }
+  .btn:hover:not(:disabled){background:var(--btn-hover);transform:translateY(-1px);border-color:var(--acc)}
+  .btn:active:not(:disabled){transform:translateY(0)}
+  .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
+  .btn-primary{
+    background:linear-gradient(135deg,#7c5cff,#22d3ee);
+    color:#fff;border:none;font-weight:800;font-size:15px;
+    padding:14px 28px;border-radius:14px;
+    box-shadow:0 8px 24px rgba(124,92,255,.4), inset 0 1px 0 rgba(255,255,255,.2);
+    min-width:200px;
+  }
+  .btn-primary:hover:not(:disabled){
+    transform:translateY(-2px);
+    box-shadow:0 14px 36px rgba(124,92,255,.55), inset 0 1px 0 rgba(255,255,255,.2);
+    filter:brightness(1.06);
+  }
+  .btn-primary:active:not(:disabled){
+    transform:translateY(0);
+    box-shadow:0 4px 12px rgba(124,92,255,.4);
+  }
+  .btn-primary:disabled{opacity:.75;cursor:wait}
+
+  .btnSpinner{
+    width:14px;height:14px;border:2px solid rgba(255,255,255,.35);
+    border-top-color:#fff;border-radius:50%;
+    animation:spin .7s linear infinite;display:inline-block;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ============ Textarea ============ */
+  textarea{
+    width:100%;min-height:320px;resize:vertical;background:var(--code-bg);
+    color:var(--code-txt);border:1px solid var(--line);border-radius:12px;
+    padding:14px;font-family:'Fira Code',Consolas,monospace;font-size:13.5px;
+    line-height:1.75;direction:ltr;text-align:left;outline:none;tab-size:2;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(124,92,255,.15)}
+  textarea::placeholder{color:var(--muted);opacity:.7}
+
+  .stats{display:flex;gap:16px;color:var(--muted);font-size:12.5px;flex-wrap:wrap}
+  .stats b{color:var(--acc2);font-weight:700}
+
+  /* ============ Level bar ============ */
+  .levelBar{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+    background:var(--toggle-bg);border:1px solid var(--line);
+    border-radius:14px;padding:6px;
+  }
+  .levelBtn{
+    background:transparent;border:none;color:var(--muted);
+    padding:12px 8px;border-radius:10px;font-size:13.5px;font-weight:700;
+    transition:.2s;font-family:inherit;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+  }
+  .levelBtn:hover{background:var(--btn-hover);color:var(--txt)}
+  .levelBtn.active{
+    background:linear-gradient(120deg,var(--acc),var(--acc2));
+    color:#fff;box-shadow:0 6px 18px rgba(124,92,255,.4);
+  }
+  .levelBtn .icon{font-size:17px}
+
+  .levelHint{
+    font-size:12.5px;color:var(--muted);text-align:center;
+    padding:10px 14px;border-radius:10px;background:var(--item-bg);
+    line-height:1.6;border:1px dashed var(--line);
+  }
+
+  /* ============ Result ============ */
+  .result{flex:1;overflow-y:auto;max-height:75vh;padding-inline-end:8px;line-height:1.85;font-size:14.5px}
+  .result::-webkit-scrollbar{width:8px}
+  .result::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+  .result::-webkit-scrollbar-track{background:transparent}
+
+  .empty{color:var(--muted);text-align:center;padding:70px 20px;font-size:15px;line-height:2.1}
+  .empty .big{font-size:56px;display:block;margin-bottom:16px;filter:drop-shadow(0 0 20px rgba(124,92,255,.4))}
+
+  .summary{
+    background:var(--summary-bg);border:1px solid var(--summary-border);
+    border-radius:14px;padding:16px;margin-bottom:16px;
+  }
+  .summary h3{font-size:16px;margin-bottom:10px;color:var(--acc2);display:flex;align-items:center;gap:8px;font-weight:800}
+  .summary p{color:var(--item-text);line-height:1.75}
+  .summary ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .summary li{
+    background:var(--summary-li-bg);border:1px solid var(--summary-border);
+    border-radius:999px;padding:5px 13px;font-size:12.5px;color:var(--summary-li-txt);
+    font-weight:600;
+  }
+  .summary li b{color:var(--txt)}
+
+  .section-title{
+    font-size:15px;font-weight:800;color:var(--acc2);margin:22px 0 10px;
+    display:flex;align-items:center;gap:8px;
+    border-bottom:1px solid var(--line);padding-bottom:8px;
+  }
+  .section-title::before{content:'▸';color:var(--acc)}
+
+  .item{
+    border-inline-start:3px solid var(--acc);background:var(--item-bg);
+    border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:9px;transition:.18s;
+  }
+  .item:hover{background:var(--item-hover);border-inline-start-color:var(--acc2)}
+  .item code{
+    display:block;font-family:'Fira Code',monospace;font-size:12.5px;
+    direction:ltr;text-align:left;color:var(--code-accent);background:var(--code-bg);
+    border:1px solid var(--line);border-radius:8px;padding:7px 11px;margin-bottom:7px;
+    overflow-x:auto;white-space:pre;
+  }
+  .item p{color:var(--item-text);font-size:14px;line-height:1.8}
+
+  .cat{
+    display:inline-block;font-size:11px;background:rgba(34,211,238,.15);
+    color:var(--acc2);border-radius:6px;padding:2px 9px;margin-inline-end:8px;
+    font-weight:700;
+  }
+  .cat.warn{background:rgba(251,191,36,.15);color:var(--warn)}
+  .cat.danger{background:rgba(248,113,113,.15);color:var(--danger)}
+  .cat.ok{background:rgba(52,211,153,.15);color:var(--ok)}
+
+  .fixBlock{
+    background:var(--fix-danger-bg);border:1px solid var(--fix-danger-border);
+    border-radius:12px;padding:14px;margin-bottom:12px;
+  }
+  .fixBlock.warn{background:var(--fix-warn-bg);border-color:var(--fix-warn-border)}
+  .fixBlock.info{background:var(--fix-info-bg);border-color:var(--fix-info-border)}
+  .fixBlock h4{font-size:14px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .fixBlock.danger h4{color:var(--danger)}
+  .fixBlock.warn h4{color:var(--warn)}
+  .fixBlock.info h4{color:var(--ok)}
+  .fixBlock .desc{color:var(--item-text);font-size:13.5px;margin-bottom:10px;line-height:1.75}
+
+  .codeCompare{display:grid;grid-template-columns:1fr;gap:10px;direction:ltr;text-align:left}
+  @media(min-width:520px){.codeCompare{grid-template-columns:1fr 1fr}}
+  .codeBox{background:var(--code-compare-bg);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .codeBox .head{font-size:11px;font-weight:700;padding:6px 11px;border-bottom:1px solid var(--line)}
+  .codeBox.bad .head{background:rgba(248,113,113,.15);color:var(--danger)}
+  .codeBox.good .head{background:rgba(52,211,153,.15);color:var(--ok)}
+  .codeBox pre{font-family:'Fira Code',monospace;font-size:12px;padding:11px;overflow-x:auto;line-height:1.65;color:var(--code-txt)}
+  .codeBox.bad pre{color:var(--danger)}
+  .codeBox.good pre{color:var(--ok)}
+  body[data-theme="light"] .codeBox.bad pre{color:#b91c1c}
+  body[data-theme="light"] .codeBox.good pre{color:#047857}
+
+  .info-card{background:var(--info-card-bg);border:1px solid var(--info-card-border);border-radius:12px;padding:14px;margin-bottom:12px}
+  .info-card h4{color:var(--acc2);font-size:14px;margin-bottom:8px;font-weight:800}
+  .info-card p{color:var(--item-text);font-size:13px;line-height:1.85;font-family:'Fira Code',monospace;direction:ltr;text-align:left;color:var(--acc2);word-break:break-word}
+
+  .metric-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:10px;margin-bottom:16px}
+  .metric{background:var(--metric-bg);border:1px solid var(--metric-border);border-radius:12px;padding:13px;text-align:center}
+  .metric .val{font-size:24px;font-weight:800;color:var(--metric-val);line-height:1.2}
+  .metric .lbl{font-size:11.5px;color:var(--muted);margin-top:5px;font-weight:600}
+
+  .loading{display:flex;flex-direction:column;align-items:center;gap:14px;color:var(--acc2);padding:60px 20px;font-size:15px;font-weight:600}
+  .spinner{
+    width:46px;height:46px;border:3px solid rgba(124,92,255,.2);
+    border-top-color:var(--acc);border-inline-end-color:var(--acc2);
+    border-radius:50%;animation:spin .8s linear infinite;
+  }
+  .err{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.4);color:var(--danger);
+    border-radius:10px;padding:14px;font-size:14px;line-height:1.8;font-weight:600}
+
+  .scoreCard{
+    display:flex;align-items:center;gap:16px;background:var(--score-bg);
+    border:1px solid var(--score-border);border-radius:14px;padding:16px;margin-bottom:16px;
+  }
+  .scoreCircle{
+    width:82px;height:82px;border-radius:50%;display:flex;
+    align-items:center;justify-content:center;font-size:24px;font-weight:800;
+    position:relative;flex-shrink:0;color:var(--txt);
+  }
+  .scoreCircle::before{
+    content:'';position:absolute;inset:0;border-radius:50%;padding:4px;
+    background:conic-gradient(var(--score-color,var(--ok)) var(--score-deg,0deg),rgba(128,128,128,.15) 0deg);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+  }
+  .scoreInfo h3{font-size:16px;margin-bottom:6px;font-weight:800}
+  .scoreInfo p{color:var(--muted);font-size:13px;line-height:1.7}
+
+  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;opacity:.75;padding:0 12px}
+
+  @media(max-width:700px){
+    header{padding-top:100px}
+    .topbar{inset-inline:0;justify-content:center}
+    .btn-primary{min-width:auto;width:100%}
+  }
+</style>
+</head>
+<body data-level="easy" data-theme="dark" dir="rtl">
+
+<header>
+  <div class="topbar">
+    <div class="toggleGroup">
+      <button id="themeDark" class="active" type="button">🌙 <span id="lblThemeDark">داكن</span></button>
+      <button id="themeLight" type="button">☀️ <span id="lblThemeLight">فاتح</span></button>
+    </div>
+    <div class="toggleGroup">
+      <button id="langAr" class="active" type="button">🇸🇦 عربي</button>
+      <button id="langEn" type="button">🇬🇧 EN</button>
+    </div>
+  </div>
+  <h1 id="title">🧠 المُحلِّل الذكي للكود</h1>
+  <p id="subtitle">ثلاثة مستويات — اختر المناسب لك</p>
+  <div class="badge" id="badge">يعمل بدون إنترنت · بدون API</div>
+</header>
+
+<div class="wrap">
+  <!-- INPUT PANEL -->
+  <section class="panel">
+    <div class="toolbar">
+      <div class="left">
+        <select id="lang">
+          <option value="auto">🔍 اكتشاف تلقائي</option>
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+          <option value="javascript">JavaScript</option>
+          <option value="python">Python</option>
+          <option value="php">PHP</option>
+        </select>
+      </div>
+      <div class="left">
+        <button class="btn" id="exampleBtn" type="button">📄 مثال</button>
+        <button class="btn" id="clearBtn" type="button">🗑️ مسح</button>
+      </div>
+    </div>
+
+    <textarea id="code" spellcheck="false" placeholder="اكتب أو الصق كودك هنا..."></textarea>
+
+    <div class="stats">
+      <span id="lblStatLines">📏 الأسطر:</span> <b id="statLines">0</b>
+      <span id="lblStatChars">🔤 الأحرف:</span> <b id="statChars">0</b>
+      <span id="lblStatLang">🌐 اللغة:</span> <b id="statLang">—</b>
+    </div>
+
+    <div class="levelBar" role="tablist">
+      <button class="levelBtn active" data-level="easy" type="button">
+        <span class="icon">🌱</span><span id="lblLevelEasy">سهل جدًا</span>
+      </button>
+      <button class="levelBtn" data-level="normal" type="button">
+        <span class="icon">⚡</span><span id="lblLevelNormal">طبيعي</span>
+      </button>
+      <button class="levelBtn" data-level="expert" type="button">
+        <span class="icon">🎓</span><span id="lblLevelExpert">خبير</span>
+      </button>
+    </div>
+
+    <div class="levelHint" id="levelHint"></div>
+
+    <button class="btn-primary" id="explainBtn" type="button">⚡ حلّل واشرح</button>
+  </section>
+
+  <!-- RESULT PANEL -->
+  <section class="panel">
+    <div class="toolbar">
+      <h2 id="resultTitle">📖 النتيجة</h2>
+      <button class="btn" id="copyBtn" type="button">📋 نسخ</button>
+    </div>
+    <div class="result" id="result">
+      <div class="empty" id="emptyState">
+        <span class="big">👈</span>
+        <span id="emptyMsg">الصق أي كود واضغط «حلّل واشرح»</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer id="footer">محرّك تحليل ذكي محلي · يعمل بدون إنترنت</footer>
+
+<script>
+"use strict";
+
+/* =========================================================
+   1) i18n
+   ========================================================= */
+const I18N = {
+  ar:{
+    title:'🧠 المُحلِّل الذكي للكود', subtitle:'ثلاثة مستويات — اختر المناسب لك',
+    badge:'يعمل بدون إنترنت · بدون API',
+    themeDark:'داكن', themeLight:'فاتح',
+    langAuto:'🔍 اكتشاف تلقائي', btnExample:'📄 مثال', btnClear:'🗑️ مسح',
+    statLines:'📏 الأسطر:', statChars:'🔤 الأحرف:', statLang:'🌐 اللغة:',
+    levelEasy:'سهل جدًا', levelNormal:'طبيعي', levelExpert:'خبير',
+    btnAnalyze:'⚡ حلّل واشرح', resultTitle:'📖 النتيجة', btnCopy:'📋 نسخ',
+    emptyMsg:'الصق أي كود واضغط «حلّل واشرح»',
+    footer:'محرّك تحليل ذكي محلي · يعمل بدون إنترنت',
+    loading:'جارٍ التحليل…', copied:'✅ تم النسخ', copyFail:'تعذّر النسخ.',
+    noCode:'⚠️ اكتب كودًا أولًا.', analysisError:'❌ خطأ:',
+    overview:'🎯 نظرة عامة', score:'التقييم',
+    scorePerfect:'كود نظيف ومحترف! 👏',
+    scoreGood:'كود جيد مع بعض التحسينات.',
+    scoreMid:'يحتاج تحسينات مهمة.',
+    scoreBad:'يحتاج إعادة نظر جدية.',
+    sectionSecurity:'🔒 تنبيهات أمنية', sectionIssues:'⚠️ أخطاء وملاحظات',
+    sectionTips:'💡 نصائح', sectionFixes:'🔧 إصلاحات مقترحة',
+    sectionSymbols:'🔍 الرموز', sectionExplain:'📖 شرح تفصيلي',
+    danger:'خطر', warn:'تحذير', tip:'نصيحة',
+    goodCode:'✅ الكود المُصحَّح', badCode:'❌ الكود الحالي',
+    language:'اللغة:', codeLines:'أسطر فعّالة:', comments:'تعليقات:',
+    functions:'دوال:', variables:'متغيرات:', classes:'كلاسات:', nesting:'عمق التداخل:',
+    totalLines:'إجمالي الأسطر', avgLen:'متوسط الطول',
+    classesHead:'📦 الكلاسات', funcsHead:'⚙️ الدوال',
+    varsHead:'📝 المتغيرات', importsHead:'📚 المكتبات',
+    hiddenMsg:'… وتم إخفاء {n} عنصرًا.',
+    hintEasy:'🌱 شرح مبسّط جدًا — كأنك في أول يوم لك في البرمجة',
+    hintNormal:'⚡ شرح تقني واضح لمن بدأ البرمجة منذ فترة',
+    hintExpert:'🎓 شرح متقدّم بعمق تقني للمحترفين',
+    phText:'اكتب أو الصق كودك هنا...'
+  },
+  en:{
+    title:'🧠 Smart Code Analyzer', subtitle:'Three levels — pick the one that fits you',
+    badge:'Works offline · No API',
+    themeDark:'Dark', themeLight:'Light',
+    langAuto:'🔍 Auto-detect', btnExample:'📄 Example', btnClear:'🗑️ Clear',
+    statLines:'📏 Lines:', statChars:'🔤 Chars:', statLang:'🌐 Language:',
+    levelEasy:'Very Easy', levelNormal:'Normal', levelExpert:'Expert',
+    btnAnalyze:'⚡ Analyze & Explain', resultTitle:'📖 Result', btnCopy:'📋 Copy',
+    emptyMsg:'Paste any code and press "Analyze & Explain"',
+    footer:'Local smart analysis engine · Works offline',
+    loading:'Analyzing…', copied:'✅ Copied', copyFail:'Copy failed.',
+    noCode:'⚠️ Please enter code first.', analysisError:'❌ Error:',
+    overview:'🎯 Overview', score:'Score',
+    scorePerfect:'Clean, professional code! 👏',
+    scoreGood:'Good code with room to improve.',
+    scoreMid:'Needs important improvements.',
+    scoreBad:'Needs serious reconsideration.',
+    sectionSecurity:'🔒 Security warnings', sectionIssues:'⚠️ Issues & warnings',
+    sectionTips:'💡 Tips', sectionFixes:'🔧 Suggested fixes',
+    sectionSymbols:'🔍 Symbols', sectionExplain:'📖 Detailed explanation',
+    danger:'Danger', warn:'Warning', tip:'Tip',
+    goodCode:'✅ Fixed code', badCode:'❌ Current code',
+    language:'Language:', codeLines:'Code lines:', comments:'Comments:',
+    functions:'Functions:', variables:'Variables:', classes:'Classes:', nesting:'Nesting:',
+    totalLines:'Total lines', avgLen:'Avg length',
+    classesHead:'📦 Classes', funcsHead:'⚙️ Functions',
+    varsHead:'📝 Variables', importsHead:'📚 Imports',
+    hiddenMsg:'… {n} more hidden.',
+    hintEasy:'🌱 Super simple — as if it were your first day',
+    hintNormal:'⚡ Clear technical explanation for recent beginners',
+    hintExpert:'🎓 Advanced deep-dive for professionals',
+    phText:'Type or paste your code here...'
+  }
+};
+
+let LANG = 'ar';
+let LEVEL = 'easy';
+let THEME = 'dark';
+
+function t(k){ return (I18N[LANG] && I18N[LANG][k]) || k; }
+function tf(k, v){ let s = t(k); for(const x in v) s = s.replace('{'+x+'}', v[x]); return s; }
+
+/* =========================================================
+   2) Dictionary helpers
+   ========================================================= */
+/* def(arEasy, arNormal, arExpert, enEasy, enNormal, enExpert) */
+function def(a1,a2,a3,e1,e2,e3){
+  return {
+    ar:{ easy:a1, normal:a2, expert:a3 },
+    en:{ easy:e1, normal:e2, expert:e3 }
+  };
+}
+/* returns the string for current lang + level */
+function pick(entry){
+  if(!entry) return '';
+  const langObj = entry[LANG];
+  if(!langObj) return '';
+  return langObj[LEVEL] || langObj.normal || langObj.easy || langObj.expert || '';
+}
+/* returns the value (may be function) for current lang + level, then calls it */
+function pickV(entry, ...args){
+  if(!entry) return '';
+  const langObj = entry[LANG];
+  if(!langObj) return '';
+  const val = langObj[LEVEL] || langObj.normal;
+  return typeof val === 'function' ? val(...args) : (val || '');
+}
+
+/* =========================================================
+   3) HTML tags
+   ========================================================= */
+const TAG_INFO = {
+  html: def(
+    'هذا وسم يقول للمتصفح: يلا نبدأ الصفحة! 🏠',
+    'الجذر الرئيسي للصفحة — يحتوي كل شيء ويحدد لغة المحتوى.',
+    'Document root. lang attribute is BCP-47 — affects SEO and screen readers.',
+    "This tag tells the browser: let's start the page! 🏠",
+    'The root element of the page — contains everything.',
+    'Document root. lang attribute is BCP-47 — affects SEO and screen readers.'
+  ),
+  head: def(
+    'صندوق خفي فيه معلومات عن الصفحة. المستخدم ما يشوفه.',
+    'قسم المعلومات المخفية: الترميز، العنوان، ملفات CSS والخطوط.',
+    'Container for document metadata not rendered to the viewport.',
+    'A hidden box with info about the page. Users never see it.',
+    'Hidden metadata section: encoding, title, CSS, fonts.',
+    'Container for document metadata not rendered to the viewport.'
+  ),
+  body: def(
+    'جسم الصفحة — كل شي تشوفه بعينك موجود هنا 👀',
+    'جسم الصفحة — كل ما يظهر للمستخدم.',
+    'The render root of the document — everything visible in the viewport.',
+    'The page body — everything you see lives here 👀',
+    'The page body — everything visible to the user.',
+    'The render root of the document — everything visible in the viewport.'
+  ),
+  title: def(
+    'اسم الصفحة اللي يطلع فوق في تبويب المتصفح 📑',
+    'عنوان الصفحة في تبويب المتصفح.',
+    'Sets document.title; critical for SEO and browser tab identification.',
+    'The page name shown in the browser tab 📑',
+    'Page title in the browser tab.',
+    'Sets document.title; critical for SEO and browser tab identification.'
+  ),
+  meta: def(
+    'معلومة صغيرة عن الصفحة، مثل نوع الحروف أو وصفها لمحرك البحث 🔍',
+    'معلومة وصفية: الترميز، الوصف، إعدادات العرض.',
+    'Void metadata element: charset, viewport, http-equiv, og:*/twitter:*.',
+    'Small info about the page — like character type or description for Google 🔍',
+    'Metadata: encoding, description, viewport.',
+    'Void metadata element: charset, viewport, http-equiv, og:*/twitter:*.'
+  ),
+  link: def(
+    'يربط الصفحة بملف خارجي مثل ملف التنسيق أو أيقونة الموقع 🔗',
+    'يربط بملف خارجي (CSS، أيقونة).',
+    'External resource link. rel determines semantics (stylesheet, icon, preload).',
+    'Connects the page to an outside file, like a stylesheet 🔗',
+    'Links an external file (CSS, favicon).',
+    'External resource link. rel determines semantics (stylesheet, icon, preload).'
+  ),
+  script: def(
+    'يحط كود JavaScript في الصفحة — يخليها تتحرك وتتفاعل ✨',
+    'يضيف كود JavaScript للصفحة.',
+    'async = parallel + ASAP; defer = parallel + after parse; type="module" = ESM.',
+    'Adds JavaScript to the page — makes it alive ✨',
+    'Adds JavaScript code.',
+    'async = parallel + ASAP; defer = parallel + after parse; type="module" = ESM.'
+  ),
+  style: def(
+    'كود تنسيق داخلي — يخبر الصفحة كيف تتزين 🎨',
+    'يضيف كود CSS داخلي.',
+    'Embeds CSSOM rules. Blocks rendering. Prefer external stylesheets for caching.',
+    'Inline style code — tells the page how to dress up 🎨',
+    'Adds inline CSS.',
+    'Embeds CSSOM rules. Blocks rendering. Prefer external stylesheets for caching.'
+  ),
+  div: def(
+    'صندوق فاضي نحط فيه الأشياء ونرتبها 📦',
+    'حاوية عامة لتجميع العناصر.',
+    'Block-level generic container. Prefer semantic alternatives to reduce "divitis".',
+    'An empty box we put things inside 📦',
+    'Generic grouping container.',
+    'Block-level generic container. Prefer semantic alternatives to reduce "divitis".'
+  ),
+  span: def(
+    'مثل div لكن صغير — يلوّن كلمة معينة داخل الجملة 🖍️',
+    'حاوية سطرية صغيرة لتنسيق جزء من النص.',
+    'Inline generic container. Use only when no semantic inline element fits.',
+    'Like div but tiny — highlights one word inside a sentence 🖍️',
+    'Inline container to style part of text.',
+    'Inline generic container. Use only when no semantic inline element fits.'
+  ),
+  p: def(
+    'فقرة كلام عادي، مثل الفقرة في كتاب 📝',
+    'فقرة نصية.',
+    'Block-level paragraph. Cannot contain block-level descendants.',
+    'A normal paragraph like in a book 📝',
+    'A paragraph of text.',
+    'Block-level paragraph. Cannot contain block-level descendants.'
+  ),
+  h1: def(
+    'أكبر عنوان في الصفحة — مثل عنوان الفصل في كتاب 📕',
+    'العنوان الرئيسي والأهم.',
+    'Highest-priority heading. One per page. Directly weighted in SEO.',
+    'The biggest title on the page 📕',
+    'Main heading.',
+    'Highest-priority heading. One per page. Directly weighted in SEO.'
+  ),
+  h2: def('عنوان متوسط الحجم','عنوان فرعي من المستوى الثاني.','Section heading. Combine with h1 in a logical outline.','A medium-sized heading','Secondary heading (level 2).','Section heading. Combine with h1 in a logical outline.'),
+  h3: def('عنوان أصغر','عنوان فرعي من المستوى الثالث.','Sub-section heading.','A smaller heading','Sub-heading (level 3).','Sub-section heading.'),
+  h4: def('عنوان صغير','عنوان فرعي من المستوى الرابع.','Lower-level heading.','A small heading','Sub-heading (level 4).','Lower-level heading.'),
+  h5: def('عنوان أصغر','عنوان فرعي من المستوى الخامس.','Rarely used heading level.','Smaller heading','Sub-heading (level 5).','Rarely used heading level.'),
+  h6: def('أصغر عنوان','عنوان فرعي من المستوى السادس.','The smallest heading level.','Smallest heading','Sub-heading (level 6).','The smallest heading level.'),
+  a: def(
+    'رابط — تضغط عليه فيوديك لمكان ثاني 🚪',
+    'رابط تشعبي.',
+    'Hyperlink. target="_blank" needs rel="noopener noreferrer".',
+    'A link — you click it and go somewhere else 🚪',
+    'Hyperlink.',
+    'Hyperlink. target="_blank" needs rel="noopener noreferrer".'
+  ),
+  img: def(
+    'يعرض صورة 🖼️ — لازم تكتب وصفها في alt لو ما ظهرت',
+    'يعرض صورة. الخاصية alt مهمة.',
+    'Replaced element. Always provide alt. Consider srcset + loading="lazy".',
+    'Displays an image 🖼️ — always add alt text',
+    'Displays an image. alt is important.',
+    'Replaced element. Always provide alt. Consider srcset + loading="lazy".'
+  ),
+  ul: def('قائمة نقطية — مثل قائمة تسوق 🛒','قائمة غير مرتبة (نقاط).','Unordered list — order-independent items.','A bulleted list 🛒','Unordered (bulleted) list.','Unordered list — order-independent items.'),
+  ol: def('قائمة مرقّمة 1، 2، 3 🔢','قائمة مرتبة (أرقام).','Ordered list — order is meaningful.','A numbered list 1,2,3 🔢','Ordered (numbered) list.','Ordered list — order is meaningful.'),
+  li: def('عنصر واحد من القائمة 📌','عنصر داخل القائمة.','List item. Only valid inside ul/ol/menu.','One item in the list 📌','List item.','List item. Only valid inside ul/ol/menu.'),
+  table: def(
+    'جدول — صفوف وأعمدة مثل جدول المدرسة 📊',
+    'جدول لعرض البيانات.',
+    'Tabular data only, never for layout. Add caption and scope attributes.',
+    'A table with rows and columns 📊',
+    'Data table.',
+    'Tabular data only, never for layout. Add caption and scope attributes.'
+  ),
+  tr: def('صف واحد في الجدول','صف داخل الجدول.','Table row. Must contain td or th.','One row in the table','Table row.','Table row. Must contain td or th.'),
+  td: def('خلية عادية في الجدول','خلية بيانات.','Table data cell.','A normal cell','Table data cell.','Table data cell.'),
+  th: def('خلية العنوان في الجدول','خلية عنوان.','Header cell. Use scope="col|row" for accessibility.','A header cell','Table header cell.','Header cell. Use scope="col|row" for accessibility.'),
+  form: def(
+    'نموذج — مثل استمارة تعبّيها وترسلها 📋',
+    'نموذج إدخال بيانات.',
+    'Form container. method=GET/POST; action=URL; enctype for uploads.',
+    'A form — like a paper you fill and send 📋',
+    'Data entry form.',
+    'Form container. method=GET/POST; action=URL; enctype for uploads.'
+  ),
+  input: def(
+    'خانة تكتب فيها — اسمك أو بريدك مثلاً ✏️',
+    'حقل إدخال.',
+    'Void element with ~22 type variants. Native validation via required/pattern.',
+    'A box you type in — like your name ✏️',
+    'Input field.',
+    'Void element with ~22 type variants. Native validation via required/pattern.'
+  ),
+  button: def(
+    'زر تضغط عليه فيصير شي 🖲️',
+    'زر قابل للنقر.',
+    'Interactive. Default type inside form is submit — set type="button" unless submitting.',
+    'A button you press and something happens 🖲️',
+    'Clickable button.',
+    'Interactive. Default type inside form is submit — set type="button" unless submitting.'
+  ),
+  label: def('اسم صغير لحقل الإدخال','تسمية لحقل إدخال.','Label. Associate via for=inputId or by wrapping.','A small name for an input','Label for an input.','Label. Associate via for=inputId or by wrapping.'),
+  select: def('قائمة منسدلة تختار منها 📋','قائمة منسدلة.','Dropdown. Native styling is OS-dependent.','A dropdown menu 📋','Dropdown select.','Dropdown. Native styling is OS-dependent.'),
+  textarea: def('مساحة كبيرة للكلام الطويل ✍️','منطقة نص متعددة الأسطر.','Multi-line text input. Size via rows/cols or CSS.','A big space for long text ✍️','Multi-line text area.','Multi-line text input. Size via rows/cols or CSS.'),
+  header: def('أعلى الصفحة — الشعار والقائمة','ترويسة الصفحة.','Page/section header. Implicit role="banner".','Top of the page','Page header.','Page/section header. Implicit role="banner".'),
+  footer: def('أسفل الصفحة — الحقوق والروابط','تذييل الصفحة.','Page/section footer. Implicit role="contentinfo".','Bottom of the page','Page footer.','Page/section footer. Implicit role="contentinfo".'),
+  nav: def('روابط التنقل — مثل شريط القوائم','روابط التنقل الرئيسية.','Navigation landmark. Add aria-label if multiple navs.','Navigation links','Main navigation links.','Navigation landmark. Add aria-label if multiple navs.'),
+  section: def('قسم في الصفحة — مثل فصل في كتاب','قسم موضوعي مستقل.','Thematic grouping. Should generally include a heading.','A section — like a chapter','Thematic section.','Thematic grouping. Should generally include a heading.'),
+  article: def('مقال مستقل — يقدر يعيش لحاله','مقال أو محتوى مستقل.','Self-contained composition suitable for syndication.','A standalone article','Independent article.','Self-contained composition suitable for syndication.'),
+  main: def('المحتوى الرئيسي — مرة واحدة بس','المحتوى الرئيسي.','Main landmark. Only one per page.','Main content — only once','Main content.','Main landmark. Only one per page.'),
+  aside: def('محتوى جانبي — مثل صندوق ملاحظات','محتوى جانبي.','Complementary content. Implicit role="complementary".','Side content','Sidebar content.','Complementary content. Implicit role="complementary".'),
+  br: def('ينزل سطر جديد ⏎','ينزل سطرًا جديدًا.','Line break. Never use repeatedly for spacing — use CSS margin.','Adds a new line ⏎','Line break.','Line break. Never use repeatedly for spacing.'),
+  strong: def('كلام مهم نعرضه عريض 💪','نص مهم (عريض).','Importance, not styling. Use CSS for pure bolding.','Important bold text 💪','Important (bold) text.','Importance, not styling. Use CSS for pure bolding.'),
+  em: def('كلام نشدد عليه — يصير مايل','نص مشدَّد عليه.','Emphasis stress. Screen readers may change inflection.','Stressed text — slanted','Emphasized text.','Emphasis stress. Screen readers may change inflection.'),
+  code: def('كود صغير داخل الكلام','جزء كود داخل النص.','Inline code. Combine with pre for code blocks.','Small code inside text','Inline code.','Inline code. Combine with pre for code blocks.'),
+  pre: def('نص منسق — يحافظ على المسافات','نص منسّق مسبقًا.','Preformatted text. Preserves whitespace and line breaks.','Formatted text — keeps spaces','Preformatted text.','Preformatted text. Preserves whitespace and line breaks.')
+};
+
+/* =========================================================
+   4) HTML attributes
+   ========================================================= */
+const ATTR_INFO = {
+  id: def('اسم مميز للعنصر — ما يتكرر','معرّف فريد للعنصر.','Unique identifier. Used by CSS #id, JS, label for.','Unique element name','Unique element identifier.','Unique identifier. Used by CSS #id, JS, label for.'),
+  'class': def('اسم نجمع فيه عناصر متشابهة','اسم كلاس لتنسيق العنصر.','Space-separated tokens used by CSS .class and classList API.','A name to group similar elements','CSS class name.','Space-separated tokens used by CSS .class and classList API.'),
+  src: def('مكان الملف — من وين نجيبه','مسار الملف أو المصدر.','Resource URL for embedded content.','Where the file comes from','File or source path.','Resource URL for embedded content.'),
+  href: def('الرابط اللي يوديك مكان','عنوان الوجهة.','Destination URL. Fragment #id scrolls; mailto:/tel: trigger protocol handlers.','The link destination','Destination URL.','Destination URL. Fragment #id scrolls; mailto:/tel: trigger protocol handlers.'),
+  alt: def('وصف الصورة لو ما ظهرت','نص بديل للصورة.','Empty alt="" marks decorative. Screen readers announce informative alt.','Description if image fails','Alternative text.','Empty alt="" marks decorative. Screen readers announce informative alt.'),
+  title: def('تلميح يظهر لما تحوم بالماوس','تلميح عند مرور الماوس.','Tooltip. Not accessible on touch. Prefer aria-label.','Tooltip when you hover','Hover tooltip.','Tooltip. Not accessible on touch. Prefer aria-label.'),
+  style: def('تنسيق مباشر على العنصر','تنسيق مباشر.','Inline CSS. Overrides stylesheets unless !important.','Direct styling','Inline style.','Inline CSS. Overrides stylesheets unless !important.'),
+  type: def('نوع العنصر أو الحقل','نوع العنصر/الحقل.','Controls semantics: input type, button type, script module.','Element or field type','Element/field type.','Controls semantics: input type, button type, script module.'),
+  name: def('اسم الحقل عند الإرسال','اسم الحقل.','Form field name. Multiple same-named checkboxes create arrays.','Field name when submitting','Field name.','Form field name. Multiple same-named checkboxes create arrays.'),
+  value: def('القيمة الافتراضية','القيمة الافتراضية.','Default field value. For checkbox/radio, value is submitted when checked.','Default value','Default value.','Default field value. For checkbox/radio, value is submitted when checked.'),
+  placeholder: def('نص رمادي إرشادي','نص إرشادي.','Hint text while empty. Not a substitute for label.','Gray hint text','Placeholder hint.','Hint text while empty. Not a substitute for label.'),
+  onclick: def('كود يشتغل لما تضغط','كود عند النقر.','Inline handler. Prefer addEventListener for separation of concerns.','Code that runs on click','Click handler.','Inline handler. Prefer addEventListener.'),
+  target: def('وين يفتح الرابط','مكان فتح الرابط.','_blank opens new tab; needs rel="noopener".','Where link opens','Where to open link.','_blank opens new tab; needs rel="noopener".'),
+  width: def('عرض العنصر','العرض.','Presentational. Prefer CSS. On canvas/img sets intrinsic pixels.','Element width','Width.','Presentational. Prefer CSS.'),
+  height: def('ارتفاع العنصر','الارتفاع.','Presentational. Prefer CSS.','Element height','Height.','Presentational. Prefer CSS.'),
+  charset: def('نوع حروف الصفحة','ترميز الحروف.','UTF-8 recommended. Must appear in first 1024 bytes.','Character type','Character encoding.','UTF-8 recommended. Must appear in first 1024 bytes.'),
+  lang: def('لغة الصفحة','لغة المحتوى.','BCP-47 tag. Affects pronunciation, hyphenation, translation.','Page language','Content language.','BCP-47 tag. Affects pronunciation, hyphenation, translation.'),
+  disabled: def('يعطّل العنصر','تعطيل العنصر.','Disables the control. Form controls don\'t submit.','Disables the element','Disables element.','Disables the control. Form controls don\'t submit.'),
+  required: def('حقل إلزامي','حقل إلزامي.','Native validation: form won\'t submit without value.','Required field','Required field.','Native validation: form won\'t submit without value.'),
+  role: def('دور العنصر لإمكانية الوصول','دور ARIA.','ARIA landmark or widget role. Prefer native semantics.','ARIA role','ARIA role.','ARIA landmark or widget role. Prefer native semantics.')
+};
+
+/* =========================================================
+   5) CSS properties
+   ========================================================= */
+const CSS_PROP = {
+  color: def('لون الكلام 🎨','لون النص.','Foreground color. Inherited. Accepts hex/rgb/hsl/oklch/currentColor.','Text color 🎨','Text color.','Foreground color. Inherited. Accepts hex/rgb/hsl/oklch.'),
+  background: def('لون أو صورة الخلفية','الخلفية.','Shorthand for background-color/-image/-position/-size/-repeat.','Background color or image','Background.','Shorthand for background-color/-image/-position/-size/-repeat.'),
+  'background-color': def('لون الخلفية 🖌️','لون الخلفية.','Solid fill behind element. Painted below background-image.','Background color 🖌️','Background color.','Solid fill behind element. Painted below background-image.'),
+  display: def('كيف يظهر العنصر','طريقة العرض.','Formatting context: block, inline, flex, grid, contents, none.','How the element shows','Display mode.','Formatting context: block, inline, flex, grid, contents, none.'),
+  position: def('كيف نحدد مكان العنصر','نوع التموضع.','static/relative/absolute/fixed/sticky. Absolute needs positioned ancestor.','How we place the element','Positioning scheme.','static/relative/absolute/fixed/sticky. Absolute needs positioned ancestor.'),
+  top: def('يبعد من فوق','الإزاحة من الأعلى.','Offset from top. Only applies when position != static.','Offset from top','Top offset.','Offset from top. Only applies when position != static.'),
+  left: def('يبعد من اليسار','الإزاحة من اليسار.','Offset from left. Physical left even in RTL.','Offset from left','Left offset.','Offset from left. Physical left even in RTL.'),
+  width: def('عرض العنصر','العرض.','Percentage is relative to containing block.','Width','Width.','Percentage is relative to containing block.'),
+  height: def('ارتفاع العنصر','الارتفاع.','Percentage needs parent with definite height.','Height','Height.','Percentage needs parent with definite height.'),
+  margin: def('مسافة برا العنصر','المسافة الخارجية.','Outer space. Vertical margins may collapse; use gap in flex/grid.','Space outside element','Outer margin.','Outer space. Vertical margins may collapse; use gap in flex/grid.'),
+  padding: def('مسافة جوّا العنصر','المسافة الداخلية.','Inner space between content and border. Included in width if border-box.','Space inside the element','Inner padding.','Inner space between content and border.'),
+  border: def('إطار حول العنصر','الحدود.','Shorthand for width/style/color. Style is required to render.','A frame around the element','Border.','Shorthand for width/style/color. Style is required to render.'),
+  'border-radius': def('يدوّر زوايا العنصر','استدارة الزوايا.','Rounds corners. Supports elliptical radii: "10px / 20px".','Rounds the corners','Corner radius.','Rounds corners. Supports elliptical radii.'),
+  'box-shadow': def('ظل حول العنصر','ظل حول العنصر.','offset-x y blur spread color. Use inset for inner shadow.','Shadow that adds depth','Box shadow.','offset-x y blur spread color. Use inset for inner shadow.'),
+  'font-size': def('حجم الخط','حجم الخط.','Prefer rem over px for accessibility.','Font size','Font size.','Prefer rem over px for accessibility.'),
+  'font-family': def('نوع الخط','نوع الخط.','Stack with fallback list. End with generic family.','Font type','Font family.','Stack with fallback list. End with generic family.'),
+  'font-weight': def('سماكة الخط','سماكة الخط.','100-900 or keywords. Variable fonts support any integer.','Font weight','Font weight.','100-900 or keywords. Variable fonts support any integer.'),
+  'text-align': def('محاذاة الكلام','محاذاة النص.','start/end follow writing direction (RTL-friendly).','Text alignment','Text alignment.','start/end follow writing direction (RTL-friendly).'),
+  'line-height': def('تباعد الأسطر','ارتفاع السطر.','Unitless value preferred (1.5) so it scales with font-size.','Space between lines','Line height.','Unitless value preferred (1.5) so it scales with font-size.'),
+  'letter-spacing': def('فراغ بين الحروف','المسافة بين الحروف.','Adds space between chars. Use em. Overuse hurts readability.','Space between letters','Letter spacing.','Adds space between chars. Use em.'),
+  flex: def('مرونة العنصر داخل الحاوية','مرونة العنصر.','Shorthand for flex-grow/shrink/basis. Default 0 1 auto.','Element flexibility','Flex shorthand.','Shorthand for flex-grow/shrink/basis. Default 0 1 auto.'),
+  'flex-direction': def('اتجاه العناصر — أفقي أو عمودي','اتجاه العناصر.','row/row-reverse/column/column-reverse. Sets the main axis.','Direction of items','Flex direction.','row/row-reverse/column/column-reverse. Sets the main axis.'),
+  'justify-content': def('توزيع العناصر أفقيًا','توزيع أفقي.','flex-start/center/space-between/space-around/space-evenly.','Spread items horizontally','Main-axis distribution.','flex-start/center/space-between/space-around/space-evenly.'),
+  'align-items': def('محاذاة العناصر عموديًا','محاذاة عمودية.','stretch (default)/flex-start/center/flex-end/baseline.','Vertical alignment','Cross-axis alignment.','stretch/flex-start/center/flex-end/baseline.'),
+  gap: def('مسافة بين العناصر','المسافة بين العناصر.','Row and column gap. Replaces margin hacks.','Space between items','Gap between items.','Row and column gap. Replaces margin hacks.'),
+  'grid-template-columns': def('تقسيم لأعمدة','أعمدة الشبكة.','fr units for flexible fractions. repeat() and minmax().','Split into columns','Grid columns.','fr units for flexible fractions. repeat() and minmax().'),
+  'z-index': def('أي عنصر فوق الثاني','ترتيب الطبقات.','Only works on positioned elements or flex/grid items.','Which element is on top','Stacking order.','Only works on positioned elements or flex/grid items.'),
+  overflow: def('إيش يصير لو المحتوى أكبر','التعامل مع الفائض.','visible/hidden/scroll/auto/clip. Creates BFC when not visible.','What happens if too big','Overflow handling.','visible/hidden/scroll/auto/clip.'),
+  opacity: def('شفافية العنصر','درجة الشفافية.','Creates stacking context. Use rgba() to fade only the background.','Transparency','Opacity.','Creates stacking context. Use rgba() to fade only the background.'),
+  transition: def('حركة ناعمة عند التغيير','انتقال تدريجي.','Animate only transform/opacity for best performance.','Smooth movement','Transition.','Animate only transform/opacity for best performance.'),
+  transform: def('تحريك أو تكبير أو تدوير','تحويل العنصر.','GPU-accelerated. Creates a containing block.','Move, scale, rotate','Transform.','GPU-accelerated. Creates a containing block.'),
+  cursor: def('شكل الماوس','شكل المؤشر.','pointer/grab/text/not-allowed etc. Communicates interactivity.','Mouse shape','Cursor shape.','pointer/grab/text/not-allowed etc. Communicates interactivity.')
+};
+
+/* =========================================================
+   6) JS rules
+   ========================================================= */
+function jr(re, arCat, enCat, a1, a2, a3, e1, e2, e3){
+  return {
+    re,
+    cat: { ar: arCat, en: enCat },
+    desc: {
+      ar: { easy:a1, normal:a2, expert:a3 },
+      en: { easy:e1, normal:e2, expert:e3 }
+    }
+  };
+}
+
+const JS_RULES = [
+  jr(/^\s*\/\//,'تعليق','Comment',
+    'سطر ما ينفّذ — بس يشرح لك الكود 💬','سطر يشرح الكود ولا يُنفَّذ.','Single-line comment. Ignored by parser. Avoid commenting the obvious.',
+    'A line that doesn\'t run — just explains 💬','Explains the code; not executed.','Single-line comment. Avoid commenting the obvious.'),
+  jr(/^\s*\/\*/,'تعليق','Comment',
+    'بداية تعليق طويل','بداية تعليق متعدد الأسطر.','Start of a block comment. Terminates at */.',
+    'Start of a long comment','Start of multi-line comment.','Start of a block comment. Terminates at */.'),
+  jr(/\belse\s+if\s*\(/,'شرط','Condition',
+    'طيب لو الأول ما تحقق، جرّب هذا','شرط إضافي يُفحص إذا لم يتحقق السابق.','Chained conditional. First truthy wins.',
+    'If the first failed, try this','Extra condition checked if previous failed.','Chained conditional. First truthy wins.'),
+  jr(/\bif\s*\(/,'شرط','Condition',
+    'لو صار كذا… سوي كذا. مثل: لو الجو بارد، ألبس جاكيت 🧥','شرط: يُنفَّذ الكود إذا تحققت الحالة.','Falsy values: 0, "", null, undefined, NaN, false.',
+    'If this happens… do this. Like: if cold, wear jacket 🧥','Conditional: executes only if test passes.','Falsy values: 0, "", null, undefined, NaN, false.'),
+  jr(/\belse\b/,'شرط','Condition',
+    'وإلا… سوي هذا','الحالة البديلة.','Fallback branch.',
+    'Otherwise… do this','Fallback branch.','Fallback branch.'),
+  jr(/\bswitch\s*\(/,'اختيار','Switch',
+    'عندنا عدة خيارات — اختر واحد','اختيار من بين عدة حالات.','Strict equality comparison; fallthrough unless break.',
+    'Several options — pick one','Choice between multiple cases.','Strict equality comparison; fallthrough unless break.'),
+  jr(/\bcase\s+/,'خيار','Case',
+    'واحد من الخيارات','حالة داخل switch.','Case label.',
+    'One of the options','Case in switch.','Case label.'),
+  jr(/\bdefault\s*:/,'افتراضي','Default',
+    'لو ما ناسب أي خيار، خذ هذا','الحالة الافتراضية.','Fallback case.',
+    'If none match, use this','Default case.','Fallback case.'),
+  {re:/\bfunction\s+([A-Za-z_$][\w$]*)/, cat:{ar:'دالة',en:'Function'},
+    desc:{
+      ar:{ easy:m=>`دالة اسمها «${m[1]}» — مثل وصفة نتبعها كل مرة نحتاجها 👨‍🍳`,
+          normal:m=>`تعريف دالة «${m[1]}» — كتلة قابلة لإعادة الاستخدام.`,
+          expert:m=>`Function declaration "${m[1]}". Hoisted; own this; has arguments object.` },
+      en:{ easy:m=>`A function named "${m[1]}" — like a reusable recipe 👨‍🍳`,
+          normal:m=>`Defines function "${m[1]}" — a reusable block.`,
+          expert:m=>`Function declaration "${m[1]}". Hoisted; own this; has arguments object.` }
+    }},
+  {re:/\bclass\s+([A-Za-z_$][\w$]*)/, cat:{ar:'كلاس',en:'Class'},
+    desc:{
+      ar:{ easy:m=>`قالب اسمه «${m[1]}» نصنع منه أشياء متشابهة 🏗️`,
+          normal:m=>`تعريف كلاس «${m[1]}» — قالب لإنشاء كائنات.`,
+          expert:m=>`Class declaration "${m[1]}". Not hoisted; strict by default; supports private #fields.` },
+      en:{ easy:m=>`A template named "${m[1]}" 🏗️`,
+          normal:m=>`Defines class "${m[1]}".`,
+          expert:m=>`Class declaration "${m[1]}". Not hoisted; strict by default.` }
+    }},
+  {re:/\b(const|let|var)\s+([A-Za-z_$][\w$]*)/, cat:{ar:'متغير',en:'Variable'},
+    desc:{
+      ar:{ easy:m=>`نحط قيمة في صندوق اسمه «${m[2]}» 📦`,
+          normal:m=>`تعريف متغير «${m[2]}» بـ ${m[1]}.`,
+          expert:m=>`Binding "${m[2]}" via ${m[1]}.` },
+      en:{ easy:m=>`Put a value in a box "${m[2]}" 📦`,
+          normal:m=>`Declares "${m[2]}" with ${m[1]}.`,
+          expert:m=>`Binding "${m[2]}" via ${m[1]}.` }
+    }},
+  jr(/\bfor\s*\(/,'تكرار','Loop',
+    'كرّر هذا الشي عدد مرات 🔁','حلقة تكرار بعدد محدد.','C-style for loop: init; condition; update.',
+    'Repeat this a number of times 🔁','Loop with a fixed count.','C-style for loop: init; condition; update.'),
+  jr(/\bfor\s+of\b/,'تكرار','Loop',
+    'مرّ على كل عنصر في القائمة','حلقة على قيم مصفوفة.','Iterates values of iterables using Symbol.iterator.',
+    'Go through each item','Iterates values of an array.','Iterates values of iterables using Symbol.iterator.'),
+  jr(/\bfor\s+in\b/,'تكرار','Loop',
+    'مرّ على مفاتيح الكائن','حلقة على مفاتيح كائن.','Iterates enumerable string keys including inherited ones.',
+    'Go through keys','Iterates object keys.','Iterates enumerable string keys including inherited ones.'),
+  jr(/\bwhile\s*\(/,'تكرار','Loop',
+    'استمر طول ما الشرط صح','حلقة تستمر ما دام الشرط صحيحًا.','Pre-test loop. Guard against infinite loops.',
+    'Keep going while true','Loop while condition is true.','Pre-test loop. Guard against infinite loops.'),
+  jr(/\bbreak\b/,'توقف','Control',
+    'وقف! اطلع من الحلقة 🛑','كسر الحلقة.','Exits the innermost loop or switch.',
+    'Stop! Exit the loop 🛑','Break out of the loop.','Exits the innermost loop or switch.'),
+  jr(/\bcontinue\b/,'تخطَّ','Control',
+    'تخطَّ هذا الدور','تخطي التكرار الحالي.','Skips to the next iteration.',
+    'Skip this round','Skip current iteration.','Skips to the next iteration.'),
+  jr(/\.forEach\s*\(/,'تكرار','Iteration',
+    'مرّ على كل عنصر ونفّذ عليه شي','تمرّ على كل عنصر وتنفّذ دالة.','Cannot break; use for...of for early exit.',
+    'Go through each item','Iterates each item running a function.','Cannot break; use for...of for early exit.'),
+  jr(/\.map\s*\(/,'تحويل','Map',
+    'حوّل كل عنصر لشي جديد','map: مصفوفة جديدة بتحويل كل عنصر.','Returns a new array of the same length.',
+    'Transform each item','map: new array from transformation.','Returns a new array of the same length.'),
+  jr(/\.filter\s*\(/,'فلترة','Filter',
+    'خذ العناصر اللي تحقق الشرط','filter: عناصر تحقق شرطًا.','Returns new array with elements where callback is truthy.',
+    'Keep items matching a condition','filter: matching items only.','Returns new array with truthy callback results.'),
+  jr(/\.reduce\s*\(/,'تجمع','Reduce',
+    'لمّ كل العناصر في نتيجة واحدة','reduce: دمج العناصر في قيمة واحدة.','Left-fold. Provide initial value to avoid errors on empty arrays.',
+    'Combine all into one value','reduce: combine into single value.','Left-fold. Provide initial value for empty arrays.'),
+  jr(/\.find\s*\(/,'بحث','Find',
+    'أول عنصر يحقق الشرط','find: أول عنصر يحقق الشرط.','Returns first match or undefined.',
+    'First matching item','find: first match.','Returns first match or undefined.'),
+  jr(/\.some\s*\(/,'بحث','Some',
+    'هل فيه على الأقل واحد؟','some: هل يوجد عنصر يحقق؟','Returns true if any match. Short-circuits.',
+    'Is there at least one?','some: does any match?','Returns true if any match. Short-circuits.'),
+  jr(/\.every\s*\(/,'بحث','Every',
+    'هل كلهم يحققون؟','every: هل كل العناصر تحقق؟','Returns true if all match. Short-circuits.',
+    'Do all match?','every: do all match?','Returns true if all match. Short-circuits.'),
+  jr(/\.includes\s*\(/,'بحث','Includes',
+    'هل فيه هذه القيمة؟','includes: هل يحتوي القيمة؟','Uses SameValueZero (NaN equals itself).',
+    'Contains this value?','includes: does it contain?','Uses SameValueZero (NaN equals itself).'),
+  jr(/console\.(log|error|warn|info)\s*\(/,'طباعة','Output',
+    'اطبع شي عشان تشوفه في الكونسول 💻','طباعة في وحدة تحكم المتصفح.','Remove or gate behind DEBUG flag before shipping.',
+    'Print something to see it 💻','Logs to browser console.','Remove or gate behind DEBUG flag before shipping.'),
+  jr(/\breturn\b/,'إرجاع','Return',
+    'رجّع قيمة من الدالة','إرجاع قيمة وإنهاء الدالة.','In async, wraps in a Promise.',
+    'Return a value','Returns value and exits function.','In async, wraps in a Promise.'),
+  jr(/=>/,'دالة','Arrow',
+    'طريقة سريعة نكتب فيها الدوال','دالة سهمية مختصرة.','Lexical this. Cannot be used with new. No arguments object.',
+    'Shorter way to write functions','Arrow function syntax.','Lexical this. Cannot be used with new. No arguments object.'),
+  {re:/document\.(getElementById|querySelector)\s*\(\s*['"`]([^'"`]+)/, cat:{ar:'عنصر',en:'DOM'},
+    desc:{
+      ar:{ easy:m=>`ابحث عن العنصر «${m[2]}» 🔍`,
+          normal:m=>`الوصول للعنصر «${m[2]}».`,
+          expert:m=>`Selects "${m[2]}". getElementById is O(1); querySelector matches CSS.` },
+      en:{ easy:m=>`Find element "${m[2]}" 🔍`,
+          normal:m=>`Selects "${m[2]}".`,
+          expert:m=>`Selects "${m[2]}". getElementById is O(1); querySelector matches CSS.` }
+    }},
+  {re:/addEventListener\s*\(\s*['"](\w+)['"]/, cat:{ar:'حدث',en:'Event'},
+    desc:{
+      ar:{ easy:m=>`لما يصير «${m[1]}» سوي شي 🎯`,
+          normal:m=>`ربط حدث «${m[1]}».`,
+          expert:m=>`Attaches "${m[1]}" listener. Options: capture, once, passive.` },
+      en:{ easy:m=>`When "${m[1]}" happens, do something 🎯`,
+          normal:m=>`Attaches "${m[1]}" listener.`,
+          expert:m=>`Attaches "${m[1]}" listener. Options: capture, once, passive.` }
+    }},
+  jr(/\.innerHTML\s*=/,'تغيير','DOM',
+    'حط محتوى داخل العنصر ⚠️ خطر لو من المستخدم','تغيير محتوى عنصر بـ HTML.','XSS risk if user input. Prefer textContent or sanitize with DOMPurify.',
+    'Put content in element ⚠️','Change element HTML content.','XSS risk if user input. Prefer textContent.'),
+  jr(/\.textContent\s*=/,'تغيير','DOM',
+    'حط نص عادي — آمن ✅','تغيير النص داخل العنصر.','Sets text safely; escapes HTML entities.',
+    'Set plain text — safe ✅','Change element text.','Sets text safely; escapes HTML entities.'),
+  jr(/\btry\s*\{/,'حاول','Try',
+    'جرّب هالكود… يمكن يطلع خطأ','محاولة تنفيذ كود قد يسبب خطأ.','Try block. Errors propagate if uncaught.',
+    'Try this code…','Tries to run code that may fail.','Try block. Errors propagate if uncaught.'),
+  jr(/\bcatch\s*\(/,'امسك','Catch',
+    'لو طلع خطأ، امسكه','التقاط الخطأ.','Error object with .message, .stack. Always log or handle.',
+    'If error, catch it','Catches the error.','Error object with .message, .stack. Always log or handle.'),
+  jr(/\bfinally\s*\{/,'دائمًا','Finally',
+    'هذا الكود ينفّذ دايمًا','كود يُنفَّذ دائمًا.','Runs after try/catch regardless. Use for cleanup.',
+    'This always runs','Always runs after try/catch.','Runs after try/catch regardless. Use for cleanup.'),
+  jr(/\basync\b/,'غير متزامن','Async',
+    'دالة تشتغل بالخلفية','دالة غير متزامنة.','Returns a Promise; enables await inside. Errors become rejections.',
+    'Function that runs in background','Async function.','Returns a Promise; enables await inside.'),
+  jr(/\bawait\b/,'انتظر','Await',
+    'استنى… لا تكمل لين تخلص','انتظار نتيجة عملية غير متزامنة.','Pauses the async function until the Promise settles.',
+    'Wait… don\'t continue','Wait for async result.','Pauses the async function until the Promise settles.'),
+  jr(/\bfetch\s*\(/,'طلب','Network',
+    'اطلب شي من الإنترنت 🌐','إرسال طلب HTTP.','Does NOT reject on 4xx/5xx — check res.ok.',
+    'Request something from the internet 🌐','Sends an HTTP request.','Does NOT reject on 4xx/5xx — check res.ok.'),
+  jr(/setTimeout|setInterval/,'مؤقت','Timer',
+    'نفّذ شي بعد فترة ⏰','تنفيذ بعد فترة أو بشكل متكرر.','Store IDs to clear. Intervals drift; prefer recursive setTimeout.',
+    'Run something after a delay ⏰','Schedule code execution.','Store IDs to clear. Intervals drift.'),
+  jr(/localStorage|sessionStorage/,'تخزين','Storage',
+    'احفظ معلومة في المتصفح 💾','حفظ بيانات في المتصفح.','Synchronous; ~5MB limit; string-only.',
+    'Save data in browser 💾','Store data in browser.','Synchronous; ~5MB limit; string-only.'),
+  {re:/\bnew\s+([A-Za-z_$][\w$]*)/, cat:{ar:'إنشاء',en:'New'},
+    desc:{
+      ar:{ easy:m=>`اصنع شي جديد من «${m[1]}» ✨`,
+          normal:m=>`إنشاء كائن جديد من «${m[1]}».`,
+          expert:m=>`Constructor invocation of "${m[1]}". Creates new object; sets [[Prototype]].` },
+      en:{ easy:m=>`Create something new from "${m[1]}" ✨`,
+          normal:m=>`Creates new instance of "${m[1]}".`,
+          expert:m=>`Constructor invocation of "${m[1]}".` }
+    }},
+  jr(/\balert\s*\(/,'تنبيه','Alert',
+    'نافذة تطلع للمستخدم ⚠️ مملة!','نافذة منبثقة.','Blocks main thread. Poor UX. Prefer modals or toasts.',
+    'Popup window ⚠️ annoying!','Popup dialog.','Blocks main thread. Prefer modals.'),
+  jr(/JSON\.(parse|stringify)/,'JSON','JSON',
+    'حوّل بين نص وكائن','تحويل JSON.','parse throws on invalid JSON. stringify ignores undefined; circular refs throw.',
+    'Convert between text and object','JSON conversion.','parse throws on invalid. stringify ignores undefined.'),
+  jr(/\bthis\b/,'كائن','This',
+    '«هذا» — يشير للشي الحالي','الإشارة للكائن الحالي.','Dynamic binding. Arrow functions capture lexically.',
+    '"This" — refers to current thing','Refers to current object.','Dynamic binding. Arrow functions capture lexically.'),
+  jr(/\bextends\b/,'وراثة','Extends',
+    'خذ صفات من كلاس ثاني','الوراثة من كلاس آخر.','Sets [[Prototype]] chain. Call super() before using this.',
+    'Inherit from another class','Class inheritance.','Sets [[Prototype]] chain. Call super() before using this.'),
+  jr(/\bimport\s+/,'استيراد','Import',
+    'جيب شي من ملف ثاني 📥','استيراد من ملف آخر.','ES module import. Static and dynamic (await import()).',
+    'Import from another file 📥','Import from another module.','ES module import. Static and dynamic.'),
+  jr(/\bexport\s+/,'تصدير','Export',
+    'شارك شي من هذا الملف 📤','تصدير للاستخدام الخارجي.','ES module export. Named or default.',
+    'Share from this file 📤','Export for external use.','ES module export. Named or default.')
+];
+
+/* =========================================================
+   7) Python rules
+   ========================================================= */
+function pr(re, arCat, enCat, a1, a2, a3, e1, e2, e3){
+  return jr(re, arCat, enCat, a1, a2, a3, e1, e2, e3);
+}
+const PY_RULES = [
+  pr(/^\s*#/,'تعليق','Comment',
+    'سطر ما ينفّذ — بس يشرح','تعليق: يشرح الكود.','Single-line comment. PEP 8: space after #.',
+    'A line that doesn\'t run','Comment: explains code.','Single-line comment. PEP 8: space after #.'),
+  pr(/^\s*(from\s+\S+\s+)?import\s+/,'مكتبة','Import',
+    'جيب أدوات جاهزة 📦','استيراد مكتبة.','Prefer explicit "from x import y" over wildcard.',
+    'Bring ready tools 📦','Import a library.','Prefer explicit imports over wildcard.'),
+  {re:/\bdef\s+(\w+)/, cat:{ar:'دالة',en:'Function'},
+    desc:{
+      ar:{ easy:m=>`دالة «${m[1]}» — مثل وصفة 👨‍🍳`,
+          normal:m=>`تعريف دالة «${m[1]}».`,
+          expert:m=>`def "${m[1]}()". First-class. Supports *args, **kwargs, keyword-only.` },
+      en:{ easy:m=>`Function "${m[1]}" — like a recipe 👨‍🍳`,
+          normal:m=>`Defines function "${m[1]}".`,
+          expert:m=>`def "${m[1]}()". First-class. Supports *args, **kwargs.` }
+    }},
+  {re:/\bclass\s+(\w+)/, cat:{ar:'كلاس',en:'Class'},
+    desc:{
+      ar:{ easy:m=>`قالب «${m[1]}» 🏗️`,
+          normal:m=>`تعريف كلاس «${m[1]}».`,
+          expert:m=>`class "${m[1]}". Multiple inheritance; MRO via C3.` },
+      en:{ easy:m=>`Template "${m[1]}" 🏗️`,
+          normal:m=>`Defines class "${m[1]}".`,
+          expert:m=>`class "${m[1]}". Multiple inheritance; MRO via C3.` }
+    }},
+  pr(/\bself\b/,'نفسي','Self',
+    '«نفسي» — الكائن يشير لنفسه','الوصول لخصائص الكائن.','Explicit first argument of instance methods.',
+    '"Self" — the object refers to itself','Access instance attributes.','Explicit first argument of instance methods.'),
+  pr(/\belif\b/,'شرط','Elif',
+    'لو الأول ما صار، جرّب هذا','شرط إضافي.','Short-circuit top-down.',
+    'If first failed, try this','Extra condition.','Short-circuit top-down.'),
+  pr(/\bif\b/,'شرط','If',
+    'لو صار كذا… سوي كذا','شرط: يُنفَّذ إذا تحقق.','Falsy: False, None, 0, 0.0, "", [], {}, set().',
+    'If this happens… do this','Conditional.','Falsy: False, None, 0, "", [], {}, set().'),
+  pr(/\belse\b/,'وإلا','Else',
+    'وإلا… سوي هذا','الحالة البديلة.','Fallback branch.',
+    'Otherwise… do this','Fallback.','Fallback branch.'),
+  pr(/\bfor\b/,'كرر','For',
+    'كرّر على كل شي 🔁','حلقة تكرار.','Iterates any iterable. Supports else clause.',
+    'Repeat each item 🔁','Loop.','Iterates any iterable. Supports else clause.'),
+  pr(/\bwhile\b/,'كرر','While',
+    'استمر طول ما الشرط صح','حلقة تستمر ما دام الشرط صحيحًا.','Can have else clause.',
+    'Continue while true','While loop.','Can have else clause.'),
+  pr(/\bprint\s*\(/,'اطبع','Print',
+    'اطبع شي على الشاشة 🖨️','طباعة على الشاشة.','Built-in print. Accepts sep, end, file, flush.',
+    'Print to screen 🖨️','Print to screen.','Built-in print. Accepts sep, end, file, flush.'),
+  pr(/\binput\s*\(/,'اقرأ','Input',
+    'اقرأ شي من المستخدم ⌨️','قراءة قيمة من المستخدم.','Returns str; cast to int/float as needed.',
+    'Read input from user ⌨️','Read user input.','Returns str; cast to int/float as needed.'),
+  pr(/\breturn\b/,'إرجاع','Return',
+    'رجّع النتيجة','إرجاع قيمة.','Returns value; exits function. Without argument returns None.',
+    'Return the result','Return a value.','Returns value; exits function.'),
+  pr(/\btry\s*:/,'حاول','Try',
+    'جرّب… يمكن يطلع خطأ','محاولة تنفيذ كود.','Combine with except/else/finally.',
+    'Try this…','Try block.','Combine with except/else/finally.'),
+  pr(/\bexcept\b/,'امسك','Except',
+    'لو طلع خطأ، سوي هذا','التعامل مع الخطأ.','Specify exception type to avoid masking bugs.',
+    'If error, do this','Handle exception.','Specify exception type to avoid masking bugs.'),
+  pr(/\bwith\s+open\s*\(/,'افتح ملف','File',
+    'افتح ملف واقرأه — يقفل لحاله 📂','فتح ملف مع إغلاق تلقائي.','Context manager; ensures file closes on error.',
+    'Open and read a file 📂','Opens file with auto-close.','Context manager; ensures file closes on error.'),
+  pr(/\blambda\b/,'دالة صغيرة','Lambda',
+    'دالة صغيرة في سطر واحد','دالة مختصرة بدون اسم.','Anonymous one-expression function. Cannot contain statements.',
+    'Small one-line function','Anonymous short function.','Anonymous one-expression function.'),
+  pr(/\brange\s*\(/,'مدى','Range',
+    'سلسلة أرقام','توليد سلسلة أرقام.','Lazy range object. Supports start, stop, step.',
+    'Sequence of numbers','Generate number sequence.','Lazy range object. Supports start, stop, step.'),
+  pr(/\blen\s*\(/,'طول','Len',
+    'كم عنصر موجود؟','طول مجموعة أو نص.','Returns length. Calls __len__.',
+    'How many items?','Length of sequence.','Returns length. Calls __len__.'),
+  pr(/\bTrue\b|\bFalse\b|\bNone\b/,'قيمة','Value',
+    'قيمة صواب/خطأ/فارغة','قيمة منطقية أو فارغة.','Singletons. Use "is None", not "== None".',
+    'True/False/None value','Boolean or None value.','Singletons. Use "is None", not "== None".'),
+  pr(/\bf["']/,'نص','F-String',
+    'نص فيه متغيرات','نص منسّق (f-string).','Embeds expressions inside {}. Supports format specs.',
+    'Text with variables','Formatted string.','Embeds expressions inside {}. Supports format specs.')
+];
+
+/* =========================================================
+   8) Helpers
+   ========================================================= */
+const $ = function(id){ return document.getElementById(id); };
+function esc(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function uniq(a){
+  const seen = {};
+  const out = [];
+  for(let i = 0; i < a.length; i++){
+    if(!seen[a[i]]){ seen[a[i]] = 1; out.push(a[i]); }
+  }
+  return out;
+}
+
+const LANG_NAMES = {
+  html:{ar:'HTML', en:'HTML'},
+  css:{ar:'CSS', en:'CSS'},
+  javascript:{ar:'JavaScript', en:'JavaScript'},
+  python:{ar:'Python', en:'Python'},
+  php:{ar:'PHP', en:'PHP'},
+  sql:{ar:'SQL', en:'SQL'},
+  json:{ar:'JSON', en:'JSON'},
+  text:{ar:'نص', en:'Text'}
+};
+
+/* =========================================================
+   9) Detect language
+   ========================================================= */
+function detectLang(code){
+  const c = code.trim();
+  if(!c) return 'text';
+  if(/^\s*[\{\[]/.test(c) && /["']\s*:\s*/.test(c)){ try{ JSON.parse(c); return 'json'; }catch(e){} }
+  if(/<\?php/.test(c)) return 'php';
+  if(/<(!doctype|html|head|body|div|span|p|a|img|ul|li|table|form|input|button|h[1-6]|section|article|nav|header|footer)\b/i.test(c)) return 'html';
+  if(/\b(SELECT|INSERT|UPDATE|DELETE|CREATE\s+TABLE|FROM|WHERE)\b/i.test(c) && !/function|def\s|const\s|let\s/.test(c)) return 'sql';
+  if(/^\s*[\w\-.#*,\s\[\]="':>()]+\s*\{[^{}]*:[^{}]*\}/m.test(c) && !/\b(function|const|let|var|def\s)\b/.test(c)) return 'css';
+  if(/\b(def|elif|self\.|__init__|import\s+\w+|print\s*\(|lambda|None|True|False)\b/.test(c) && !/\b(function|const|let|var|=>)\b/.test(c)) return 'python';
+  if(/\b(function|const|let|var|=>|console\.log|document\.|window\.|async|await)\b/.test(c)) return 'javascript';
+  return 'text';
+}
+
+/* =========================================================
+   10) Analyzers
+   ========================================================= */
+function explainHTML(code){
+  const items = [];
+  const re = /<([a-zA-Z][\w-]*)((?:\s+[^<>]*?)?)\s*\/?>/g;
+  let m, guard = 0;
+  while((m = re.exec(code)) && guard++ < 500){
+    const tag = m[1].toLowerCase();
+    const attrs = m[2] || '';
+    let desc = pick(TAG_INFO[tag]);
+    if(!desc){
+      desc = LANG === 'ar'
+        ? (LEVEL === 'easy' ? 'وسم <' + tag + '> — نوع من العناصر.'
+           : LEVEL === 'expert' ? 'Element <' + tag + '>. Consult MDN for spec.'
+           : 'وسم <' + tag + '> يصف جزءًا من المحتوى.')
+        : (LEVEL === 'easy' ? 'Tag <' + tag + '> — a type of element.'
+           : LEVEL === 'expert' ? 'Element <' + tag + '>. Consult MDN for spec.'
+           : 'Tag <' + tag + '> describes part of the content.');
+    }
+    const notes = [];
+    const aRe = /([\w:-]+)(?:\s*=\s*("([^"]*)"|'([^']*)'|[^\s>]+))?/g;
+    let a, g2 = 0;
+    while((a = aRe.exec(attrs)) && g2++ < 25){
+      const name = a[1].toLowerCase();
+      const val = (a[3] != null ? a[3] : (a[4] != null ? a[4] : (a[2] || ''))).toString();
+      const info = pick(ATTR_INFO[name]);
+      if(info){
+        if(LEVEL === 'easy') notes.push(name + ': ' + info);
+        else if(LEVEL === 'expert') notes.push(name + '="' + val.slice(0,40) + '" → ' + info);
+        else notes.push(name + ' → ' + info + (val && val !== name ? ' ("' + val.slice(0,40) + '")' : ''));
+      }
+    }
+    if(notes.length) desc += ' — ' + notes.join(LEVEL === 'easy' ? '. ' : ' • ') + '.';
+    items.push({ code: m[0].trim().slice(0,140), desc: desc, cat: 'tag <' + tag + '>' });
+  }
+  if(!items.length) items.push({ code: code.slice(0,120), desc: LANG === 'ar' ? 'ما لقيت وسوم HTML واضحة.' : 'No clear HTML tags found.', cat: 'general' });
+  return items;
+}
+
+function explainCSS(code){
+  const items = [];
+  const re = /([^{}]+)\{([^{}]*)\}/g;
+  let m, guard = 0;
+  while((m = re.exec(code)) && guard++ < 300){
+    const selector = m[1].trim().replace(/\s+/g,' ');
+    const body = m[2];
+    let selDesc;
+    const AR = LANG === 'ar';
+    if(/^@media/.test(selector)) selDesc = AR
+      ? (LEVEL === 'easy' ? 'يشتغل بس لما تكون الشاشة بحجم معين 📱' : 'استعلام وسائط — يُطبَّق عند تحقق شرط.')
+      : (LEVEL === 'easy' ? 'Applies only when a screen condition matches 📱' : 'Media query — applies when a condition matches.');
+    else if(/^@keyframes/.test(selector)) selDesc = AR
+      ? (LEVEL === 'easy' ? 'حركة — يتحرك العنصر ✨' : 'تعريف حركة بمراحل.')
+      : (LEVEL === 'easy' ? 'An animation ✨' : 'Keyframes — animation stages.');
+    else if(/^@import/.test(selector)) selDesc = AR ? 'استيراد ملف CSS خارجي.' : 'Imports an external CSS file.';
+    else if(selector.charAt(0) === '.') selDesc = AR
+      ? (LEVEL === 'easy' ? 'كلاس «' + selector.slice(1).split(/[\s:>]/)[0] + '» — مجموعة عناصر لهم نفس الشكل' : 'كلاس «' + selector.slice(1).split(/[\s:>]/)[0] + '».')
+      : (LEVEL === 'easy' ? 'Class "' + selector.slice(1).split(/[\s:>]/)[0] + '" — a group of elements' : 'Class "' + selector.slice(1).split(/[\s:>]/)[0] + '".');
+    else if(selector.charAt(0) === '#') selDesc = AR
+      ? (LEVEL === 'easy' ? 'معرّف «' + selector.slice(1).split(/[\s:>]/)[0] + '» — عنصر واحد بس' : 'معرّف «' + selector.slice(1).split(/[\s:>]/)[0] + '».')
+      : (LEVEL === 'easy' ? 'Id "' + selector.slice(1).split(/[\s:>]/)[0] + '" — a single element' : 'Id "' + selector.slice(1).split(/[\s:>]/)[0] + '".');
+    else if(selector === '*') selDesc = AR ? 'كل العناصر.' : 'All elements.';
+    else selDesc = AR
+      ? (LEVEL === 'easy' ? 'عنصر «' + selector + '»' : 'مُحدِّد عنصر «' + selector + '».')
+      : (LEVEL === 'easy' ? 'Element "' + selector + '"' : 'Element selector "' + selector + '".');
+
+    items.push({ code: selector + ' {', desc: selDesc, cat: AR ? 'مُحدِّد' : 'Selector' });
+
+    body.split(';').forEach(function(d){
+      const decl = d.trim();
+      if(!decl) return;
+      const idx = decl.indexOf(':');
+      if(idx === -1) return;
+      const prop = decl.slice(0, idx).trim().toLowerCase();
+      const val = decl.slice(idx + 1).trim();
+      const info = pick(CSS_PROP[prop]);
+      let desc;
+      if(info){
+        if(LEVEL === 'easy') desc = info + ' — القيمة: ' + val;
+        else if(LEVEL === 'expert') desc = info + ' · value: ' + val;
+        else desc = info + ' → "' + val + '".';
+      } else {
+        desc = AR
+          ? (LEVEL === 'easy' ? 'خاصية ' + prop + ' = ' + val : 'خاصية «' + prop + '» بقيمة «' + val + '».')
+          : (LEVEL === 'easy' ? 'Property ' + prop + ' = ' + val : 'Property "' + prop + '" with value "' + val + '".');
+      }
+      items.push({ code: '  ' + prop + ': ' + val + ';', desc: desc, cat: AR ? 'خاصية' : 'Property' });
+    });
+  }
+  if(!items.length) items.push({ code: code.slice(0,120), desc: LANG === 'ar' ? 'ما لقيت قواعد CSS واضحة.' : 'No clear CSS rules found.', cat: 'general' });
+  return items;
+}
+
+function explainByRules(code, rules, label){
+  const items = [];
+  const lines = code.split('\n');
+  for(let i = 0; i < lines.length; i++){
+    const raw = lines[i];
+    if(!raw.trim()) continue;
+    if(items.length >= 500) break;
+    let matched = false;
+    for(let r = 0; r < rules.length; r++){
+      const rule = rules[r];
+      if(rule.re.test(raw)){
+        if(!rule.cat || !rule.desc){ matched = true; break; }
+        const m = raw.match(rule.re);
+        const cat = rule.cat[LANG] || rule.cat.ar;
+        const desc = pickV(rule.desc, m || []);
+        items.push({ code: raw.length > 120 ? raw.slice(0,120) + ' …' : raw, desc: desc, cat: cat });
+        matched = true;
+        break;
+      }
+    }
+    if(!matched){
+      items.push({ code: raw.slice(0,120), desc: label + ': ' + raw.trim(), cat: LANG === 'ar' ? 'سطر' : 'Line' });
+    }
+  }
+  if(!items.length) items.push({ code: '', desc: LANG === 'ar' ? 'الكود فارغ.' : 'Code empty.', cat: 'general' });
+  return items;
+}
+
+function explainText(code){
+  const words = code.trim().split(/\s+/).filter(Boolean).length;
+  return [{ code: code.slice(0,140), desc: LANG === 'ar' ? 'نص عادي (' + words + ' كلمة).' : 'Plain text (' + words + ' words).', cat: 'text' }];
+}
+
+/* =========================================================
+   11) Fixes builder
+   ========================================================= */
+function buildFixes(code, lang){
+  const fixes = [];
+  const AR = LANG === 'ar';
+  const LV = LEVEL;
+
+  function d(ae, an, ax, ee, en, ex){
+    if(AR){
+      if(LV === 'easy') return ae;
+      if(LV === 'expert') return ax;
+      return an;
+    } else {
+      if(LV === 'easy') return ee;
+      if(LV === 'expert') return ex;
+      return en;
+    }
+  }
+
+  /* 1. Hardcoded secret */
+  const secretRe = /(?:api[_-]?key|password|secret|token|passwd|pwd)\s*[:=]\s*['"]([^'"]{4,})['"]/i;
+  const sm = code.match(secretRe);
+  if(sm){
+    fixes.push({
+      level:'danger',
+      title: AR ? (LV === 'easy' ? '🔑 مفتاح مكشوف!' : 'مفتاح/كلمة مرور مكشوفة في الكود') : (LV === 'easy' ? '🔑 Exposed secret!' : 'Hardcoded secret in code'),
+      desc: d(
+        'لا تحط كلمة السر في الكود مباشرة! أي واحد يشوف الملف يقدر يسرقها 😱',
+        'لا تكتب مفاتيح API أو كلمات المرور مباشرة في الكود — أي شخص يرى الملف يمكنه سرقتها. استخدم متغيرات البيئة.',
+        'Credential leak risk. Rotate this secret immediately, migrate to a secrets manager or env vars, add gitleaks/trufflehog scanning.',
+        "Don't put passwords in code! Anyone who sees the file can steal them 😱",
+        'Never hardcode secrets. Anyone viewing the file can steal them. Use env vars.',
+        'Credential leak risk. Rotate immediately, migrate to secrets manager, add scanning.'
+      ),
+      bad: sm[0],
+      good: '// .env (never committed)\nAPI_KEY=your_secret_key_here\n\n// In code:\nconst apiKey = process.env.API_KEY;'
+    });
+  }
+
+  /* 2. eval */
+  if(/\beval\s*\(/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /eval\s*\(/.test(l); })[0] || 'eval(...)';
+    fixes.push({
+      level:'danger',
+      title: AR ? 'eval() — خطر أمني' : 'eval() — security risk',
+      desc: d(
+        'لا تستخدم eval أبدًا — خطر!',
+        'eval() ينفّذ أي كود يُمرَّر له، مما يفتح بابًا لهجمات injection. استخدم بدائل آمنة.',
+        'eval() enables arbitrary code execution and defeats CSP. Use JSON.parse or a proper parser.',
+        'Never use eval — dangerous!',
+        'eval() runs any code passed to it. Use JSON.parse instead.',
+        'eval() enables arbitrary code execution and defeats CSP.'
+      ),
+      bad: line.trim(),
+      good: '// Instead of:\n// const data = eval("(" + str + ")");\n\n// Use:\nconst data = JSON.parse(str);'
+    });
+  }
+
+  /* 3. innerHTML */
+  if(/\.innerHTML\s*=/.test(code) && !/textContent|escapeHtml|sanitize|DOMPurify/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /\.innerHTML\s*=/.test(l); })[0] || '.innerHTML = ...';
+    fixes.push({
+      level:'warn',
+      title: AR ? 'innerHTML قد يسبب ثغرة XSS' : 'innerHTML may cause XSS',
+      desc: d(
+        'حط نص عادي بدل HTML — أأمن ✅',
+        'إدخال بيانات المستخدم في innerHTML يفتح ثغرة XSS. استخدم textContent.',
+        'innerHTML parses HTML and executes inline event handlers. XSS sink. Use DOMPurify or textContent.',
+        'Use text instead of HTML — safer ✅',
+        'User input in innerHTML opens XSS hole. Use textContent.',
+        'innerHTML parses HTML and executes handlers. XSS sink.'
+      ),
+      bad: line.trim(),
+      good: '// Unsafe:\n// el.innerHTML = userInput;\n\n// Safe:\nel.textContent = userInput;'
+    });
+  }
+
+  /* 4. var */
+  const varLines = code.split('\n').filter(function(l){ return /\bvar\s+\w/.test(l); });
+  if(varLines.length && lang === 'javascript'){
+    const sample = varLines[0];
+    fixes.push({
+      level:'warn',
+      title: AR ? 'استخدم let/const بدل var' : 'Use let/const instead of var',
+      desc: d(
+        varLines.length + ' استخدام لـ var — قديم! غيّره لـ let',
+        varLines.length + ' استخدام لـ var. استخدم let/const لأنها أنظف وأأمن.',
+        varLines.length + ' var bindings. var is function-scoped with hoisting quirks. Use const/let.',
+        varLines.length + ' uses of var — old! Change to let',
+        varLines.length + ' uses of var. Use let/const for safety.',
+        varLines.length + ' var bindings. Prefer const/let.'
+      ),
+      bad: sample.trim(),
+      good: sample.replace(/\bvar\b/, /[+\-*/]=|\+\+|--/.test(sample) ? 'let' : 'const').trim()
+    });
+  }
+
+  /* 5. == */
+  const eqLines = code.split('\n').filter(function(l){ return /[^=!<>]==[^=]/.test(l) && !/===/.test(l); });
+  if(eqLines.length && lang === 'javascript'){
+    const sample = eqLines[0];
+    fixes.push({
+      level:'warn',
+      title: AR ? 'استخدم === بدل ==' : 'Use === instead of ==',
+      desc: d(
+        'استخدم === (ثلاث تساويات) — أدق!',
+        'المقارنة بـ == تقوم بتحويل تلقائي للنوع وقد تعطي نتائج غريبة.',
+        'Loose equality triggers Abstract Equality Comparison with type coercion ([] == ![] is true).',
+        'Use === (three equals) — stricter!',
+        'Loose == does type coercion and can give odd results.',
+        'Loose equality triggers Abstract Equality Comparison.'
+      ),
+      bad: sample.trim(),
+      good: sample.replace(/([^=!<>])==([^=])/g, '$1===$2').trim()
+    });
+  }
+
+  /* 6. for(var) */
+  if(/\bfor\s*\(\s*var\b/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /for\s*\(\s*var\b/.test(l); })[0] || 'for (var i=0;...)';
+    fixes.push({
+      level:'warn',
+      title: AR ? 'var داخل for' : 'var inside for loop',
+      desc: d(
+        'استخدم let بدل var في الحلقة 🔄',
+        'var في for يسبب مشاكل مع الإغلاقات والدوال غير المتزامنة.',
+        'var shares one binding across iterations causing closure bugs. let creates per-iteration bindings.',
+        'Use let in the loop 🔄',
+        'var in for causes closure issues with async callbacks.',
+        'var shares one binding across iterations causing closure bugs.'
+      ),
+      bad: line.trim(),
+      good: line.replace(/\bvar\b/, 'let').trim()
+    });
+  }
+
+  /* 7. img alt */
+  if(lang === 'html'){
+    const imgs = code.match(/<img\b[^>]*>/g) || [];
+    const badImgs = imgs.filter(function(m){ return !/\balt\s*=/.test(m); });
+    if(badImgs.length){
+      const sample = badImgs[0];
+      fixes.push({
+        level:'warn',
+        title: AR ? 'صور بدون alt' : 'Images without alt',
+        desc: d(
+          'حط وصف للصورة عشان لو ما ظهرت يعرفون إيش فيها 🖼️',
+          badImgs.length + ' صورة بدون alt. الخاصية ضرورية لقارئات الشاشة ومحركات البحث.',
+          badImgs.length + ' <img> without alt. WCAG 2.1 SC 1.1.1 violation. Use descriptive alt.',
+          'Add description to images 🖼️',
+          badImgs.length + ' images without alt. Needed for accessibility.',
+          badImgs.length + ' <img> without alt (WCAG 1.1.1).'
+        ),
+        bad: sample,
+        good: sample.replace(/<img\b/, '<img alt="وصف الصورة هنا"')
+      });
+    }
+  }
+
+  /* 8. html lang */
+  if(lang === 'html' && /<html\b[^>]*>/i.test(code) && !/<html[^>]*\blang\s*=/i.test(code)){
+    const match = code.match(/<html\b[^>]*>/i);
+    fixes.push({
+      level:'warn',
+      title: AR ? 'html بدون lang' : 'html without lang',
+      desc: d(
+        'حدد لغة الصفحة — عربي أو إنجليزي 🌍',
+        'خاصية lang مهمة لقارئات الشاشة ومحركات البحث.',
+        'BCP-47 required for WCAG 3.1.1. Affects screen reader voice, hyphenation, translation.',
+        'Set page language 🌍',
+        'lang attribute matters for accessibility and SEO.',
+        'BCP-47 required for WCAG 3.1.1.'
+      ),
+      bad: match[0],
+      good: match[0].replace(/<html\b/, '<html lang="ar"')
+    });
+  }
+
+  /* 9. !important */
+  const important = (code.match(/!important/g) || []).length;
+  if(lang === 'css' && important > 2){
+    fixes.push({
+      level:'warn',
+      title: AR ? '!important كثير' : 'Too much !important',
+      desc: d(
+        'فيه ' + important + ' استخدام لـ !important — فوضى 😵',
+        important + ' استخدام لـ !important. علامة على صراع في التخصيص.',
+        important + ' !important declarations. Refactor with @layer, :where(), or design tokens.',
+        important + ' uses of !important — chaos 😵',
+        important + ' !important declarations — specificity debt.',
+        important + ' !important declarations. Refactor with @layer.'
+      ),
+      bad: 'color: red !important;',
+      good: '/* Use specificity or @layer */\n@layer components {\n  .btn.primary { color: red; }\n}'
+    });
+  }
+
+  /* 10. try without catch */
+  if(/\btry\s*\{/.test(code) && !/\bcatch\b|\bexcept\b/.test(code)){
+    fixes.push({
+      level:'warn',
+      title: AR ? 'try بدون catch' : 'try without catch',
+      desc: d(
+        'لو الخطأ صار، مين يمسكه؟ 🤔',
+        'try بدون catch يعني الخطأ سيُتجاهل بصمت.',
+        'try without catch rethrows and may crash at a higher frame. Use finally for cleanup.',
+        'Who catches the error? 🤔',
+        'try without catch swallows errors silently.',
+        'try without catch rethrows and may crash higher.'
+      ),
+      bad: 'try {\n  doSomething();\n}',
+      good: 'try {\n  doSomething();\n} catch (err) {\n  console.error(err);\n}'
+    });
+  }
+
+  /* 11. console.log */
+  const logs = (code.match(/console\.(log|debug)/g) || []).length;
+  if(logs > 3){
+    fixes.push({
+      level:'info',
+      title: AR ? 'console.log كثير' : 'Many console.log',
+      desc: d(
+        logs + ' طبعة — تمام للتجربة بس شيليها قبل النشر',
+        logs + ' استدعاء console. أزلها قبل النشر للإنتاج.',
+        logs + ' console calls. Gate behind DEBUG or use structured logger (pino/winston).',
+        logs + ' console calls — remove before shipping',
+        logs + ' console calls. Remove before production.',
+        logs + ' console calls. Use structured logger.'
+      ),
+      bad: 'console.log("user:", user);\nconsole.log("total:", total);',
+      good: '// Gate behind a flag or use a logger:\nif (DEBUG) console.log(user);'
+    });
+  }
+
+  /* 12. alert */
+  if(/\balert\s*\(/.test(code)){
+    fixes.push({
+      level:'info',
+      title: AR ? 'استخدم رسائل مخصصة بدل alert' : 'Use custom messages instead of alert',
+      desc: d(
+        'alert مملة! استخدم رسالة أنيقة داخل الصفحة 💬',
+        'alert() تجمّد الصفحة وتزعج المستخدم. استخدم نوافذ مخصصة.',
+        'alert() blocks main thread, dismisses on focus loss, cannot be styled. Use aria-modal or toast.',
+        'alert is annoying! Use inline message 💬',
+        'alert() freezes page and annoys users.',
+        'alert() blocks main thread. Use aria-modal.'
+      ),
+      bad: 'alert("تم الحفظ!");',
+      good: 'showToast("تم الحفظ!", "success");'
+    });
+  }
+
+  /* 13. while(true) */
+  if(/while\s*\(\s*true\s*\)/.test(code) && !/break/.test(code)){
+    fixes.push({
+      level:'warn',
+      title: AR ? 'حلقة لا نهائية' : 'Infinite loop',
+      desc: d(
+        'هذي الحلقة ما توقف! أضف break 🛑',
+        'حلقة لا نهائية بدون شرط خروج — قد تجمّد الصفحة.',
+        'Unbounded loop with no exit; blocks event loop and freezes the tab. Add break or max-iterations counter.',
+        'This loop never stops! Add break 🛑',
+        'Infinite loop without exit — freezes the page.',
+        'Unbounded loop; blocks the event loop.'
+      ),
+      bad: 'while (true) {\n  doWork();\n}',
+      good: 'while (true) {\n  if (shouldStop()) break;\n  doWork();\n}'
+    });
+  }
+
+  /* 14. Long function */
+  const lines = code.split('\n');
+  let inFunc = false, funcName = '', funcLen = 0, bc = 0;
+  for(let i = 0; i < lines.length; i++){
+    const line = lines[i];
+    const fm = line.match(/\bfunction\s+(\w+)|\bdef\s+(\w+)/);
+    if(fm && !inFunc){ inFunc = true; funcName = fm[1] || fm[2]; funcLen = 0; bc = 0; }
+    if(inFunc){
+      funcLen++;
+      bc += (line.match(/\{/g) || []).length;
+      bc -= (line.match(/\}/g) || []).length;
+      if(bc === 0 && funcLen > 1){
+        if(funcLen > 40){
+          fixes.push({
+            level:'info',
+            title: AR ? 'دالة طويلة: ' + funcName : 'Long function: ' + funcName,
+            desc: d(
+              'دالة «' + funcName + '» فيها ' + funcLen + ' سطر — قسمها ✂️',
+              'الدالة «' + funcName + '» فيها ' + funcLen + ' سطر. قسمها لدوال أصغر.',
+              funcName + '() spans ' + funcLen + ' lines. Extract sub-functions; aim for <20 lines per SRP.',
+              'Function "' + funcName + '" is ' + funcLen + ' lines — split it ✂️',
+              'Function "' + funcName + '" is ' + funcLen + ' lines. Split it.',
+              funcName + '() spans ' + funcLen + ' lines. Extract sub-functions.'
+            ),
+            bad: 'function ' + funcName + '() {\n  // ...' + funcLen + ' lines...\n}',
+            good: 'function ' + funcName + '() {\n  const data = loadData();\n  const result = processData(data);\n  return formatOutput(result);\n}'
+          });
+        }
+        inFunc = false;
+      }
+    }
+  }
+
+  return fixes;
+}
+
+/* =========================================================
+   12) Deep analysis
+   ========================================================= */
+function calcNesting(lines){
+  let max = 0, cur = 0;
+  for(let i = 0; i < lines.length; i++){
+    const line = lines[i];
+    const open = (line.match(/[\{\(\[]/g) || []).length;
+    const close = (line.match(/[\}\)\]]/g) || []).length;
+    cur += open - close;
+    if(cur > max) max = cur;
+  }
+  return max;
+}
+
+function generateOverview(lang, metrics, funcs, classes, vars){
+  const AR = LANG === 'ar', LV = LEVEL;
+  const ln = LANG_NAMES[lang] ? LANG_NAMES[lang][LANG] : lang;
+  const p = [];
+  if(LV === 'easy'){
+    if(AR){
+      p.push('هذا كود ' + ln + ' 👋');
+      if(metrics.codeLines) p.push('فيه ' + metrics.codeLines + ' سطر.');
+      if(funcs.length) p.push('فيه ' + funcs.length + ' دالة (وصفة جاهزة).');
+      if(classes.length) p.push('فيه ' + classes.length + ' كلاس (قالب).');
+      if(vars.length) p.push('يستخدم ' + vars.length + ' صندوق لتخزين القيم.');
+    } else {
+      p.push('This is ' + ln + ' code 👋');
+      if(metrics.codeLines) p.push(metrics.codeLines + ' lines.');
+      if(funcs.length) p.push(funcs.length + ' function(s).');
+      if(classes.length) p.push(classes.length + ' class(es).');
+      if(vars.length) p.push(vars.length + ' variable(s).');
+    }
+  } else if(LV === 'expert'){
+    if(AR){
+      p.push(ln + ' · ' + metrics.codeLines + ' SLOC · avg ' + metrics.avgLineLength + ' chars/line · max nesting ' + metrics.nestingDepth + '.');
+      p.push(funcs.length + ' functions, ' + classes.length + ' classes, ' + vars.length + ' bindings, ' + metrics.comments + ' comments (' + Math.round(metrics.comments / Math.max(1, metrics.totalLines) * 100) + '%).');
+      if(metrics.maxLineLength > 120) p.push('Longest line ' + metrics.maxLineLength + ' chars — consider extraction.');
+      if(metrics.nestingDepth > 4) p.push('Deep nesting — refactor via guard clauses or strategy pattern.');
+    } else {
+      p.push(ln + ' · ' + metrics.codeLines + ' SLOC · avg ' + metrics.avgLineLength + ' chars/line · max nesting ' + metrics.nestingDepth + '.');
+      p.push(funcs.length + ' functions, ' + classes.length + ' classes, ' + vars.length + ' bindings, ' + metrics.comments + ' comments (' + Math.round(metrics.comments / Math.max(1, metrics.totalLines) * 100) + '%).');
+      if(metrics.maxLineLength > 120) p.push('Longest line ' + metrics.maxLineLength + ' chars.');
+    }
+  } else {
+    if(AR){
+      p.push('كود ' + ln + ' بحجم ' + metrics.codeLines + ' سطر فعّال.');
+      if(funcs.length) p.push('يعرّف ' + funcs.length + ' دالة.');
+      if(classes.length) p.push(classes.length + ' كلاس.');
+      if(vars.length) p.push(vars.length + ' متغير.');
+      if(metrics.comments) p.push(metrics.comments + ' تعليق.');
+    } else {
+      p.push(ln + ' code with ' + metrics.codeLines + ' active lines.');
+      if(funcs.length) p.push(funcs.length + ' function(s).');
+      if(classes.length) p.push(classes.length + ' class(es).');
+      if(vars.length) p.push(vars.length + ' variable(s).');
+    }
+  }
+  return p.join(' ');
+}
+
+function computeScore(x){
+  let s = 100;
+  s -= x.security.length * 18;
+  s -= x.warnings.length * 8;
+  s -= x.issues.length * 6;
+  s -= x.tips.length * 2;
+  if(x.metrics.nestingDepth > 5) s -= 8;
+  if(x.metrics.avgLineLength > 100) s -= 5;
+  return Math.max(0, Math.min(100, s));
+}
+
+function deepAnalyze(code, langChoice){
+  const lang = langChoice === 'auto' ? detectLang(code) : langChoice;
+  const lines = code.split('\n');
+  const nonEmpty = lines.filter(function(l){ return l.trim() && !/^\s*(\/\/|#|\/\*|\*|<!--)/.test(l); });
+  const comments = lines.filter(function(l){ return /^\s*(\/\/|#|\/\*|\*|<!--)/.test(l); });
+
+  const vars = uniq((code.match(/\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)/g) || []).map(function(s){ return s.replace(/^(?:const|let|var)\s+/, ''); }));
+  const funcs = uniq([].concat(
+    (code.match(/\bfunction\s+([A-Za-z_$][\w$]*)/g) || []).map(function(s){ return s.split(/\s+/)[1]; }),
+    (code.match(/\bdef\s+([A-Za-z_]\w*)/g) || []).map(function(s){ return s.split(/\s+/)[1]; }),
+    (code.match(/(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s*)?\(?[^)]*\)?\s*=>/g) || []).map(function(s){
+      const m = s.match(/(?:const|let|var)\s+([A-Za-z_$][\w$]*)/);
+      return m ? m[1] : null;
+    }).filter(Boolean)
+  ));
+  const classes = uniq((code.match(/\bclass\s+([A-Za-z_$][\w$]*)/g) || []).map(function(s){ return s.split(/\s+/)[1]; }));
+  const imports = uniq([].concat(
+    (code.match(/import\s+.*?from\s+['"]([^'"]+)['"]/g) || []),
+    (code.match(/^\s*import\s+([\w.]+)/gm) || []),
+    (code.match(/^\s*from\s+([\w.]+)\s+import/gm) || [])
+  ));
+
+  const metrics = {
+    totalLines: lines.length,
+    codeLines: nonEmpty.length,
+    comments: comments.length,
+    variables: vars.length,
+    functions: funcs.length,
+    classes: classes.length,
+    maxLineLength: Math.max.apply(null, [0].concat(lines.map(function(l){ return l.length; }))),
+    avgLineLength: nonEmpty.length ? Math.round(nonEmpty.reduce(function(a, l){ return a + l.length; }, 0) / nonEmpty.length) : 0,
+    nestingDepth: calcNesting(lines)
+  };
+
+  const issues = [], warnings = [], tips = [], security = [];
+  const AR = LANG === 'ar', LV = LEVEL;
+
+  const secrets = code.match(/(?:api[_-]?key|password|secret|token|passwd|pwd)\s*[:=]\s*['"][^'"]{4,}['"]/gi);
+  if(secrets) security.push({
+    level:'danger',
+    text: AR
+      ? (LV === 'easy' ? 'فيه ' + secrets.length + ' مفتاح مكتوب مباشرة — خطر! 🔑'
+         : LV === 'expert' ? 'Credential leak: ' + secrets.length + ' hardcoded secret(s). Rotate & migrate to vault.'
+         : 'تم العثور على ' + secrets.length + ' قيمة تبدو كسر مكتوب مباشرة.')
+      : (LV === 'easy' ? 'Found ' + secrets.length + ' hardcoded secret(s)! 🔑'
+         : LV === 'expert' ? 'Credential leak: ' + secrets.length + ' hardcoded secret(s).'
+         : 'Found ' + secrets.length + ' hardcoded secrets.')
+  });
+
+  if(/\beval\s*\(/.test(code)) security.push({
+    level:'danger',
+    text: AR
+      ? (LV === 'easy' ? 'يستخدم eval — خطر كبير!' : 'استخدام eval() خطر أمني كبير.')
+      : (LV === 'easy' ? 'Uses eval — big danger!' : 'eval() is a major security risk.')
+  });
+
+  if(/\.innerHTML\s*=/.test(code) && !/esc|sanitize|textContent|DOMPurify/.test(code))
+    security.push({
+      level:'warn',
+      text: AR
+        ? (LV === 'easy' ? 'يستخدم innerHTML — قد يكون خطر' : 'استخدام innerHTML قد يفتح ثغرة XSS.')
+        : (LV === 'easy' ? 'Uses innerHTML — risky' : 'innerHTML may open XSS hole.')
+    });
+
+  const varCount = (code.match(/\bvar\s+/g) || []).length;
+  if(varCount > 0 && lang === 'javascript') warnings.push({
+    level:'warn',
+    text: AR
+      ? (LV === 'easy' ? 'فيه ' + varCount + ' استخدام لـ var — استخدم let بدلها' : varCount + ' استخدام لـ var — يُفضَّل let/const.')
+      : (LV === 'easy' ? varCount + ' uses of var — use let' : varCount + ' uses of var — prefer let/const.')
+  });
+
+  const looseEq = (code.match(/[^=!<>]==[^=]/g) || []).length;
+  if(looseEq > 0 && lang === 'javascript') warnings.push({
+    level:'warn',
+    text: AR
+      ? (LV === 'easy' ? looseEq + ' استخدام لـ == — استخدم === أدق' : looseEq + ' استخدام لـ == — استخدم ===.')
+      : (LV === 'easy' ? looseEq + ' uses of == — prefer ===' : looseEq + ' uses of == — prefer ===.')
+  });
+
+  const logs = (code.match(/console\.(log|debug)/g) || []).length;
+  if(logs > 3) tips.push({
+    level:'info',
+    text: AR
+      ? (LV === 'easy' ? logs + ' طبعة console — شيليها قبل النشر' : logs + ' استدعاء console.log — أزلها قبل النشر.')
+      : (LV === 'easy' ? logs + ' console calls — remove before ship' : logs + ' console.log calls — remove before production.')
+  });
+
+  if(metrics.nestingDepth > 4) warnings.push({
+    level:'warn',
+    text: AR
+      ? (LV === 'easy' ? 'الكود داخل بعضه كثير — صعب تقرأه' : 'عمق التداخل ' + metrics.nestingDepth + ' مستويات.')
+      : (LV === 'easy' ? 'Deeply nested — hard to read' : 'Nesting depth ' + metrics.nestingDepth + '.')
+  });
+
+  if(/\bfor\s*\(\s*var\b/.test(code)) warnings.push({
+    level:'warn',
+    text: AR
+      ? (LV === 'easy' ? 'var داخل for — استخدم let' : 'استخدام var في for يسبب مشاكل الإغلاق.')
+      : (LV === 'easy' ? 'var inside for — use let' : 'var in for loop causes closure bugs.')
+  });
+
+  if(/\btry\s*\{/.test(code) && !/\bcatch\b/.test(code) && !/\bexcept\b/.test(code))
+    warnings.push({
+      level:'warn',
+      text: AR
+        ? (LV === 'easy' ? 'try بدون catch — لو صار خطأ ما أحد يمسكه' : 'try بدون catch/except سيفشل بصمت.')
+        : (LV === 'easy' ? 'try without catch' : 'try without catch fails silently.')
+    });
+
+  if(/\balert\s*\(/.test(code)) tips.push({
+    level:'info',
+    text: AR
+      ? (LV === 'easy' ? 'alert مملة — استخدم رسالة أنيقة' : 'alert مزعج — استخدم نوافذ مخصصة.')
+      : (LV === 'easy' ? 'alert is annoying' : 'alert is disruptive — use custom dialogs.')
+  });
+
+  if(lang === 'html' && !/<html[^>]*\blang\s*=/.test(code)) issues.push({
+    level:'warn',
+    text: AR
+      ? (LV === 'easy' ? 'حدد لغة الصفحة عربي/إنجليزي 🌍' : 'وسم html يفتقد خاصية lang.')
+      : (LV === 'easy' ? 'Set page language 🌍' : 'html tag missing lang.')
+  });
+
+  if(lang === 'html'){
+    const imgs = (code.match(/<img\b/g) || []).length;
+    const alts = (code.match(/<img[^>]*\balt\s*=/g) || []).length;
+    if(imgs > alts) issues.push({
+      level:'warn',
+      text: AR
+        ? (LV === 'easy' ? (imgs - alts) + ' صورة بدون وصف — حط alt' : (imgs - alts) + ' من ' + imgs + ' صورة بدون alt.')
+        : (LV === 'easy' ? (imgs - alts) + ' images without alt' : (imgs - alts) + ' of ' + imgs + ' images missing alt.')
+    });
+  }
+
+  const important = (code.match(/!important/g) || []).length;
+  if(important > 2) warnings.push({
+    level:'warn',
+    text: AR
+      ? (LV === 'easy' ? important + ' استخدام لـ !important — فوضى' : important + ' استخدام لـ !important — نظّم التنسيق.')
+      : (LV === 'easy' ? important + ' !important — chaos' : important + ' !important uses — organize styles.')
+  });
+
+  let items;
+  if(lang === 'html') items = explainHTML(code);
+  else if(lang === 'css') items = explainCSS(code);
+  else if(lang === 'javascript') items = explainByRules(code, JS_RULES, 'JavaScript');
+  else if(lang === 'python') items = explainByRules(code, PY_RULES, 'Python');
+  else if(lang === 'php') items = explainByRules(code, JS_RULES, 'PHP');
+  else items = explainText(code);
+
+  const fixes = buildFixes(code, lang);
+  const overview = generateOverview(lang, metrics, funcs, classes, vars);
+  const score = computeScore({ security: security, warnings: warnings, issues: issues, tips: tips, metrics: metrics });
+
+  return {
+    lang: lang, metrics: metrics, items: items,
+    issues: issues, warnings: warnings, tips: tips, security: security, fixes: fixes,
+    vars: vars, funcs: funcs, classes: classes, imports: imports,
+    overview: overview, score: score
+  };
+}
+
+/* =========================================================
+   13) Render
+   ========================================================= */
+function levelClass(l){
+  if(l === 'danger') return 'danger';
+  if(l === 'warn') return 'warn';
+  if(l === 'ok') return 'ok';
+  return 'info';
+}
+
+function renderAnalysis(a){
+  const lang = a.lang, metrics = a.metrics, items = a.items;
+  const issues = a.issues, warnings = a.warnings, tips = a.tips, security = a.security, fixes = a.fixes;
+  const vars = a.vars, funcs = a.funcs, classes = a.classes, imports = a.imports;
+  const overview = a.overview, score = a.score;
+  const ln = LANG_NAMES[lang] ? LANG_NAMES[lang][LANG] : lang;
+
+  let html = '';
+
+  const scoreClass = score >= 80 ? 'good' : score >= 55 ? 'mid' : 'bad';
+  const scoreMsg = score >= 80 ? t('scorePerfect') : score >= 55 ? t('scoreGood') : score >= 35 ? t('scoreMid') : t('scoreBad');
+  const scoreColor = score >= 80 ? '#34d399' : score >= 55 ? '#fbbf24' : '#f87171';
+  const deg = (score / 100) * 360;
+
+  html += '<div class="scoreCard">'
+    + '<div class="scoreCircle ' + scoreClass + '" style="--score-color:' + scoreColor + ';--score-deg:' + deg + 'deg">' + score + '</div>'
+    + '<div class="scoreInfo"><h3>' + t('score') + '</h3><p>' + esc(scoreMsg) + '</p></div>'
+    + '</div>';
+
+  html += '<div class="summary">'
+    + '<h3>' + t('overview') + '</h3>'
+    + '<p style="font-size:14.5px;margin-bottom:10px">' + esc(overview) + '</p>'
+    + '<ul>'
+    + '<li>' + t('language') + ' <b>' + esc(ln) + '</b></li>'
+    + '<li>' + t('codeLines') + ' <b>' + metrics.codeLines + '</b></li>'
+    + '<li>' + t('comments') + ' <b>' + metrics.comments + '</b></li>'
+    + '<li>' + t('functions') + ' <b>' + metrics.functions + '</b></li>'
+    + '<li>' + t('variables') + ' <b>' + metrics.variables + '</b></li>'
+    + (metrics.classes ? '<li>' + t('classes') + ' <b>' + metrics.classes + '</b></li>' : '')
+    + (metrics.nestingDepth ? '<li>' + t('nesting') + ' <b>' + metrics.nestingDepth + '</b></li>' : '')
+    + '</ul></div>';
+
+  html += '<div class="metric-grid">'
+    + '<div class="metric"><div class="val">' + metrics.totalLines + '</div><div class="lbl">' + t('totalLines') + '</div></div>'
+    + '<div class="metric"><div class="val">' + metrics.codeLines + '</div><div class="lbl">' + t('codeLines') + '</div></div>'
+    + '<div class="metric"><div class="val">' + metrics.comments + '</div><div class="lbl">' + t('comments') + '</div></div>'
+    + '<div class="metric"><div class="val">' + metrics.functions + '</div><div class="lbl">' + t('functions') + '</div></div>'
+    + '<div class="metric"><div class="val">' + metrics.variables + '</div><div class="lbl">' + t('variables') + '</div></div>'
+    + '<div class="metric"><div class="val">' + metrics.avgLineLength + '</div><div class="lbl">' + t('avgLen') + '</div></div>'
+    + '</div>';
+
+  if(security.length){
+    html += '<div class="section-title">' + t('sectionSecurity') + ' (' + security.length + ')</div>';
+    security.forEach(function(s){
+      html += '<div class="item" style="border-inline-start-color:var(--danger)"><p><span class="cat danger">' + t('danger') + '</span>' + s.text + '</p></div>';
+    });
+  }
+
+  if(fixes.length){
+    html += '<div class="section-title">' + t('sectionFixes') + ' (' + fixes.length + ')</div>';
+    fixes.forEach(function(f){
+      html += '<div class="fixBlock ' + f.level + '">'
+        + '<h4>🔧 ' + esc(f.title) + '</h4>'
+        + '<p class="desc">' + esc(f.desc) + '</p>'
+        + '<div class="codeCompare">'
+        + '<div class="codeBox bad"><div class="head">' + t('badCode') + '</div><pre>' + esc(f.bad) + '</pre></div>'
+        + '<div class="codeBox good"><div class="head">' + t('goodCode') + '</div><pre>' + esc(f.good) + '</pre></div>'
+        + '</div></div>';
+    });
+  }
+
+  if(issues.length || warnings.length){
+    html += '<div class="section-title">' + t('sectionIssues') + ' (' + (issues.length + warnings.length) + ')</div>';
+    issues.concat(warnings).forEach(function(w){
+      html += '<div class="item" style="border-inline-start-color:var(--warn)"><p><span class="cat ' + levelClass(w.level) + '">' + (w.level === 'danger' ? t('danger') : t('warn')) + '</span>' + w.text + '</p></div>';
+    });
+  }
+
+  if(tips.length){
+    html += '<div class="section-title">' + t('sectionTips') + ' (' + tips.length + ')</div>';
+    tips.forEach(function(tp){
+      html += '<div class="item" style="border-inline-start-color:var(--ok)"><p><span class="cat ok">' + t('tip') + '</span>' + tp.text + '</p></div>';
+    });
+  }
+
+  if(funcs.length || classes.length || (vars.length && vars.length <= 20) || imports.length){
+    html += '<div class="section-title">' + t('sectionSymbols') + '</div>';
+    if(classes.length) html += '<div class="info-card"><h4>' + t('classesHead') + ' (' + classes.length + ')</h4><p>' + classes.map(esc).join(', ') + '</p></div>';
+    if(funcs.length) html += '<div class="info-card"><h4>' + t('funcsHead') + ' (' + funcs.length + ')</h4><p>' + funcs.map(esc).join(', ') + '</p></div>';
+    if(vars.length && vars.length <= 20) html += '<div class="info-card"><h4>' + t('varsHead') + ' (' + vars.length + ')</h4><p>' + vars.map(esc).join(', ') + '</p></div>';
+    if(imports.length) html += '<div class="info-card"><h4>' + t('importsHead') + ' (' + imports.length + ')</h4><p>' + imports.slice(0,15).map(esc).join('<br>') + '</p></div>';
+  }
+
+  html += '<div class="section-title">' + t('sectionExplain') + ' (' + items.length + ')</div>';
+  const shown = items.slice(0, 250);
+  shown.forEach(function(it){
+    html += '<div class="item">'
+      + (it.code ? '<code>' + esc(it.code) + '</code>' : '')
+      + '<p>' + (it.cat ? '<span class="cat">' + esc(it.cat) + '</span>' : '') + esc(it.desc) + '</p>'
+      + '</div>';
+  });
+  if(items.length > 250){
+    html += '<p style="color:var(--muted);text-align:center;padding:14px;font-size:13px">' + tf('hiddenMsg', { n: items.length - 250 }) + '</p>';
+  }
+
+  return html;
+}
+
+/* =========================================================
+   14) UI wiring
+   ========================================================= */
+const codeEl = $('code');
+const resultEl = $('result');
+const langEl = $('lang');
+
+function updateStats(){
+  const c = codeEl.value;
+  $('statLines').textContent = c ? c.split('\n').length : 0;
+  $('statChars').textContent = c.length;
+  const d = langEl.value === 'auto' ? detectLang(c) : langEl.value;
+  $('statLang').textContent = c.trim() ? (LANG_NAMES[d] ? LANG_NAMES[d][LANG] : d) : '—';
+}
+
+function updatePlaceholder(){
+  codeEl.placeholder = t('phText');
+}
+
+function updateLevelHint(){
+  const el = $('levelHint');
+  if(!el) return;
+  el.textContent = LEVEL === 'easy' ? t('hintEasy') : LEVEL === 'expert' ? t('hintExpert') : t('hintNormal');
+}
+
+function applyLang(lang){
+  LANG = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+  $('title').textContent = t('title');
+  $('subtitle').textContent = t('subtitle');
+  $('badge').textContent = t('badge');
+  $('footer').textContent = t('footer');
+  $('copyBtn').textContent = t('btnCopy');
+  $('explainBtn').textContent = t('btnAnalyze');
+  $('exampleBtn').textContent = t('btnExample');
+  $('clearBtn').textContent = t('btnClear');
+  $('resultTitle').textContent = t('resultTitle');
+  $('lblThemeDark').textContent = t('themeDark');
+  $('lblThemeLight').textContent = t('themeLight');
+  $('lblStatLines').textContent = t('statLines');
+  $('lblStatChars').textContent = t('statChars');
+  $('lblStatLang').textContent = t('statLang');
+  $('lblLevelEasy').textContent = t('levelEasy');
+  $('lblLevelNormal').textContent = t('levelNormal');
+  $('lblLevelExpert').textContent = t('levelExpert');
+  $('emptyMsg').textContent = t('emptyMsg');
+
+  const opt = document.querySelector('#lang option[value="auto"]');
+  if(opt) opt.textContent = t('langAuto');
+
+  $('langAr').classList.toggle('active', lang === 'ar');
+  $('langEn').classList.toggle('active', lang === 'en');
+
+  updateStats();
+  updatePlaceholder();
+  updateLevelHint();
+
+  try{ localStorage.setItem('analyzerLang', lang); }catch(e){}
+
+  if(window.__lastCode) runAnalysis();
+}
+
+function applyTheme(theme){
+  THEME = theme;
+  document.body.dataset.theme = theme;
+  $('themeDark').classList.toggle('active', theme === 'dark');
+  $('themeLight').classList.toggle('active', theme === 'light');
+  try{ localStorage.setItem('analyzerTheme', theme); }catch(e){}
+}
+
+function setLevel(level){
+  LEVEL = level;
+  document.body.dataset.level = level;
+  const btns = document.querySelectorAll('.levelBtn');
+  for(let i = 0; i < btns.length; i++){
+    btns[i].classList.toggle('active', btns[i].dataset.level === level);
+  }
+  updateLevelHint();
+  if(window.__lastCode) runAnalysis();
+}
+
+function runAnalysis(){
+  const code = codeEl.value.trim();
+  if(!code){
+    resultEl.innerHTML = '<div class="err">' + t('noCode') + '</div>';
+    return;
+  }
+  window.__lastCode = code;
+
+  const btn = $('explainBtn');
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="btnSpinner"></span> ' + t('loading');
+
+  resultEl.innerHTML = '<div class="loading"><div class="spinner"></div><div>' + t('loading') + '</div></div>';
+
+  setTimeout(function(){
+    try{
+      const analysis = deepAnalyze(code, langEl.value);
+      resultEl.innerHTML = renderAnalysis(analysis);
+      resultEl.scrollTop = 0;
+    }catch(err){
+      resultEl.innerHTML = '<div class="err">' + t('analysisError') + '<br>' + esc(err.message) + '</div>';
+    }finally{
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  }, 100);
+}
+
+/* Wire events */
+$('themeDark').addEventListener('click', function(){ applyTheme('dark'); });
+$('themeLight').addEventListener('click', function(){ applyTheme('light'); });
+$('langAr').addEventListener('click', function(){ applyLang('ar'); });
+$('langEn').addEventListener('click', function(){ applyLang('en'); });
+$('explainBtn').addEventListener('click', runAnalysis);
+
+const levelBtns = document.querySelectorAll('.levelBtn');
+for(let i = 0; i < levelBtns.length; i++){
+  levelBtns[i].addEventListener('click', function(){
+    setLevel(this.dataset.level);
+  });
+}
+
+codeEl.addEventListener('input', updateStats);
+langEl.addEventListener('change', updateStats);
+
+codeEl.addEventListener('keydown', function(e){
+  if((e.ctrlKey || e.metaKey) && e.key === 'Enter') runAnalysis();
+});
+
+$('clearBtn').addEventListener('click', function(){
+  codeEl.value = '';
+  window.__lastCode = null;
+  updateStats();
+  resultEl.innerHTML = '<div class="empty"><span class="big">👈</span>' + t('emptyMsg') + '</div>';
+});
+
+$('exampleBtn').addEventListener('click', function(){
+  codeEl.value = [
+    'function calculateTotal(items, taxRate = 0.15) {',
+    '  // التحقق من المدخلات',
+    '  if (!Array.isArray(items)) {',
+    '    throw new Error("items must be an array");',
+    '  }',
+    '  ',
+    '  let subtotal = 0;',
+    '  for (var i = 0; i < items.length; i++) {',
+    '    const item = items[i];',
+    '    if (item.price == null) {',
+    '      console.log("تخطي عنصر:", item);',
+    '      continue;',
+    '    }',
+    '    subtotal += item.price * (item.quantity || 1);',
+    '  }',
+    '  ',
+    '  const tax = subtotal * taxRate;',
+    '  const total = subtotal + tax;',
+    '  return { subtotal, tax, total };',
+    '}',
+    '',
+    'const cart = [',
+    '  { name: "لابتوب", price: 5000, quantity: 1 },',
+    '  { name: "ماوس", price: 150 },',
+    '  { name: "كيبورد", price: 300, quantity: 2 }',
+    '];',
+    '',
+    'const result = calculateTotal(cart);',
+    'console.log("النتيجة:", result);',
+    '',
+    'const apiKey = "sk-1234567890abcdef";',
+    'fetch("https://api.example.com/data?key=" + apiKey)',
+    '  .then(r => r.json())',
+    '  .then(data => console.log(data));',
+    '',
+    'document.getElementById("output").innerHTML = result.total;',
+    'alert("تم الحساب!");'
+  ].join('\n');
+  langEl.value = 'auto';
+  updateStats();
+});
+
+$('copyBtn').addEventListener('click', function(){
+  const text = resultEl.innerText.trim();
+  if(!text) return;
+  const btn = this;
+  const old = btn.textContent;
+  function done(){ btn.textContent = old; }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){
+      btn.textContent = t('copied');
+      setTimeout(done, 1500);
+    }).catch(function(){ alert(t('copyFail')); });
+  } else {
+    alert(t('copyFail'));
+  }
+});
+
+/* =========================================================
+   15) Init
+   ========================================================= */
+(function init(){
+  let savedTheme = 'dark', savedLang = 'ar';
+  try{
+    savedTheme = localStorage.getItem('analyzerTheme') || 'dark';
+    savedLang = localStorage.getItem('analyzerLang') || 'ar';
+  }catch(e){}
+  applyTheme(savedTheme);
+  applyLang(savedLang);
+  updateStats();
+  updatePlaceholder();
+  updateLevelHint();
+})();
+</script>
+</body>
+</html>
