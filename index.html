@@ -65,8 +65,6 @@
     line-height:1.6;
   }
   body[dir="ltr"]{font-family:'Inter','Tajawal',system-ui,sans-serif}
-
-  /* ============ Header ============ */
   header{text-align:center;margin-bottom:22px;position:relative;padding-top:52px}
   header h1{
     font-size:clamp(22px,4.5vw,38px);font-weight:800;letter-spacing:-.5px;
@@ -82,8 +80,6 @@
   }
   .badge::before{content:'●';animation:pulse 1.5s infinite}
   @keyframes pulse{50%{opacity:.35}}
-
-  /* ============ Topbar toggles ============ */
   .topbar{
     position:absolute;top:0;inset-inline-end:0;display:flex;gap:10px;
     flex-wrap:wrap;justify-content:flex-end;
@@ -103,8 +99,6 @@
     background:linear-gradient(120deg,var(--acc),var(--acc2));
     color:#fff;font-weight:700;box-shadow:0 4px 12px rgba(124,92,255,.35);
   }
-
-  /* ============ Layout ============ */
   .wrap{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:18px}
   @media(min-width:1050px){.wrap{grid-template-columns:1fr 1.1fr}}
   .panel{
@@ -117,15 +111,12 @@
   .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
   .toolbar h2{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
   .left{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-
-  /* ============ Inputs & buttons ============ */
   select{
     background:var(--select-bg);color:var(--txt);border:1px solid var(--line);
     border-radius:10px;padding:10px 14px;font-family:inherit;font-size:13.5px;
     outline:none;cursor:pointer;font-weight:600;transition:.2s;
   }
   select:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(124,92,255,.15)}
-
   .btn{
     font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;
     border-radius:11px;padding:10px 16px;border:1px solid var(--line);
@@ -136,7 +127,6 @@
   .btn:hover:not(:disabled){background:var(--btn-hover);transform:translateY(-1px);border-color:var(--acc)}
   .btn:active:not(:disabled){transform:translateY(0)}
   .btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
-
   .btn-primary{
     background:linear-gradient(135deg,#7c5cff,#22d3ee);
     color:#fff;border:none;font-weight:800;font-size:15px;
@@ -149,20 +139,14 @@
     box-shadow:0 14px 36px rgba(124,92,255,.55), inset 0 1px 0 rgba(255,255,255,.2);
     filter:brightness(1.06);
   }
-  .btn-primary:active:not(:disabled){
-    transform:translateY(0);
-    box-shadow:0 4px 12px rgba(124,92,255,.4);
-  }
+  .btn-primary:active:not(:disabled){transform:translateY(0);box-shadow:0 4px 12px rgba(124,92,255,.4)}
   .btn-primary:disabled{opacity:.75;cursor:wait}
-
   .btnSpinner{
     width:14px;height:14px;border:2px solid rgba(255,255,255,.35);
     border-top-color:#fff;border-radius:50%;
     animation:spin .7s linear infinite;display:inline-block;
   }
   @keyframes spin{to{transform:rotate(360deg)}}
-
-  /* ============ Textarea ============ */
   textarea{
     width:100%;min-height:320px;resize:vertical;background:var(--code-bg);
     color:var(--code-txt);border:1px solid var(--line);border-radius:12px;
@@ -172,11 +156,8 @@
   }
   textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(124,92,255,.15)}
   textarea::placeholder{color:var(--muted);opacity:.7}
-
   .stats{display:flex;gap:16px;color:var(--muted);font-size:12.5px;flex-wrap:wrap}
   .stats b{color:var(--acc2);font-weight:700}
-
-  /* ============ Level bar ============ */
   .levelBar{
     display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
     background:var(--toggle-bg);border:1px solid var(--line);
@@ -194,22 +175,17 @@
     color:#fff;box-shadow:0 6px 18px rgba(124,92,255,.4);
   }
   .levelBtn .icon{font-size:17px}
-
   .levelHint{
     font-size:12.5px;color:var(--muted);text-align:center;
     padding:10px 14px;border-radius:10px;background:var(--item-bg);
     line-height:1.6;border:1px dashed var(--line);
   }
-
-  /* ============ Result ============ */
   .result{flex:1;overflow-y:auto;max-height:75vh;padding-inline-end:8px;line-height:1.85;font-size:14.5px}
   .result::-webkit-scrollbar{width:8px}
   .result::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
   .result::-webkit-scrollbar-track{background:transparent}
-
   .empty{color:var(--muted);text-align:center;padding:70px 20px;font-size:15px;line-height:2.1}
   .empty .big{font-size:56px;display:block;margin-bottom:16px;filter:drop-shadow(0 0 20px rgba(124,92,255,.4))}
-
   .summary{
     background:var(--summary-bg);border:1px solid var(--summary-border);
     border-radius:14px;padding:16px;margin-bottom:16px;
@@ -223,14 +199,12 @@
     font-weight:600;
   }
   .summary li b{color:var(--txt)}
-
   .section-title{
     font-size:15px;font-weight:800;color:var(--acc2);margin:22px 0 10px;
     display:flex;align-items:center;gap:8px;
     border-bottom:1px solid var(--line);padding-bottom:8px;
   }
   .section-title::before{content:'▸';color:var(--acc)}
-
   .item{
     border-inline-start:3px solid var(--acc);background:var(--item-bg);
     border-radius:0 10px 10px 0;padding:10px 14px;margin-bottom:9px;transition:.18s;
@@ -243,7 +217,6 @@
     overflow-x:auto;white-space:pre;
   }
   .item p{color:var(--item-text);font-size:14px;line-height:1.8}
-
   .cat{
     display:inline-block;font-size:11px;background:rgba(34,211,238,.15);
     color:var(--acc2);border-radius:6px;padding:2px 9px;margin-inline-end:8px;
@@ -252,7 +225,7 @@
   .cat.warn{background:rgba(251,191,36,.15);color:var(--warn)}
   .cat.danger{background:rgba(248,113,113,.15);color:var(--danger)}
   .cat.ok{background:rgba(52,211,153,.15);color:var(--ok)}
-
+  .cat.info{background:rgba(34,211,238,.15);color:var(--acc2)}
   .fixBlock{
     background:var(--fix-danger-bg);border:1px solid var(--fix-danger-border);
     border-radius:12px;padding:14px;margin-bottom:12px;
@@ -264,7 +237,6 @@
   .fixBlock.warn h4{color:var(--warn)}
   .fixBlock.info h4{color:var(--ok)}
   .fixBlock .desc{color:var(--item-text);font-size:13.5px;margin-bottom:10px;line-height:1.75}
-
   .codeCompare{display:grid;grid-template-columns:1fr;gap:10px;direction:ltr;text-align:left}
   @media(min-width:520px){.codeCompare{grid-template-columns:1fr 1fr}}
   .codeBox{background:var(--code-compare-bg);border:1px solid var(--line);border-radius:10px;overflow:hidden}
@@ -276,16 +248,13 @@
   .codeBox.good pre{color:var(--ok)}
   body[data-theme="light"] .codeBox.bad pre{color:#b91c1c}
   body[data-theme="light"] .codeBox.good pre{color:#047857}
-
   .info-card{background:var(--info-card-bg);border:1px solid var(--info-card-border);border-radius:12px;padding:14px;margin-bottom:12px}
   .info-card h4{color:var(--acc2);font-size:14px;margin-bottom:8px;font-weight:800}
-  .info-card p{color:var(--item-text);font-size:13px;line-height:1.85;font-family:'Fira Code',monospace;direction:ltr;text-align:left;color:var(--acc2);word-break:break-word}
-
+  .info-card p{color:var(--acc2);font-size:13px;line-height:1.85;font-family:'Fira Code',monospace;direction:ltr;text-align:left;word-break:break-word}
   .metric-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:10px;margin-bottom:16px}
   .metric{background:var(--metric-bg);border:1px solid var(--metric-border);border-radius:12px;padding:13px;text-align:center}
   .metric .val{font-size:24px;font-weight:800;color:var(--metric-val);line-height:1.2}
   .metric .lbl{font-size:11.5px;color:var(--muted);margin-top:5px;font-weight:600}
-
   .loading{display:flex;flex-direction:column;align-items:center;gap:14px;color:var(--acc2);padding:60px 20px;font-size:15px;font-weight:600}
   .spinner{
     width:46px;height:46px;border:3px solid rgba(124,92,255,.2);
@@ -294,7 +263,6 @@
   }
   .err{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.4);color:var(--danger);
     border-radius:10px;padding:14px;font-size:14px;line-height:1.8;font-weight:600}
-
   .scoreCard{
     display:flex;align-items:center;gap:16px;background:var(--score-bg);
     border:1px solid var(--score-border);border-radius:14px;padding:16px;margin-bottom:16px;
@@ -312,9 +280,7 @@
   }
   .scoreInfo h3{font-size:16px;margin-bottom:6px;font-weight:800}
   .scoreInfo p{color:var(--muted);font-size:13px;line-height:1.7}
-
   footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;opacity:.75;padding:0 12px}
-
   @media(max-width:700px){
     header{padding-top:100px}
     .topbar{inset-inline:0;justify-content:center}
@@ -341,7 +307,6 @@
 </header>
 
 <div class="wrap">
-  <!-- INPUT PANEL -->
   <section class="panel">
     <div class="toolbar">
       <div class="left">
@@ -352,6 +317,8 @@
           <option value="javascript">JavaScript</option>
           <option value="python">Python</option>
           <option value="php">PHP</option>
+          <option value="c">C</option>
+          <option value="cpp">C++</option>
         </select>
       </div>
       <div class="left">
@@ -385,7 +352,6 @@
     <button class="btn-primary" id="explainBtn" type="button">⚡ حلّل واشرح</button>
   </section>
 
-  <!-- RESULT PANEL -->
   <section class="panel">
     <div class="toolbar">
       <h2 id="resultTitle">📖 النتيجة</h2>
@@ -406,19 +372,19 @@
 "use strict";
 
 /* =========================================================
-   1) i18n
+   1) i18n — محسّن مع نصوص للمستويات الثلاثة
    ========================================================= */
 const I18N = {
   ar:{
     title:'🧠 المُحلِّل الذكي للكود', subtitle:'ثلاثة مستويات — اختر المناسب لك',
-    badge:'يعمل بدون إنترنت · بدون API',
+    badge:'يعمل بدون إنترنت · بدون API · محمي 🛡️',
     themeDark:'داكن', themeLight:'فاتح',
     langAuto:'🔍 اكتشاف تلقائي', btnExample:'📄 مثال', btnClear:'🗑️ مسح',
     statLines:'📏 الأسطر:', statChars:'🔤 الأحرف:', statLang:'🌐 اللغة:',
     levelEasy:'سهل جدًا', levelNormal:'طبيعي', levelExpert:'خبير',
     btnAnalyze:'⚡ حلّل واشرح', resultTitle:'📖 النتيجة', btnCopy:'📋 نسخ',
     emptyMsg:'الصق أي كود واضغط «حلّل واشرح»',
-    footer:'محرّك تحليل ذكي محلي · يعمل بدون إنترنت',
+    footer:'محرّك تحليل ذكي محلي · يعمل بدون إنترنت · محمي ضد XSS',
     loading:'جارٍ التحليل…', copied:'✅ تم النسخ', copyFail:'تعذّر النسخ.',
     noCode:'⚠️ اكتب كودًا أولًا.', analysisError:'❌ خطأ:',
     overview:'🎯 نظرة عامة', score:'التقييم',
@@ -429,7 +395,8 @@ const I18N = {
     sectionSecurity:'🔒 تنبيهات أمنية', sectionIssues:'⚠️ أخطاء وملاحظات',
     sectionTips:'💡 نصائح', sectionFixes:'🔧 إصلاحات مقترحة',
     sectionSymbols:'🔍 الرموز', sectionExplain:'📖 شرح تفصيلي',
-    danger:'خطر', warn:'تحذير', tip:'نصيحة',
+    sectionThreats:'🚨 تهديدات أمنية مكتشفة',
+    danger:'خطر', warn:'تحذير', tip:'نصيحة', info:'معلومة',
     goodCode:'✅ الكود المُصحَّح', badCode:'❌ الكود الحالي',
     language:'اللغة:', codeLines:'أسطر فعّالة:', comments:'تعليقات:',
     functions:'دوال:', variables:'متغيرات:', classes:'كلاسات:', nesting:'عمق التداخل:',
@@ -439,19 +406,21 @@ const I18N = {
     hiddenMsg:'… وتم إخفاء {n} عنصرًا.',
     hintEasy:'🌱 شرح مبسّط جدًا — كأنك في أول يوم لك في البرمجة',
     hintNormal:'⚡ شرح تقني واضح لمن بدأ البرمجة منذ فترة',
-    hintExpert:'🎓 شرح متقدّم بعمق تقني للمحترفين',
-    phText:'اكتب أو الصق كودك هنا...'
+    hintExpert:'🎓 شرح متقدّم بعمق تقني للمحترفين + تحليل أمني كامل',
+    phText:'اكتب أو الصق كودك هنا...',
+    securityWarning:'⚠️ الكود الذي لصقته يحتوي على أنماط خطيرة. تم تحليله بحذر.',
+    codeTooBig:'⚠️ الكود كبير جداً (200KB+). قسّمه لأجزاء أصغر.'
   },
   en:{
     title:'🧠 Smart Code Analyzer', subtitle:'Three levels — pick the one that fits you',
-    badge:'Works offline · No API',
+    badge:'Works offline · No API · Protected 🛡️',
     themeDark:'Dark', themeLight:'Light',
     langAuto:'🔍 Auto-detect', btnExample:'📄 Example', btnClear:'🗑️ Clear',
     statLines:'📏 Lines:', statChars:'🔤 Chars:', statLang:'🌐 Language:',
     levelEasy:'Very Easy', levelNormal:'Normal', levelExpert:'Expert',
     btnAnalyze:'⚡ Analyze & Explain', resultTitle:'📖 Result', btnCopy:'📋 Copy',
     emptyMsg:'Paste any code and press "Analyze & Explain"',
-    footer:'Local smart analysis engine · Works offline',
+    footer:'Local smart analysis engine · Works offline · XSS-protected',
     loading:'Analyzing…', copied:'✅ Copied', copyFail:'Copy failed.',
     noCode:'⚠️ Please enter code first.', analysisError:'❌ Error:',
     overview:'🎯 Overview', score:'Score',
@@ -462,7 +431,8 @@ const I18N = {
     sectionSecurity:'🔒 Security warnings', sectionIssues:'⚠️ Issues & warnings',
     sectionTips:'💡 Tips', sectionFixes:'🔧 Suggested fixes',
     sectionSymbols:'🔍 Symbols', sectionExplain:'📖 Detailed explanation',
-    danger:'Danger', warn:'Warning', tip:'Tip',
+    sectionThreats:'🚨 Detected security threats',
+    danger:'Danger', warn:'Warning', tip:'Tip', info:'Info',
     goodCode:'✅ Fixed code', badCode:'❌ Current code',
     language:'Language:', codeLines:'Code lines:', comments:'Comments:',
     functions:'Functions:', variables:'Variables:', classes:'Classes:', nesting:'Nesting:',
@@ -472,8 +442,10 @@ const I18N = {
     hiddenMsg:'… {n} more hidden.',
     hintEasy:'🌱 Super simple — as if it were your first day',
     hintNormal:'⚡ Clear technical explanation for recent beginners',
-    hintExpert:'🎓 Advanced deep-dive for professionals',
-    phText:'Type or paste your code here...'
+    hintExpert:'🎓 Advanced deep-dive for professionals + full security audit',
+    phText:'Type or paste your code here...',
+    securityWarning:'⚠️ The code you pasted contains dangerous patterns. Analyzed with caution.',
+    codeTooBig:'⚠️ Code too large (200KB+). Split into smaller chunks.'
   }
 };
 
@@ -487,21 +459,18 @@ function tf(k, v){ let s = t(k); for(const x in v) s = s.replace('{'+x+'}', v[x]
 /* =========================================================
    2) Dictionary helpers
    ========================================================= */
-/* def(arEasy, arNormal, arExpert, enEasy, enNormal, enExpert) */
 function def(a1,a2,a3,e1,e2,e3){
   return {
     ar:{ easy:a1, normal:a2, expert:a3 },
     en:{ easy:e1, normal:e2, expert:e3 }
   };
 }
-/* returns the string for current lang + level */
 function pick(entry){
   if(!entry) return '';
   const langObj = entry[LANG];
   if(!langObj) return '';
   return langObj[LEVEL] || langObj.normal || langObj.easy || langObj.expert || '';
 }
-/* returns the value (may be function) for current lang + level, then calls it */
 function pickV(entry, ...args){
   if(!entry) return '';
   const langObj = entry[LANG];
@@ -511,252 +480,213 @@ function pickV(entry, ...args){
 }
 
 /* =========================================================
-   3) HTML tags
+   3) Security Layer — حماية شاملة
+   ========================================================= */
+function esc(s){
+  if(s == null) return '';
+  return String(s).replace(/[&<>"'`=\/]/g, function(c){
+    return {
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',
+      "'":'&#39;','`':'&#96;','=':'&#61;','/':'&#47;'
+    }[c];
+  });
+}
+
+function scanForThreats(code){
+  const threats = [];
+  const AR = LANG === 'ar';
+  const seen = {};
+
+  const patterns = [
+    { re:/\beval\s*\(/, id:'eval', level:'danger',
+      ar:'eval() — تنفيذ كود عشوائي! خطر شديد جداً.', en:'eval() — arbitrary code execution!' },
+    { re:/new\s+Function\s*\(/, id:'newFn', level:'danger',
+      ar:'new Function() — مثل eval، خطر أمني.', en:'new Function() — same as eval.' },
+    { re:/document\.write\s*\(/, id:'docWrite', level:'danger',
+      ar:'document.write() — يفتح ثغرة XSS.', en:'document.write() — XSS risk.' },
+    { re:/\bsetTimeout\s*\(\s*['"`]/, id:'setTimeoutStr', level:'danger',
+      ar:'setTimeout بنص — مثل eval.', en:'setTimeout with string — like eval.' },
+    { re:/\bsetInterval\s*\(\s*['"`]/, id:'setIntervalStr', level:'danger',
+      ar:'setInterval بنص — مثل eval.', en:'setInterval with string — like eval.' },
+    { re:/\bchild_process\b|\bexec\s*\(|\bspawn\s*\(/, id:'childProc', level:'danger',
+      ar:'child_process / exec / spawn — تنفيذ أوامر النظام!', en:'child_process / exec — OS command execution!' },
+    { re:/require\s*\(\s*['"]child_process['"]\s*\)/, id:'reqChild', level:'danger',
+      ar:'استيراد child_process — خطر!', en:'Imports child_process!' },
+    { re:/\b__proto__\b|constructor\s*\.\s*prototype/, id:'protoPollution', level:'danger',
+      ar:'تلاعب بـ prototype — ثغرة Prototype Pollution!', en:'Prototype manipulation — Prototype Pollution!' },
+    { re:/\$_(GET|POST|REQUEST|COOKIE)\s*\[/i, id:'phpInput', level:'danger',
+      ar:'إدخال PHP مباشر بدون فلترة!', en:'Direct PHP input without filter!' },
+    { re:/\bmysql_query\s*\(|\bmysqli_query\s*\([^,]*,\s*[^'"`]*\$/, id:'sqlRaw', level:'danger',
+      ar:'استعلام SQL مباشر بمتغيرات — خطر SQL Injection!', en:'Raw SQL with variables — SQL Injection!' },
+    { re:/\bgets\s*\(/, id:'gets', level:'danger',
+      ar:'gets() — دالة محظورة! buffer overflow مضمون.', en:'gets() banned — buffer overflow!' },
+    { re:/\bscanf\s*\(\s*"%s"/, id:'scanfNoLimit', level:'danger',
+      ar:'scanf("%s") بدون حد — buffer overflow!', en:'scanf("%s") without width — overflow!' },
+    { re:/(?:http:\/\/)(?!localhost|127\.0\.0\.1|0\.0\.0\.0)/, id:'http', level:'warn',
+      ar:'رابط HTTP غير مشفّر — استخدم HTTPS.', en:'Insecure HTTP — use HTTPS.' },
+    { re:/\.innerHTML\s*=|\.outerHTML\s*=|insertAdjacentHTML\s*\(/, id:'innerHTML', level:'warn',
+      ar:'innerHTML/outerHTML — ثغرة XSS محتملة.', en:'innerHTML family — potential XSS.' },
+    { re:/\bmd5\s*\(|\bsha1\s*\(/i, id:'weakHash', level:'warn',
+      ar:'خوارزمية تشفير ضعيفة (MD5/SHA1).', en:'Weak hash (MD5/SHA1).' },
+    { re:/Math\.random\s*\(\s*\)/, id:'weakRandom', level:'warn',
+      ar:'Math.random() غير آمن للتشفير.', en:'Math.random() not cryptographically secure.' },
+    { re:/document\.cookie\s*=/, id:'cookie', level:'warn',
+      ar:'كتابة cookie مباشرة — استخدم HttpOnly.', en:'Writing cookie directly — use HttpOnly.' },
+    { re:/debugger\s*;/, id:'debugger', level:'warn',
+      ar:'debugger — أزلها قبل النشر!', en:'debugger — remove before shipping!' },
+    { re:/localStorage\.setItem\s*\(\s*['"][^'"]*(?:password|token|secret|key)/i, id:'insecureStore', level:'warn',
+      ar:'تخزين بيانات حساسة في localStorage — غير آمن.', en:'Storing secrets in localStorage — insecure.' },
+    { re:/\bstrcpy\s*\(|\bstrcat\s*\(|\bsprintf\s*\(/, id:'unsafeStr', level:'warn',
+      ar:'strcpy/strcat/sprintf — خطر buffer overflow.', en:'strcpy/strcat/sprintf — overflow risk.' },
+    { re:/\bprintf\s*\(\s*[A-Za-z_]\w*\s*\)/, id:'formatString', level:'warn',
+      ar:'printf(variable) — format string vuln!', en:'printf(variable) — format string vuln!' },
+    { re:/\balert\s*\(\s*['"`]/, id:'alert', level:'info',
+      ar:'alert() — تجربة مستخدم سيئة.', en:'alert() — poor UX.' },
+    { re:/console\.(log|debug|trace)\s*\(/, id:'console', level:'info',
+      ar:'console.log — أزلها قبل الإنتاج.', en:'console.log — remove before production.' },
+    { re:/\bTODO\b|\bFIXME\b|\bHACK\b/, id:'todo', level:'info',
+      ar:'تعليق TODO/FIXME — لا تنسَ معالجته.', en:'TODO/FIXME — handle before shipping.' },
+    { re:/process\.env\.\w+/, id:'envLeak', level:'info',
+      ar:'process.env — تأكد من عدم كشفه في الواجهة.', en:'process.env — ensure not exposed client-side.' }
+  ];
+
+  for(let i = 0; i < patterns.length; i++){
+    const p = patterns[i];
+    if(p.re.test(code) && !seen[p.id]){
+      seen[p.id] = 1;
+      threats.push({ id:p.id, level:p.level, text: AR ? p.ar : p.en });
+    }
+  }
+  return threats;
+}
+
+function scanSecrets(code){
+  const found = [];
+  const re = /(?:api[_-]?key|apikey|secret[_-]?key|password|passwd|pwd|access[_-]?token|auth[_-]?token|private[_-]?key|bearer)\s*[:=]\s*['"]([^'"]{6,})['"]/gi;
+  let m, guard = 0;
+  while((m = re.exec(code)) && guard++ < 50){
+    const val = m[1];
+    if(/^(your_|xxx|placeholder|example|test|dummy|<|\.\.\.)/i.test(val)) continue;
+    found.push({
+      full: m[0].slice(0, 100),
+      value: val.slice(0, 8) + '***',
+      key: m[0].split(/[:=]/)[0].trim()
+    });
+  }
+  return found;
+}
+
+/* =========================================================
+   4) HTML tags
    ========================================================= */
 const TAG_INFO = {
-  html: def(
-    'هذا وسم يقول للمتصفح: يلا نبدأ الصفحة! 🏠',
-    'الجذر الرئيسي للصفحة — يحتوي كل شيء ويحدد لغة المحتوى.',
-    'Document root. lang attribute is BCP-47 — affects SEO and screen readers.',
-    "This tag tells the browser: let's start the page! 🏠",
-    'The root element of the page — contains everything.',
-    'Document root. lang attribute is BCP-47 — affects SEO and screen readers.'
-  ),
-  head: def(
-    'صندوق خفي فيه معلومات عن الصفحة. المستخدم ما يشوفه.',
-    'قسم المعلومات المخفية: الترميز، العنوان، ملفات CSS والخطوط.',
-    'Container for document metadata not rendered to the viewport.',
-    'A hidden box with info about the page. Users never see it.',
-    'Hidden metadata section: encoding, title, CSS, fonts.',
-    'Container for document metadata not rendered to the viewport.'
-  ),
-  body: def(
-    'جسم الصفحة — كل شي تشوفه بعينك موجود هنا 👀',
-    'جسم الصفحة — كل ما يظهر للمستخدم.',
-    'The render root of the document — everything visible in the viewport.',
-    'The page body — everything you see lives here 👀',
-    'The page body — everything visible to the user.',
-    'The render root of the document — everything visible in the viewport.'
-  ),
-  title: def(
-    'اسم الصفحة اللي يطلع فوق في تبويب المتصفح 📑',
-    'عنوان الصفحة في تبويب المتصفح.',
-    'Sets document.title; critical for SEO and browser tab identification.',
-    'The page name shown in the browser tab 📑',
-    'Page title in the browser tab.',
-    'Sets document.title; critical for SEO and browser tab identification.'
-  ),
-  meta: def(
-    'معلومة صغيرة عن الصفحة، مثل نوع الحروف أو وصفها لمحرك البحث 🔍',
-    'معلومة وصفية: الترميز، الوصف، إعدادات العرض.',
-    'Void metadata element: charset, viewport, http-equiv, og:*/twitter:*.',
-    'Small info about the page — like character type or description for Google 🔍',
-    'Metadata: encoding, description, viewport.',
-    'Void metadata element: charset, viewport, http-equiv, og:*/twitter:*.'
-  ),
-  link: def(
-    'يربط الصفحة بملف خارجي مثل ملف التنسيق أو أيقونة الموقع 🔗',
-    'يربط بملف خارجي (CSS، أيقونة).',
-    'External resource link. rel determines semantics (stylesheet, icon, preload).',
-    'Connects the page to an outside file, like a stylesheet 🔗',
-    'Links an external file (CSS, favicon).',
-    'External resource link. rel determines semantics (stylesheet, icon, preload).'
-  ),
-  script: def(
-    'يحط كود JavaScript في الصفحة — يخليها تتحرك وتتفاعل ✨',
-    'يضيف كود JavaScript للصفحة.',
-    'async = parallel + ASAP; defer = parallel + after parse; type="module" = ESM.',
-    'Adds JavaScript to the page — makes it alive ✨',
-    'Adds JavaScript code.',
-    'async = parallel + ASAP; defer = parallel + after parse; type="module" = ESM.'
-  ),
-  style: def(
-    'كود تنسيق داخلي — يخبر الصفحة كيف تتزين 🎨',
-    'يضيف كود CSS داخلي.',
-    'Embeds CSSOM rules. Blocks rendering. Prefer external stylesheets for caching.',
-    'Inline style code — tells the page how to dress up 🎨',
-    'Adds inline CSS.',
-    'Embeds CSSOM rules. Blocks rendering. Prefer external stylesheets for caching.'
-  ),
-  div: def(
-    'صندوق فاضي نحط فيه الأشياء ونرتبها 📦',
-    'حاوية عامة لتجميع العناصر.',
-    'Block-level generic container. Prefer semantic alternatives to reduce "divitis".',
-    'An empty box we put things inside 📦',
-    'Generic grouping container.',
-    'Block-level generic container. Prefer semantic alternatives to reduce "divitis".'
-  ),
-  span: def(
-    'مثل div لكن صغير — يلوّن كلمة معينة داخل الجملة 🖍️',
-    'حاوية سطرية صغيرة لتنسيق جزء من النص.',
-    'Inline generic container. Use only when no semantic inline element fits.',
-    'Like div but tiny — highlights one word inside a sentence 🖍️',
-    'Inline container to style part of text.',
-    'Inline generic container. Use only when no semantic inline element fits.'
-  ),
-  p: def(
-    'فقرة كلام عادي، مثل الفقرة في كتاب 📝',
-    'فقرة نصية.',
-    'Block-level paragraph. Cannot contain block-level descendants.',
-    'A normal paragraph like in a book 📝',
-    'A paragraph of text.',
-    'Block-level paragraph. Cannot contain block-level descendants.'
-  ),
-  h1: def(
-    'أكبر عنوان في الصفحة — مثل عنوان الفصل في كتاب 📕',
-    'العنوان الرئيسي والأهم.',
-    'Highest-priority heading. One per page. Directly weighted in SEO.',
-    'The biggest title on the page 📕',
-    'Main heading.',
-    'Highest-priority heading. One per page. Directly weighted in SEO.'
-  ),
-  h2: def('عنوان متوسط الحجم','عنوان فرعي من المستوى الثاني.','Section heading. Combine with h1 in a logical outline.','A medium-sized heading','Secondary heading (level 2).','Section heading. Combine with h1 in a logical outline.'),
-  h3: def('عنوان أصغر','عنوان فرعي من المستوى الثالث.','Sub-section heading.','A smaller heading','Sub-heading (level 3).','Sub-section heading.'),
-  h4: def('عنوان صغير','عنوان فرعي من المستوى الرابع.','Lower-level heading.','A small heading','Sub-heading (level 4).','Lower-level heading.'),
-  h5: def('عنوان أصغر','عنوان فرعي من المستوى الخامس.','Rarely used heading level.','Smaller heading','Sub-heading (level 5).','Rarely used heading level.'),
-  h6: def('أصغر عنوان','عنوان فرعي من المستوى السادس.','The smallest heading level.','Smallest heading','Sub-heading (level 6).','The smallest heading level.'),
-  a: def(
-    'رابط — تضغط عليه فيوديك لمكان ثاني 🚪',
-    'رابط تشعبي.',
-    'Hyperlink. target="_blank" needs rel="noopener noreferrer".',
-    'A link — you click it and go somewhere else 🚪',
-    'Hyperlink.',
-    'Hyperlink. target="_blank" needs rel="noopener noreferrer".'
-  ),
-  img: def(
-    'يعرض صورة 🖼️ — لازم تكتب وصفها في alt لو ما ظهرت',
-    'يعرض صورة. الخاصية alt مهمة.',
-    'Replaced element. Always provide alt. Consider srcset + loading="lazy".',
-    'Displays an image 🖼️ — always add alt text',
-    'Displays an image. alt is important.',
-    'Replaced element. Always provide alt. Consider srcset + loading="lazy".'
-  ),
-  ul: def('قائمة نقطية — مثل قائمة تسوق 🛒','قائمة غير مرتبة (نقاط).','Unordered list — order-independent items.','A bulleted list 🛒','Unordered (bulleted) list.','Unordered list — order-independent items.'),
-  ol: def('قائمة مرقّمة 1، 2، 3 🔢','قائمة مرتبة (أرقام).','Ordered list — order is meaningful.','A numbered list 1,2,3 🔢','Ordered (numbered) list.','Ordered list — order is meaningful.'),
-  li: def('عنصر واحد من القائمة 📌','عنصر داخل القائمة.','List item. Only valid inside ul/ol/menu.','One item in the list 📌','List item.','List item. Only valid inside ul/ol/menu.'),
-  table: def(
-    'جدول — صفوف وأعمدة مثل جدول المدرسة 📊',
-    'جدول لعرض البيانات.',
-    'Tabular data only, never for layout. Add caption and scope attributes.',
-    'A table with rows and columns 📊',
-    'Data table.',
-    'Tabular data only, never for layout. Add caption and scope attributes.'
-  ),
-  tr: def('صف واحد في الجدول','صف داخل الجدول.','Table row. Must contain td or th.','One row in the table','Table row.','Table row. Must contain td or th.'),
-  td: def('خلية عادية في الجدول','خلية بيانات.','Table data cell.','A normal cell','Table data cell.','Table data cell.'),
-  th: def('خلية العنوان في الجدول','خلية عنوان.','Header cell. Use scope="col|row" for accessibility.','A header cell','Table header cell.','Header cell. Use scope="col|row" for accessibility.'),
-  form: def(
-    'نموذج — مثل استمارة تعبّيها وترسلها 📋',
-    'نموذج إدخال بيانات.',
-    'Form container. method=GET/POST; action=URL; enctype for uploads.',
-    'A form — like a paper you fill and send 📋',
-    'Data entry form.',
-    'Form container. method=GET/POST; action=URL; enctype for uploads.'
-  ),
-  input: def(
-    'خانة تكتب فيها — اسمك أو بريدك مثلاً ✏️',
-    'حقل إدخال.',
-    'Void element with ~22 type variants. Native validation via required/pattern.',
-    'A box you type in — like your name ✏️',
-    'Input field.',
-    'Void element with ~22 type variants. Native validation via required/pattern.'
-  ),
-  button: def(
-    'زر تضغط عليه فيصير شي 🖲️',
-    'زر قابل للنقر.',
-    'Interactive. Default type inside form is submit — set type="button" unless submitting.',
-    'A button you press and something happens 🖲️',
-    'Clickable button.',
-    'Interactive. Default type inside form is submit — set type="button" unless submitting.'
-  ),
-  label: def('اسم صغير لحقل الإدخال','تسمية لحقل إدخال.','Label. Associate via for=inputId or by wrapping.','A small name for an input','Label for an input.','Label. Associate via for=inputId or by wrapping.'),
-  select: def('قائمة منسدلة تختار منها 📋','قائمة منسدلة.','Dropdown. Native styling is OS-dependent.','A dropdown menu 📋','Dropdown select.','Dropdown. Native styling is OS-dependent.'),
-  textarea: def('مساحة كبيرة للكلام الطويل ✍️','منطقة نص متعددة الأسطر.','Multi-line text input. Size via rows/cols or CSS.','A big space for long text ✍️','Multi-line text area.','Multi-line text input. Size via rows/cols or CSS.'),
-  header: def('أعلى الصفحة — الشعار والقائمة','ترويسة الصفحة.','Page/section header. Implicit role="banner".','Top of the page','Page header.','Page/section header. Implicit role="banner".'),
-  footer: def('أسفل الصفحة — الحقوق والروابط','تذييل الصفحة.','Page/section footer. Implicit role="contentinfo".','Bottom of the page','Page footer.','Page/section footer. Implicit role="contentinfo".'),
-  nav: def('روابط التنقل — مثل شريط القوائم','روابط التنقل الرئيسية.','Navigation landmark. Add aria-label if multiple navs.','Navigation links','Main navigation links.','Navigation landmark. Add aria-label if multiple navs.'),
-  section: def('قسم في الصفحة — مثل فصل في كتاب','قسم موضوعي مستقل.','Thematic grouping. Should generally include a heading.','A section — like a chapter','Thematic section.','Thematic grouping. Should generally include a heading.'),
-  article: def('مقال مستقل — يقدر يعيش لحاله','مقال أو محتوى مستقل.','Self-contained composition suitable for syndication.','A standalone article','Independent article.','Self-contained composition suitable for syndication.'),
-  main: def('المحتوى الرئيسي — مرة واحدة بس','المحتوى الرئيسي.','Main landmark. Only one per page.','Main content — only once','Main content.','Main landmark. Only one per page.'),
-  aside: def('محتوى جانبي — مثل صندوق ملاحظات','محتوى جانبي.','Complementary content. Implicit role="complementary".','Side content','Sidebar content.','Complementary content. Implicit role="complementary".'),
-  br: def('ينزل سطر جديد ⏎','ينزل سطرًا جديدًا.','Line break. Never use repeatedly for spacing — use CSS margin.','Adds a new line ⏎','Line break.','Line break. Never use repeatedly for spacing.'),
-  strong: def('كلام مهم نعرضه عريض 💪','نص مهم (عريض).','Importance, not styling. Use CSS for pure bolding.','Important bold text 💪','Important (bold) text.','Importance, not styling. Use CSS for pure bolding.'),
-  em: def('كلام نشدد عليه — يصير مايل','نص مشدَّد عليه.','Emphasis stress. Screen readers may change inflection.','Stressed text — slanted','Emphasized text.','Emphasis stress. Screen readers may change inflection.'),
-  code: def('كود صغير داخل الكلام','جزء كود داخل النص.','Inline code. Combine with pre for code blocks.','Small code inside text','Inline code.','Inline code. Combine with pre for code blocks.'),
-  pre: def('نص منسق — يحافظ على المسافات','نص منسّق مسبقًا.','Preformatted text. Preserves whitespace and line breaks.','Formatted text — keeps spaces','Preformatted text.','Preformatted text. Preserves whitespace and line breaks.')
+  html: def('هذا وسم يقول للمتصفح: يلا نبدأ الصفحة! 🏠','الجذر الرئيسي للصفحة.','Document root. lang attribute is BCP-47.','This tag tells the browser to start the page! 🏠','The root element of the page.','Document root.'),
+  head: def('صندوق خفي فيه معلومات عن الصفحة.','قسم المعلومات المخفية.','Container for document metadata.','A hidden box with info about the page.','Hidden metadata section.','Container for document metadata.'),
+  body: def('جسم الصفحة — كل شي تشوفه موجود هنا 👀','جسم الصفحة.','The render root of the document.','The page body 👀','The page body.','The render root.'),
+  title: def('اسم الصفحة اللي يطلع فوق في التبويب 📑','عنوان الصفحة.','Sets document.title.','The page name in the tab 📑','Page title.','Sets document.title.'),
+  meta: def('معلومة صغيرة عن الصفحة 🔍','معلومة وصفية.','Void metadata element.','Small info about the page 🔍','Metadata.','Void metadata element.'),
+  link: def('يربط الصفحة بملف خارجي 🔗','يربط بملف خارجي.','External resource link.','Connects to an outside file 🔗','External link.','External resource link.'),
+  script: def('يحط كود JavaScript في الصفحة ✨','يضيف كود JavaScript.','async/defer/module control loading.','Adds JavaScript ✨','Adds JS code.','async/defer/module.'),
+  style: def('كود تنسيق داخلي 🎨','كود CSS داخلي.','Embeds CSSOM rules.','Inline style code 🎨','Inline CSS.','Embeds CSSOM rules.'),
+  div: def('صندوق فاضي نحط فيه الأشياء 📦','حاوية عامة.','Block-level generic container.','An empty box 📦','Generic container.','Block-level container.'),
+  span: def('مثل div لكن صغير 🖍️','حاوية سطرية.','Inline generic container.','Like div but tiny 🖍️','Inline container.','Inline container.'),
+  p: def('فقرة كلام عادي 📝','فقرة نصية.','Block-level paragraph.','A paragraph 📝','A paragraph.','Block-level paragraph.'),
+  h1: def('أكبر عنوان في الصفحة 📕','العنوان الرئيسي.','Highest-priority heading.','The biggest title 📕','Main heading.','Highest heading.'),
+  h2: def('عنوان متوسط','عنوان فرعي.','Section heading.','Medium heading','Secondary heading.','Section heading.'),
+  h3: def('عنوان أصغر','عنوان فرعي 3.','Sub-section heading.','Smaller heading','Heading level 3.','Sub-section heading.'),
+  a: def('رابط — تضغط عليه فيوديك لمكان ثاني 🚪','رابط تشعبي.','target=_blank needs rel=noopener.','A link 🚪','Hyperlink.','target=_blank needs rel=noopener.'),
+  img: def('يعرض صورة 🖼️','يعرض صورة.','Always provide alt.','Displays an image 🖼️','Displays an image.','Always provide alt.'),
+  ul: def('قائمة نقطية 🛒','قائمة غير مرتبة.','Unordered list.','Bulleted list 🛒','Unordered list.','Unordered list.'),
+  ol: def('قائمة مرقّمة 🔢','قائمة مرتبة.','Ordered list.','Numbered list 🔢','Ordered list.','Ordered list.'),
+  li: def('عنصر من القائمة 📌','عنصر قائمة.','List item.','List item 📌','List item.','List item.'),
+  table: def('جدول 📊','جدول بيانات.','Tabular data only.','A table 📊','Data table.','Tabular data only.'),
+  tr: def('صف في الجدول','صف جدول.','Table row.','Table row','Table row.','Table row.'),
+  td: def('خلية عادية','خلية بيانات.','Table data cell.','Data cell','Data cell.','Table data cell.'),
+  th: def('خلية عنوان','خلية عنوان.','Header cell.','Header cell','Header cell.','Header cell.'),
+  form: def('نموذج 📋','نموذج إدخال.','Form container.','A form 📋','Form container.','Form container.'),
+  input: def('خانة تكتب فيها ✏️','حقل إدخال.','Void element with many types.','Input box ✏️','Input field.','Void element with many types.'),
+  button: def('زر تضغط عليه 🖲️','زر.','Interactive. Default type is submit.','A button 🖲️','Button.','Default type=submit.'),
+  label: def('اسم صغير لحقل','تسمية.','Label for input.','Label for input','Label.','Label for input.'),
+  select: def('قائمة منسدلة 📋','قائمة اختيار.','Dropdown.','Dropdown 📋','Select.','Dropdown.'),
+  textarea: def('مساحة للكلام الطويل ✍️','نص متعدد الأسطر.','Multi-line input.','Big text space ✍️','Textarea.','Multi-line input.'),
+  header: def('أعلى الصفحة','ترويسة.','Implicit role=banner.','Page top','Header.','Implicit banner.'),
+  footer: def('أسفل الصفحة','تذييل.','Implicit contentinfo.','Page bottom','Footer.','Implicit contentinfo.'),
+  nav: def('روابط التنقل','تنقل.','Navigation landmark.','Navigation','Nav.','Navigation landmark.'),
+  section: def('قسم في الصفحة','قسم موضوعي.','Thematic grouping.','A section','Section.','Thematic section.'),
+  article: def('مقال مستقل','مقال.','Self-contained content.','An article','Article.','Self-contained.'),
+  main: def('المحتوى الرئيسي','محتوى رئيسي.','Main landmark.','Main content','Main content.','Main landmark.'),
+  aside: def('محتوى جانبي','جانبي.','Complementary content.','Side content','Sidebar.','Complementary content.'),
+  br: def('سطر جديد ⏎','سطر جديد.','Line break.','Newline ⏎','Line break.','Line break.'),
+  strong: def('كلام مهم عريض 💪','نص مهم.','Importance.','Important bold 💪','Bold text.','Importance.'),
+  em: def('كلام نشدد عليه','تأكيد.','Emphasis.','Stressed text','Emphasis.','Emphasis.'),
+  code: def('كود صغير','كود داخلي.','Inline code.','Small code','Inline code.','Inline code.'),
+  pre: def('نص منسق','نص مسبق التنسيق.','Preformatted text.','Formatted text','Preformatted.','Preformatted text.')
 };
 
-/* =========================================================
-   4) HTML attributes
-   ========================================================= */
 const ATTR_INFO = {
-  id: def('اسم مميز للعنصر — ما يتكرر','معرّف فريد للعنصر.','Unique identifier. Used by CSS #id, JS, label for.','Unique element name','Unique element identifier.','Unique identifier. Used by CSS #id, JS, label for.'),
-  'class': def('اسم نجمع فيه عناصر متشابهة','اسم كلاس لتنسيق العنصر.','Space-separated tokens used by CSS .class and classList API.','A name to group similar elements','CSS class name.','Space-separated tokens used by CSS .class and classList API.'),
-  src: def('مكان الملف — من وين نجيبه','مسار الملف أو المصدر.','Resource URL for embedded content.','Where the file comes from','File or source path.','Resource URL for embedded content.'),
-  href: def('الرابط اللي يوديك مكان','عنوان الوجهة.','Destination URL. Fragment #id scrolls; mailto:/tel: trigger protocol handlers.','The link destination','Destination URL.','Destination URL. Fragment #id scrolls; mailto:/tel: trigger protocol handlers.'),
-  alt: def('وصف الصورة لو ما ظهرت','نص بديل للصورة.','Empty alt="" marks decorative. Screen readers announce informative alt.','Description if image fails','Alternative text.','Empty alt="" marks decorative. Screen readers announce informative alt.'),
-  title: def('تلميح يظهر لما تحوم بالماوس','تلميح عند مرور الماوس.','Tooltip. Not accessible on touch. Prefer aria-label.','Tooltip when you hover','Hover tooltip.','Tooltip. Not accessible on touch. Prefer aria-label.'),
-  style: def('تنسيق مباشر على العنصر','تنسيق مباشر.','Inline CSS. Overrides stylesheets unless !important.','Direct styling','Inline style.','Inline CSS. Overrides stylesheets unless !important.'),
-  type: def('نوع العنصر أو الحقل','نوع العنصر/الحقل.','Controls semantics: input type, button type, script module.','Element or field type','Element/field type.','Controls semantics: input type, button type, script module.'),
-  name: def('اسم الحقل عند الإرسال','اسم الحقل.','Form field name. Multiple same-named checkboxes create arrays.','Field name when submitting','Field name.','Form field name. Multiple same-named checkboxes create arrays.'),
-  value: def('القيمة الافتراضية','القيمة الافتراضية.','Default field value. For checkbox/radio, value is submitted when checked.','Default value','Default value.','Default field value. For checkbox/radio, value is submitted when checked.'),
-  placeholder: def('نص رمادي إرشادي','نص إرشادي.','Hint text while empty. Not a substitute for label.','Gray hint text','Placeholder hint.','Hint text while empty. Not a substitute for label.'),
-  onclick: def('كود يشتغل لما تضغط','كود عند النقر.','Inline handler. Prefer addEventListener for separation of concerns.','Code that runs on click','Click handler.','Inline handler. Prefer addEventListener.'),
-  target: def('وين يفتح الرابط','مكان فتح الرابط.','_blank opens new tab; needs rel="noopener".','Where link opens','Where to open link.','_blank opens new tab; needs rel="noopener".'),
-  width: def('عرض العنصر','العرض.','Presentational. Prefer CSS. On canvas/img sets intrinsic pixels.','Element width','Width.','Presentational. Prefer CSS.'),
-  height: def('ارتفاع العنصر','الارتفاع.','Presentational. Prefer CSS.','Element height','Height.','Presentational. Prefer CSS.'),
-  charset: def('نوع حروف الصفحة','ترميز الحروف.','UTF-8 recommended. Must appear in first 1024 bytes.','Character type','Character encoding.','UTF-8 recommended. Must appear in first 1024 bytes.'),
-  lang: def('لغة الصفحة','لغة المحتوى.','BCP-47 tag. Affects pronunciation, hyphenation, translation.','Page language','Content language.','BCP-47 tag. Affects pronunciation, hyphenation, translation.'),
-  disabled: def('يعطّل العنصر','تعطيل العنصر.','Disables the control. Form controls don\'t submit.','Disables the element','Disables element.','Disables the control. Form controls don\'t submit.'),
-  required: def('حقل إلزامي','حقل إلزامي.','Native validation: form won\'t submit without value.','Required field','Required field.','Native validation: form won\'t submit without value.'),
-  role: def('دور العنصر لإمكانية الوصول','دور ARIA.','ARIA landmark or widget role. Prefer native semantics.','ARIA role','ARIA role.','ARIA landmark or widget role. Prefer native semantics.')
+  id: def('اسم مميز للعنصر','معرّف فريد.','Unique identifier.','Unique name','Unique ID.','Unique identifier.'),
+  'class': def('اسم نجمع فيه عناصر','كلاس.','CSS class.','Group name','CSS class.','CSS class.'),
+  src: def('مكان الملف','مصدر.','Resource URL.','File source','Source URL.','Resource URL.'),
+  href: def('الرابط','عنوان الوجهة.','Destination URL.','Link target','URL.','Destination URL.'),
+  alt: def('وصف الصورة','نص بديل.','Alternative text.','Image description','Alt text.','Alternative text.'),
+  title: def('تلميح','تلميح.','Tooltip.','Tooltip','Tooltip.','Tooltip.'),
+  style: def('تنسيق مباشر','تنسيق مباشر.','Inline CSS.','Inline style','Inline style.','Inline CSS.'),
+  type: def('نوع العنصر','نوع.','Element type.','Element type','Type.','Element type.'),
+  name: def('اسم الحقل','اسم.','Field name.','Field name','Name.','Field name.'),
+  value: def('القيمة الافتراضية','قيمة.','Default value.','Default value','Value.','Default value.'),
+  placeholder: def('نص إرشادي','نص إرشادي.','Hint text.','Hint','Placeholder.','Hint text.'),
+  onclick: def('كود عند النقر','معالج النقر.','Inline handler.','Click code','Click handler.','Inline handler.'),
+  target: def('وين يفتح الرابط','هدف الرابط.','Link target.','Link target','Target.','Link target.'),
+  width: def('عرض','عرض.','Width.','Width','Width.','Width.'),
+  height: def('ارتفاع','ارتفاع.','Height.','Height','Height.','Height.'),
+  charset: def('نوع الحروف','ترميز.','Encoding.','Charset','Encoding.','Encoding.'),
+  lang: def('لغة الصفحة','لغة.','Language tag.','Language','Lang.','Language tag.'),
+  disabled: def('يعطّل','تعطيل.','Disabled.','Disables','Disabled.','Disabled.'),
+  required: def('إلزامي','مطلوب.','Required field.','Required','Required.','Required.'),
+  role: def('دور ARIA','دور.','ARIA role.','ARIA role','Role.','ARIA role.')
 };
 
-/* =========================================================
-   5) CSS properties
-   ========================================================= */
 const CSS_PROP = {
-  color: def('لون الكلام 🎨','لون النص.','Foreground color. Inherited. Accepts hex/rgb/hsl/oklch/currentColor.','Text color 🎨','Text color.','Foreground color. Inherited. Accepts hex/rgb/hsl/oklch.'),
-  background: def('لون أو صورة الخلفية','الخلفية.','Shorthand for background-color/-image/-position/-size/-repeat.','Background color or image','Background.','Shorthand for background-color/-image/-position/-size/-repeat.'),
-  'background-color': def('لون الخلفية 🖌️','لون الخلفية.','Solid fill behind element. Painted below background-image.','Background color 🖌️','Background color.','Solid fill behind element. Painted below background-image.'),
-  display: def('كيف يظهر العنصر','طريقة العرض.','Formatting context: block, inline, flex, grid, contents, none.','How the element shows','Display mode.','Formatting context: block, inline, flex, grid, contents, none.'),
-  position: def('كيف نحدد مكان العنصر','نوع التموضع.','static/relative/absolute/fixed/sticky. Absolute needs positioned ancestor.','How we place the element','Positioning scheme.','static/relative/absolute/fixed/sticky. Absolute needs positioned ancestor.'),
-  top: def('يبعد من فوق','الإزاحة من الأعلى.','Offset from top. Only applies when position != static.','Offset from top','Top offset.','Offset from top. Only applies when position != static.'),
-  left: def('يبعد من اليسار','الإزاحة من اليسار.','Offset from left. Physical left even in RTL.','Offset from left','Left offset.','Offset from left. Physical left even in RTL.'),
-  width: def('عرض العنصر','العرض.','Percentage is relative to containing block.','Width','Width.','Percentage is relative to containing block.'),
-  height: def('ارتفاع العنصر','الارتفاع.','Percentage needs parent with definite height.','Height','Height.','Percentage needs parent with definite height.'),
-  margin: def('مسافة برا العنصر','المسافة الخارجية.','Outer space. Vertical margins may collapse; use gap in flex/grid.','Space outside element','Outer margin.','Outer space. Vertical margins may collapse; use gap in flex/grid.'),
-  padding: def('مسافة جوّا العنصر','المسافة الداخلية.','Inner space between content and border. Included in width if border-box.','Space inside the element','Inner padding.','Inner space between content and border.'),
-  border: def('إطار حول العنصر','الحدود.','Shorthand for width/style/color. Style is required to render.','A frame around the element','Border.','Shorthand for width/style/color. Style is required to render.'),
-  'border-radius': def('يدوّر زوايا العنصر','استدارة الزوايا.','Rounds corners. Supports elliptical radii: "10px / 20px".','Rounds the corners','Corner radius.','Rounds corners. Supports elliptical radii.'),
-  'box-shadow': def('ظل حول العنصر','ظل حول العنصر.','offset-x y blur spread color. Use inset for inner shadow.','Shadow that adds depth','Box shadow.','offset-x y blur spread color. Use inset for inner shadow.'),
-  'font-size': def('حجم الخط','حجم الخط.','Prefer rem over px for accessibility.','Font size','Font size.','Prefer rem over px for accessibility.'),
-  'font-family': def('نوع الخط','نوع الخط.','Stack with fallback list. End with generic family.','Font type','Font family.','Stack with fallback list. End with generic family.'),
-  'font-weight': def('سماكة الخط','سماكة الخط.','100-900 or keywords. Variable fonts support any integer.','Font weight','Font weight.','100-900 or keywords. Variable fonts support any integer.'),
-  'text-align': def('محاذاة الكلام','محاذاة النص.','start/end follow writing direction (RTL-friendly).','Text alignment','Text alignment.','start/end follow writing direction (RTL-friendly).'),
-  'line-height': def('تباعد الأسطر','ارتفاع السطر.','Unitless value preferred (1.5) so it scales with font-size.','Space between lines','Line height.','Unitless value preferred (1.5) so it scales with font-size.'),
-  'letter-spacing': def('فراغ بين الحروف','المسافة بين الحروف.','Adds space between chars. Use em. Overuse hurts readability.','Space between letters','Letter spacing.','Adds space between chars. Use em.'),
-  flex: def('مرونة العنصر داخل الحاوية','مرونة العنصر.','Shorthand for flex-grow/shrink/basis. Default 0 1 auto.','Element flexibility','Flex shorthand.','Shorthand for flex-grow/shrink/basis. Default 0 1 auto.'),
-  'flex-direction': def('اتجاه العناصر — أفقي أو عمودي','اتجاه العناصر.','row/row-reverse/column/column-reverse. Sets the main axis.','Direction of items','Flex direction.','row/row-reverse/column/column-reverse. Sets the main axis.'),
-  'justify-content': def('توزيع العناصر أفقيًا','توزيع أفقي.','flex-start/center/space-between/space-around/space-evenly.','Spread items horizontally','Main-axis distribution.','flex-start/center/space-between/space-around/space-evenly.'),
-  'align-items': def('محاذاة العناصر عموديًا','محاذاة عمودية.','stretch (default)/flex-start/center/flex-end/baseline.','Vertical alignment','Cross-axis alignment.','stretch/flex-start/center/flex-end/baseline.'),
-  gap: def('مسافة بين العناصر','المسافة بين العناصر.','Row and column gap. Replaces margin hacks.','Space between items','Gap between items.','Row and column gap. Replaces margin hacks.'),
-  'grid-template-columns': def('تقسيم لأعمدة','أعمدة الشبكة.','fr units for flexible fractions. repeat() and minmax().','Split into columns','Grid columns.','fr units for flexible fractions. repeat() and minmax().'),
-  'z-index': def('أي عنصر فوق الثاني','ترتيب الطبقات.','Only works on positioned elements or flex/grid items.','Which element is on top','Stacking order.','Only works on positioned elements or flex/grid items.'),
-  overflow: def('إيش يصير لو المحتوى أكبر','التعامل مع الفائض.','visible/hidden/scroll/auto/clip. Creates BFC when not visible.','What happens if too big','Overflow handling.','visible/hidden/scroll/auto/clip.'),
-  opacity: def('شفافية العنصر','درجة الشفافية.','Creates stacking context. Use rgba() to fade only the background.','Transparency','Opacity.','Creates stacking context. Use rgba() to fade only the background.'),
-  transition: def('حركة ناعمة عند التغيير','انتقال تدريجي.','Animate only transform/opacity for best performance.','Smooth movement','Transition.','Animate only transform/opacity for best performance.'),
-  transform: def('تحريك أو تكبير أو تدوير','تحويل العنصر.','GPU-accelerated. Creates a containing block.','Move, scale, rotate','Transform.','GPU-accelerated. Creates a containing block.'),
-  cursor: def('شكل الماوس','شكل المؤشر.','pointer/grab/text/not-allowed etc. Communicates interactivity.','Mouse shape','Cursor shape.','pointer/grab/text/not-allowed etc. Communicates interactivity.')
+  color: def('لون الكلام 🎨','لون النص.','Foreground color.','Text color 🎨','Text color.','Foreground color.'),
+  background: def('الخلفية','الخلفية.','Background shorthand.','Background','Background.','Background shorthand.'),
+  'background-color': def('لون الخلفية 🖌️','لون الخلفية.','Solid fill.','Background color 🖌️','BG color.','Solid fill.'),
+  display: def('كيف يظهر','طريقة العرض.','Formatting context.','Display mode','Display.','Formatting context.'),
+  position: def('مكان العنصر','تموضع.','Positioning scheme.','Position','Position.','Positioning scheme.'),
+  top: def('يبعد من فوق','إزاحة عليا.','Top offset.','Top offset','Top.','Top offset.'),
+  left: def('يبعد من اليسار','إزاحة يسرى.','Left offset.','Left offset','Left.','Left offset.'),
+  width: def('عرض','عرض.','Width.','Width','Width.','Width.'),
+  height: def('ارتفاع','ارتفاع.','Height.','Height','Height.','Height.'),
+  margin: def('مسافة برا','هامش خارجي.','Outer margin.','Outer space','Margin.','Outer margin.'),
+  padding: def('مسافة جوّا','حشوة داخلية.','Inner padding.','Inner space','Padding.','Inner padding.'),
+  border: def('إطار','حدود.','Border shorthand.','Border','Border.','Border.'),
+  'border-radius': def('يدوّر الزوايا','استدارة.','Rounds corners.','Rounds corners','Radius.','Rounds corners.'),
+  'box-shadow': def('ظل','ظل.','Box shadow.','Shadow','Shadow.','Box shadow.'),
+  'font-size': def('حجم الخط','حجم.','Font size.','Font size','Font size.','Font size.'),
+  'font-family': def('نوع الخط','عائلة الخط.','Font family.','Font family','Family.','Font family.'),
+  'font-weight': def('سماكة الخط','سماكة.','Font weight.','Weight','Weight.','Font weight.'),
+  'text-align': def('محاذاة','محاذاة.','Text align.','Align','Align.','Text align.'),
+  'line-height': def('تباعد الأسطر','ارتفاع السطر.','Line height.','Line height','Height.','Line height.'),
+  'letter-spacing': def('فراغ بين الحروف','تباعد.','Letter spacing.','Spacing','Spacing.','Letter spacing.'),
+  flex: def('مرونة','flex.','Flex shorthand.','Flex','Flex.','Flex shorthand.'),
+  'flex-direction': def('اتجاه','اتجاه.','Flex direction.','Direction','Direction.','Flex direction.'),
+  'justify-content': def('توزيع أفقي','توزيع.','Justify content.','Justify','Justify.','Justify content.'),
+  'align-items': def('محاذاة عمودية','محاذاة.','Align items.','Align','Align.','Align items.'),
+  gap: def('مسافة بين','فجوة.','Gap.','Gap','Gap.','Gap.'),
+  'grid-template-columns': def('أعمدة','أعمدة.','Grid columns.','Columns','Columns.','Grid columns.'),
+  'z-index': def('الطبقات','z-index.','Stacking order.','Z-order','Z-index.','Stacking order.'),
+  overflow: def('الفائض','فائض.','Overflow handling.','Overflow','Overflow.','Overflow handling.'),
+  opacity: def('شفافية','شفافية.','Opacity.','Opacity','Opacity.','Opacity.'),
+  transition: def('انتقال ناعم','انتقال.','Transition.','Transition','Transition.','Transition.'),
+  transform: def('تحويل','تحويل.','Transform.','Transform','Transform.','Transform.'),
+  cursor: def('شكل الماوس','مؤشر.','Cursor.','Cursor','Cursor.','Cursor.')
 };
 
 /* =========================================================
-   6) JS rules
+   5) JS Rules
    ========================================================= */
 function jr(re, arCat, enCat, a1, a2, a3, e1, e2, e3){
   return {
-    re,
-    cat: { ar: arCat, en: enCat },
+    re, cat: { ar: arCat, en: enCat },
     desc: {
       ar: { easy:a1, normal:a2, expert:a3 },
       en: { easy:e1, normal:e2, expert:e3 }
@@ -766,277 +696,454 @@ function jr(re, arCat, enCat, a1, a2, a3, e1, e2, e3){
 
 const JS_RULES = [
   jr(/^\s*\/\//,'تعليق','Comment',
-    'سطر ما ينفّذ — بس يشرح لك الكود 💬','سطر يشرح الكود ولا يُنفَّذ.','Single-line comment. Ignored by parser. Avoid commenting the obvious.',
-    'A line that doesn\'t run — just explains 💬','Explains the code; not executed.','Single-line comment. Avoid commenting the obvious.'),
+    'سطر ما ينفّذ — بس يشرح الكود 💬','سطر يشرح الكود.','Single-line comment.',
+    "A line that doesn't run 💬",'Comment.','Single-line comment.'),
   jr(/^\s*\/\*/,'تعليق','Comment',
-    'بداية تعليق طويل','بداية تعليق متعدد الأسطر.','Start of a block comment. Terminates at */.',
-    'Start of a long comment','Start of multi-line comment.','Start of a block comment. Terminates at */.'),
+    'بداية تعليق طويل','بداية تعليق متعدد.','Start of block comment.',
+    'Long comment start','Block comment.','Start of block comment.'),
   jr(/\belse\s+if\s*\(/,'شرط','Condition',
-    'طيب لو الأول ما تحقق، جرّب هذا','شرط إضافي يُفحص إذا لم يتحقق السابق.','Chained conditional. First truthy wins.',
-    'If the first failed, try this','Extra condition checked if previous failed.','Chained conditional. First truthy wins.'),
+    'طيب لو الأول ما تحقق، جرّب هذا','شرط إضافي.','Chained conditional.',
+    'If first failed, try this','Extra condition.','Chained conditional.'),
   jr(/\bif\s*\(/,'شرط','Condition',
-    'لو صار كذا… سوي كذا. مثل: لو الجو بارد، ألبس جاكيت 🧥','شرط: يُنفَّذ الكود إذا تحققت الحالة.','Falsy values: 0, "", null, undefined, NaN, false.',
-    'If this happens… do this. Like: if cold, wear jacket 🧥','Conditional: executes only if test passes.','Falsy values: 0, "", null, undefined, NaN, false.'),
+    'لو صار كذا… سوي كذا 🧥','شرط.','Falsy: 0, "", null, undefined.',
+    'If this happens… do this 🧥','Conditional.','Falsy values.'),
   jr(/\belse\b/,'شرط','Condition',
-    'وإلا… سوي هذا','الحالة البديلة.','Fallback branch.',
-    'Otherwise… do this','Fallback branch.','Fallback branch.'),
+    'وإلا… سوي هذا','بديل.','Fallback branch.',
+    'Otherwise…','Fallback.','Fallback branch.'),
   jr(/\bswitch\s*\(/,'اختيار','Switch',
-    'عندنا عدة خيارات — اختر واحد','اختيار من بين عدة حالات.','Strict equality comparison; fallthrough unless break.',
-    'Several options — pick one','Choice between multiple cases.','Strict equality comparison; fallthrough unless break.'),
+    'اختر واحد من عدة','اختيار.','Strict equality.',
+    'Pick one','Switch.','Strict equality.'),
   jr(/\bcase\s+/,'خيار','Case',
-    'واحد من الخيارات','حالة داخل switch.','Case label.',
-    'One of the options','Case in switch.','Case label.'),
+    'واحد من الخيارات','حالة.','Case label.',
+    'One option','Case.','Case label.'),
   jr(/\bdefault\s*:/,'افتراضي','Default',
-    'لو ما ناسب أي خيار، خذ هذا','الحالة الافتراضية.','Fallback case.',
-    'If none match, use this','Default case.','Fallback case.'),
+    'لو ما ناسب أي','افتراضي.','Fallback case.',
+    'If none match','Default.','Fallback case.'),
   {re:/\bfunction\s+([A-Za-z_$][\w$]*)/, cat:{ar:'دالة',en:'Function'},
-    desc:{
-      ar:{ easy:m=>`دالة اسمها «${m[1]}» — مثل وصفة نتبعها كل مرة نحتاجها 👨‍🍳`,
-          normal:m=>`تعريف دالة «${m[1]}» — كتلة قابلة لإعادة الاستخدام.`,
-          expert:m=>`Function declaration "${m[1]}". Hoisted; own this; has arguments object.` },
-      en:{ easy:m=>`A function named "${m[1]}" — like a reusable recipe 👨‍🍳`,
-          normal:m=>`Defines function "${m[1]}" — a reusable block.`,
-          expert:m=>`Function declaration "${m[1]}". Hoisted; own this; has arguments object.` }
-    }},
+    desc:{ar:{easy:m=>`دالة «${m[1]}» — مثل وصفة 👨‍🍳`,normal:m=>`تعريف دالة «${m[1]}».`,expert:m=>`Function "${m[1]}". Hoisted.`},
+      en:{easy:m=>`Function "${m[1]}" 👨‍🍳`,normal:m=>`Defines "${m[1]}".`,expert:m=>`Function "${m[1]}". Hoisted.`}}},
   {re:/\bclass\s+([A-Za-z_$][\w$]*)/, cat:{ar:'كلاس',en:'Class'},
-    desc:{
-      ar:{ easy:m=>`قالب اسمه «${m[1]}» نصنع منه أشياء متشابهة 🏗️`,
-          normal:m=>`تعريف كلاس «${m[1]}» — قالب لإنشاء كائنات.`,
-          expert:m=>`Class declaration "${m[1]}". Not hoisted; strict by default; supports private #fields.` },
-      en:{ easy:m=>`A template named "${m[1]}" 🏗️`,
-          normal:m=>`Defines class "${m[1]}".`,
-          expert:m=>`Class declaration "${m[1]}". Not hoisted; strict by default.` }
-    }},
+    desc:{ar:{easy:m=>`قالب «${m[1]}» 🏗️`,normal:m=>`كلاس «${m[1]}».`,expert:m=>`Class "${m[1]}". Not hoisted.`},
+      en:{easy:m=>`Template "${m[1]}" 🏗️`,normal:m=>`Class "${m[1]}".`,expert:m=>`Class "${m[1]}". Not hoisted.`}}},
   {re:/\b(const|let|var)\s+([A-Za-z_$][\w$]*)/, cat:{ar:'متغير',en:'Variable'},
-    desc:{
-      ar:{ easy:m=>`نحط قيمة في صندوق اسمه «${m[2]}» 📦`,
-          normal:m=>`تعريف متغير «${m[2]}» بـ ${m[1]}.`,
-          expert:m=>`Binding "${m[2]}" via ${m[1]}.` },
-      en:{ easy:m=>`Put a value in a box "${m[2]}" 📦`,
-          normal:m=>`Declares "${m[2]}" with ${m[1]}.`,
-          expert:m=>`Binding "${m[2]}" via ${m[1]}.` }
-    }},
+    desc:{ar:{easy:m=>`صندوق «${m[2]}» 📦`,normal:m=>`متغير «${m[2]}» بـ ${m[1]}.`,expert:m=>`${m[1]} binding "${m[2]}".`},
+      en:{easy:m=>`Box "${m[2]}" 📦`,normal:m=>`"${m[2]}" via ${m[1]}.`,expert:m=>`${m[1]} "${m[2]}".`}}},
   jr(/\bfor\s*\(/,'تكرار','Loop',
-    'كرّر هذا الشي عدد مرات 🔁','حلقة تكرار بعدد محدد.','C-style for loop: init; condition; update.',
-    'Repeat this a number of times 🔁','Loop with a fixed count.','C-style for loop: init; condition; update.'),
+    'كرّر 🔁','حلقة for.','C-style for.',
+    'Repeat 🔁','For loop.','C-style for.'),
   jr(/\bfor\s+of\b/,'تكرار','Loop',
-    'مرّ على كل عنصر في القائمة','حلقة على قيم مصفوفة.','Iterates values of iterables using Symbol.iterator.',
-    'Go through each item','Iterates values of an array.','Iterates values of iterables using Symbol.iterator.'),
-  jr(/\bfor\s+in\b/,'تكرار','Loop',
-    'مرّ على مفاتيح الكائن','حلقة على مفاتيح كائن.','Iterates enumerable string keys including inherited ones.',
-    'Go through keys','Iterates object keys.','Iterates enumerable string keys including inherited ones.'),
+    'مرّ على كل عنصر','حلقة على قيم.','Iterates values.',
+    'Each item','Values loop.','Iterates values.'),
   jr(/\bwhile\s*\(/,'تكرار','Loop',
-    'استمر طول ما الشرط صح','حلقة تستمر ما دام الشرط صحيحًا.','Pre-test loop. Guard against infinite loops.',
-    'Keep going while true','Loop while condition is true.','Pre-test loop. Guard against infinite loops.'),
+    'استمر طول ما صح','حلقة while.','Pre-test loop.',
+    'While true','While loop.','Pre-test loop.'),
   jr(/\bbreak\b/,'توقف','Control',
-    'وقف! اطلع من الحلقة 🛑','كسر الحلقة.','Exits the innermost loop or switch.',
-    'Stop! Exit the loop 🛑','Break out of the loop.','Exits the innermost loop or switch.'),
+    'وقف! 🛑','كسر.','Exit loop.',
+    'Stop 🛑','Break.','Exit loop.'),
   jr(/\bcontinue\b/,'تخطَّ','Control',
-    'تخطَّ هذا الدور','تخطي التكرار الحالي.','Skips to the next iteration.',
-    'Skip this round','Skip current iteration.','Skips to the next iteration.'),
+    'تخطَّ هذا','تخطي.','Skip iteration.',
+    'Skip','Continue.','Skip iteration.'),
   jr(/\.forEach\s*\(/,'تكرار','Iteration',
-    'مرّ على كل عنصر ونفّذ عليه شي','تمرّ على كل عنصر وتنفّذ دالة.','Cannot break; use for...of for early exit.',
-    'Go through each item','Iterates each item running a function.','Cannot break; use for...of for early exit.'),
+    'مرّ على كل','forEach.','Cannot break.',
+    'Each item','forEach.','Cannot break.'),
   jr(/\.map\s*\(/,'تحويل','Map',
-    'حوّل كل عنصر لشي جديد','map: مصفوفة جديدة بتحويل كل عنصر.','Returns a new array of the same length.',
-    'Transform each item','map: new array from transformation.','Returns a new array of the same length.'),
+    'حوّل كل عنصر','map.','New array.',
+    'Transform','map.','New array.'),
   jr(/\.filter\s*\(/,'فلترة','Filter',
-    'خذ العناصر اللي تحقق الشرط','filter: عناصر تحقق شرطًا.','Returns new array with elements where callback is truthy.',
-    'Keep items matching a condition','filter: matching items only.','Returns new array with truthy callback results.'),
+    'خذ اللي يحقق','filter.','Filtered array.',
+    'Keep matching','filter.','Filtered.'),
   jr(/\.reduce\s*\(/,'تجمع','Reduce',
-    'لمّ كل العناصر في نتيجة واحدة','reduce: دمج العناصر في قيمة واحدة.','Left-fold. Provide initial value to avoid errors on empty arrays.',
-    'Combine all into one value','reduce: combine into single value.','Left-fold. Provide initial value for empty arrays.'),
-  jr(/\.find\s*\(/,'بحث','Find',
-    'أول عنصر يحقق الشرط','find: أول عنصر يحقق الشرط.','Returns first match or undefined.',
-    'First matching item','find: first match.','Returns first match or undefined.'),
-  jr(/\.some\s*\(/,'بحث','Some',
-    'هل فيه على الأقل واحد؟','some: هل يوجد عنصر يحقق؟','Returns true if any match. Short-circuits.',
-    'Is there at least one?','some: does any match?','Returns true if any match. Short-circuits.'),
-  jr(/\.every\s*\(/,'بحث','Every',
-    'هل كلهم يحققون؟','every: هل كل العناصر تحقق؟','Returns true if all match. Short-circuits.',
-    'Do all match?','every: do all match?','Returns true if all match. Short-circuits.'),
-  jr(/\.includes\s*\(/,'بحث','Includes',
-    'هل فيه هذه القيمة؟','includes: هل يحتوي القيمة؟','Uses SameValueZero (NaN equals itself).',
-    'Contains this value?','includes: does it contain?','Uses SameValueZero (NaN equals itself).'),
+    'لمّ في نتيجة','reduce.','Left-fold.',
+    'Combine','reduce.','Left-fold.'),
   jr(/console\.(log|error|warn|info)\s*\(/,'طباعة','Output',
-    'اطبع شي عشان تشوفه في الكونسول 💻','طباعة في وحدة تحكم المتصفح.','Remove or gate behind DEBUG flag before shipping.',
-    'Print something to see it 💻','Logs to browser console.','Remove or gate behind DEBUG flag before shipping.'),
+    'اطبع 💻','console.','Remove before ship.',
+    'Print 💻','console.','Remove before ship.'),
   jr(/\breturn\b/,'إرجاع','Return',
-    'رجّع قيمة من الدالة','إرجاع قيمة وإنهاء الدالة.','In async, wraps in a Promise.',
-    'Return a value','Returns value and exits function.','In async, wraps in a Promise.'),
+    'رجّع قيمة','return.','Returns value.',
+    'Return value','return.','Returns.'),
   jr(/=>/,'دالة','Arrow',
-    'طريقة سريعة نكتب فيها الدوال','دالة سهمية مختصرة.','Lexical this. Cannot be used with new. No arguments object.',
-    'Shorter way to write functions','Arrow function syntax.','Lexical this. Cannot be used with new. No arguments object.'),
-  {re:/document\.(getElementById|querySelector)\s*\(\s*['"`]([^'"`]+)/, cat:{ar:'عنصر',en:'DOM'},
-    desc:{
-      ar:{ easy:m=>`ابحث عن العنصر «${m[2]}» 🔍`,
-          normal:m=>`الوصول للعنصر «${m[2]}».`,
-          expert:m=>`Selects "${m[2]}". getElementById is O(1); querySelector matches CSS.` },
-      en:{ easy:m=>`Find element "${m[2]}" 🔍`,
-          normal:m=>`Selects "${m[2]}".`,
-          expert:m=>`Selects "${m[2]}". getElementById is O(1); querySelector matches CSS.` }
-    }},
-  {re:/addEventListener\s*\(\s*['"](\w+)['"]/, cat:{ar:'حدث',en:'Event'},
-    desc:{
-      ar:{ easy:m=>`لما يصير «${m[1]}» سوي شي 🎯`,
-          normal:m=>`ربط حدث «${m[1]}».`,
-          expert:m=>`Attaches "${m[1]}" listener. Options: capture, once, passive.` },
-      en:{ easy:m=>`When "${m[1]}" happens, do something 🎯`,
-          normal:m=>`Attaches "${m[1]}" listener.`,
-          expert:m=>`Attaches "${m[1]}" listener. Options: capture, once, passive.` }
-    }},
-  jr(/\.innerHTML\s*=/,'تغيير','DOM',
-    'حط محتوى داخل العنصر ⚠️ خطر لو من المستخدم','تغيير محتوى عنصر بـ HTML.','XSS risk if user input. Prefer textContent or sanitize with DOMPurify.',
-    'Put content in element ⚠️','Change element HTML content.','XSS risk if user input. Prefer textContent.'),
-  jr(/\.textContent\s*=/,'تغيير','DOM',
-    'حط نص عادي — آمن ✅','تغيير النص داخل العنصر.','Sets text safely; escapes HTML entities.',
-    'Set plain text — safe ✅','Change element text.','Sets text safely; escapes HTML entities.'),
+    'دالة سريعة','دالة سهمية.','Lexical this.',
+    'Arrow fn','Arrow.','Lexical this.'),
   jr(/\btry\s*\{/,'حاول','Try',
-    'جرّب هالكود… يمكن يطلع خطأ','محاولة تنفيذ كود قد يسبب خطأ.','Try block. Errors propagate if uncaught.',
-    'Try this code…','Tries to run code that may fail.','Try block. Errors propagate if uncaught.'),
+    'جرّب','try.','Try block.',
+    'Try','try.','Try block.'),
   jr(/\bcatch\s*\(/,'امسك','Catch',
-    'لو طلع خطأ، امسكه','التقاط الخطأ.','Error object with .message, .stack. Always log or handle.',
-    'If error, catch it','Catches the error.','Error object with .message, .stack. Always log or handle.'),
-  jr(/\bfinally\s*\{/,'دائمًا','Finally',
-    'هذا الكود ينفّذ دايمًا','كود يُنفَّذ دائمًا.','Runs after try/catch regardless. Use for cleanup.',
-    'This always runs','Always runs after try/catch.','Runs after try/catch regardless. Use for cleanup.'),
-  jr(/\basync\b/,'غير متزامن','Async',
-    'دالة تشتغل بالخلفية','دالة غير متزامنة.','Returns a Promise; enables await inside. Errors become rejections.',
-    'Function that runs in background','Async function.','Returns a Promise; enables await inside.'),
-  jr(/\bawait\b/,'انتظر','Await',
-    'استنى… لا تكمل لين تخلص','انتظار نتيجة عملية غير متزامنة.','Pauses the async function until the Promise settles.',
-    'Wait… don\'t continue','Wait for async result.','Pauses the async function until the Promise settles.'),
+    'امسك الخطأ','catch.','Catch error.',
+    'Catch','catch.','Catch.'),
   jr(/\bfetch\s*\(/,'طلب','Network',
-    'اطلب شي من الإنترنت 🌐','إرسال طلب HTTP.','Does NOT reject on 4xx/5xx — check res.ok.',
-    'Request something from the internet 🌐','Sends an HTTP request.','Does NOT reject on 4xx/5xx — check res.ok.'),
+    'اطلب من الإنترنت 🌐','fetch.','No reject on 4xx.',
+    'Request 🌐','fetch.','No reject on 4xx.'),
   jr(/setTimeout|setInterval/,'مؤقت','Timer',
-    'نفّذ شي بعد فترة ⏰','تنفيذ بعد فترة أو بشكل متكرر.','Store IDs to clear. Intervals drift; prefer recursive setTimeout.',
-    'Run something after a delay ⏰','Schedule code execution.','Store IDs to clear. Intervals drift.'),
+    'بعد فترة ⏰','مؤقت.','Store IDs.',
+    'Delay ⏰','Timer.','Store IDs.'),
   jr(/localStorage|sessionStorage/,'تخزين','Storage',
-    'احفظ معلومة في المتصفح 💾','حفظ بيانات في المتصفح.','Synchronous; ~5MB limit; string-only.',
-    'Save data in browser 💾','Store data in browser.','Synchronous; ~5MB limit; string-only.'),
-  {re:/\bnew\s+([A-Za-z_$][\w$]*)/, cat:{ar:'إنشاء',en:'New'},
-    desc:{
-      ar:{ easy:m=>`اصنع شي جديد من «${m[1]}» ✨`,
-          normal:m=>`إنشاء كائن جديد من «${m[1]}».`,
-          expert:m=>`Constructor invocation of "${m[1]}". Creates new object; sets [[Prototype]].` },
-      en:{ easy:m=>`Create something new from "${m[1]}" ✨`,
-          normal:m=>`Creates new instance of "${m[1]}".`,
-          expert:m=>`Constructor invocation of "${m[1]}".` }
-    }},
+    'احفظ في المتصفح 💾','تخزين.','Sync ~5MB.',
+    'Browser save 💾','Storage.','Sync ~5MB.'),
   jr(/\balert\s*\(/,'تنبيه','Alert',
-    'نافذة تطلع للمستخدم ⚠️ مملة!','نافذة منبثقة.','Blocks main thread. Poor UX. Prefer modals or toasts.',
-    'Popup window ⚠️ annoying!','Popup dialog.','Blocks main thread. Prefer modals.'),
-  jr(/JSON\.(parse|stringify)/,'JSON','JSON',
-    'حوّل بين نص وكائن','تحويل JSON.','parse throws on invalid JSON. stringify ignores undefined; circular refs throw.',
-    'Convert between text and object','JSON conversion.','parse throws on invalid. stringify ignores undefined.'),
+    'نافذة ⚠️','alert.','Blocks thread.',
+    'Popup ⚠️','alert.','Blocks thread.'),
   jr(/\bthis\b/,'كائن','This',
-    '«هذا» — يشير للشي الحالي','الإشارة للكائن الحالي.','Dynamic binding. Arrow functions capture lexically.',
-    '"This" — refers to current thing','Refers to current object.','Dynamic binding. Arrow functions capture lexically.'),
-  jr(/\bextends\b/,'وراثة','Extends',
-    'خذ صفات من كلاس ثاني','الوراثة من كلاس آخر.','Sets [[Prototype]] chain. Call super() before using this.',
-    'Inherit from another class','Class inheritance.','Sets [[Prototype]] chain. Call super() before using this.'),
+    '«هذا»','this.','Dynamic binding.',
+    '"This"','this.','Dynamic binding.'),
   jr(/\bimport\s+/,'استيراد','Import',
-    'جيب شي من ملف ثاني 📥','استيراد من ملف آخر.','ES module import. Static and dynamic (await import()).',
-    'Import from another file 📥','Import from another module.','ES module import. Static and dynamic.'),
+    'جيب 📥','import.','ES module.',
+    'Import 📥','import.','ES module.'),
   jr(/\bexport\s+/,'تصدير','Export',
-    'شارك شي من هذا الملف 📤','تصدير للاستخدام الخارجي.','ES module export. Named or default.',
-    'Share from this file 📤','Export for external use.','ES module export. Named or default.')
+    'شارك 📤','export.','ES module.',
+    'Share 📤','export.','ES module.')
 ];
 
 /* =========================================================
-   7) Python rules
+   6) Python Rules
    ========================================================= */
-function pr(re, arCat, enCat, a1, a2, a3, e1, e2, e3){
-  return jr(re, arCat, enCat, a1, a2, a3, e1, e2, e3);
-}
 const PY_RULES = [
-  pr(/^\s*#/,'تعليق','Comment',
-    'سطر ما ينفّذ — بس يشرح','تعليق: يشرح الكود.','Single-line comment. PEP 8: space after #.',
-    'A line that doesn\'t run','Comment: explains code.','Single-line comment. PEP 8: space after #.'),
-  pr(/^\s*(from\s+\S+\s+)?import\s+/,'مكتبة','Import',
-    'جيب أدوات جاهزة 📦','استيراد مكتبة.','Prefer explicit "from x import y" over wildcard.',
-    'Bring ready tools 📦','Import a library.','Prefer explicit imports over wildcard.'),
+  jr(/^\s*#/,'تعليق','Comment',
+    'سطر ما ينفّذ','تعليق.','Comment.',
+    "Doesn't run",'Comment.','Comment.'),
+  jr(/^\s*(from\s+\S+\s+)?import\s+/,'مكتبة','Import',
+    'جيب أدوات 📦','import.','Prefer explicit.',
+    'Import 📦','import.','Prefer explicit.'),
   {re:/\bdef\s+(\w+)/, cat:{ar:'دالة',en:'Function'},
-    desc:{
-      ar:{ easy:m=>`دالة «${m[1]}» — مثل وصفة 👨‍🍳`,
-          normal:m=>`تعريف دالة «${m[1]}».`,
-          expert:m=>`def "${m[1]}()". First-class. Supports *args, **kwargs, keyword-only.` },
-      en:{ easy:m=>`Function "${m[1]}" — like a recipe 👨‍🍳`,
-          normal:m=>`Defines function "${m[1]}".`,
-          expert:m=>`def "${m[1]}()". First-class. Supports *args, **kwargs.` }
-    }},
+    desc:{ar:{easy:m=>`دالة «${m[1]}» 👨‍🍳`,normal:m=>`def «${m[1]}».`,expert:m=>`def "${m[1]}()". First-class.`},
+      en:{easy:m=>`Function "${m[1]}" 👨‍🍳`,normal:m=>`def "${m[1]}".`,expert:m=>`def "${m[1]}()". First-class.`}}},
   {re:/\bclass\s+(\w+)/, cat:{ar:'كلاس',en:'Class'},
-    desc:{
-      ar:{ easy:m=>`قالب «${m[1]}» 🏗️`,
-          normal:m=>`تعريف كلاس «${m[1]}».`,
-          expert:m=>`class "${m[1]}". Multiple inheritance; MRO via C3.` },
-      en:{ easy:m=>`Template "${m[1]}" 🏗️`,
-          normal:m=>`Defines class "${m[1]}".`,
-          expert:m=>`class "${m[1]}". Multiple inheritance; MRO via C3.` }
-    }},
-  pr(/\bself\b/,'نفسي','Self',
-    '«نفسي» — الكائن يشير لنفسه','الوصول لخصائص الكائن.','Explicit first argument of instance methods.',
-    '"Self" — the object refers to itself','Access instance attributes.','Explicit first argument of instance methods.'),
-  pr(/\belif\b/,'شرط','Elif',
-    'لو الأول ما صار، جرّب هذا','شرط إضافي.','Short-circuit top-down.',
-    'If first failed, try this','Extra condition.','Short-circuit top-down.'),
-  pr(/\bif\b/,'شرط','If',
-    'لو صار كذا… سوي كذا','شرط: يُنفَّذ إذا تحقق.','Falsy: False, None, 0, 0.0, "", [], {}, set().',
-    'If this happens… do this','Conditional.','Falsy: False, None, 0, "", [], {}, set().'),
-  pr(/\belse\b/,'وإلا','Else',
-    'وإلا… سوي هذا','الحالة البديلة.','Fallback branch.',
-    'Otherwise… do this','Fallback.','Fallback branch.'),
-  pr(/\bfor\b/,'كرر','For',
-    'كرّر على كل شي 🔁','حلقة تكرار.','Iterates any iterable. Supports else clause.',
-    'Repeat each item 🔁','Loop.','Iterates any iterable. Supports else clause.'),
-  pr(/\bwhile\b/,'كرر','While',
-    'استمر طول ما الشرط صح','حلقة تستمر ما دام الشرط صحيحًا.','Can have else clause.',
-    'Continue while true','While loop.','Can have else clause.'),
-  pr(/\bprint\s*\(/,'اطبع','Print',
-    'اطبع شي على الشاشة 🖨️','طباعة على الشاشة.','Built-in print. Accepts sep, end, file, flush.',
-    'Print to screen 🖨️','Print to screen.','Built-in print. Accepts sep, end, file, flush.'),
-  pr(/\binput\s*\(/,'اقرأ','Input',
-    'اقرأ شي من المستخدم ⌨️','قراءة قيمة من المستخدم.','Returns str; cast to int/float as needed.',
-    'Read input from user ⌨️','Read user input.','Returns str; cast to int/float as needed.'),
-  pr(/\breturn\b/,'إرجاع','Return',
-    'رجّع النتيجة','إرجاع قيمة.','Returns value; exits function. Without argument returns None.',
-    'Return the result','Return a value.','Returns value; exits function.'),
-  pr(/\btry\s*:/,'حاول','Try',
-    'جرّب… يمكن يطلع خطأ','محاولة تنفيذ كود.','Combine with except/else/finally.',
-    'Try this…','Try block.','Combine with except/else/finally.'),
-  pr(/\bexcept\b/,'امسك','Except',
-    'لو طلع خطأ، سوي هذا','التعامل مع الخطأ.','Specify exception type to avoid masking bugs.',
-    'If error, do this','Handle exception.','Specify exception type to avoid masking bugs.'),
-  pr(/\bwith\s+open\s*\(/,'افتح ملف','File',
-    'افتح ملف واقرأه — يقفل لحاله 📂','فتح ملف مع إغلاق تلقائي.','Context manager; ensures file closes on error.',
-    'Open and read a file 📂','Opens file with auto-close.','Context manager; ensures file closes on error.'),
-  pr(/\blambda\b/,'دالة صغيرة','Lambda',
-    'دالة صغيرة في سطر واحد','دالة مختصرة بدون اسم.','Anonymous one-expression function. Cannot contain statements.',
-    'Small one-line function','Anonymous short function.','Anonymous one-expression function.'),
-  pr(/\brange\s*\(/,'مدى','Range',
-    'سلسلة أرقام','توليد سلسلة أرقام.','Lazy range object. Supports start, stop, step.',
-    'Sequence of numbers','Generate number sequence.','Lazy range object. Supports start, stop, step.'),
-  pr(/\blen\s*\(/,'طول','Len',
-    'كم عنصر موجود؟','طول مجموعة أو نص.','Returns length. Calls __len__.',
-    'How many items?','Length of sequence.','Returns length. Calls __len__.'),
-  pr(/\bTrue\b|\bFalse\b|\bNone\b/,'قيمة','Value',
-    'قيمة صواب/خطأ/فارغة','قيمة منطقية أو فارغة.','Singletons. Use "is None", not "== None".',
-    'True/False/None value','Boolean or None value.','Singletons. Use "is None", not "== None".'),
-  pr(/\bf["']/,'نص','F-String',
-    'نص فيه متغيرات','نص منسّق (f-string).','Embeds expressions inside {}. Supports format specs.',
-    'Text with variables','Formatted string.','Embeds expressions inside {}. Supports format specs.')
+    desc:{ar:{easy:m=>`قالب «${m[1]}» 🏗️`,normal:m=>`class «${m[1]}».`,expert:m=>`class "${m[1]}". MRO C3.`},
+      en:{easy:m=>`Template "${m[1]}" 🏗️`,normal:m=>`class "${m[1]}".`,expert:m=>`class "${m[1]}". MRO C3.`}}},
+  jr(/\bself\b/,'نفسي','Self',
+    '«نفسي»','self.','Explicit self.',
+    '"Self"','self.','Explicit self.'),
+  jr(/\belif\b/,'شرط','Elif',
+    'لو الأول ما صار','elif.','Short-circuit.',
+    'If first failed','elif.','Short-circuit.'),
+  jr(/\bif\b/,'شرط','If',
+    'لو صار','if.','Falsy.',
+    'If','if.','Falsy.'),
+  jr(/\belse\b/,'وإلا','Else',
+    'وإلا','else.','Fallback.',
+    'Otherwise','else.','Fallback.'),
+  jr(/\bfor\b/,'كرر','For',
+    'كرّر 🔁','for.','Iterable.',
+    'Repeat 🔁','for.','Iterable.'),
+  jr(/\bwhile\b/,'كرر','While',
+    'استمر','while.','Pre-test.',
+    'Continue','while.','Pre-test.'),
+  jr(/\bprint\s*\(/,'اطبع','Print',
+    'اطبع 🖨️','print.','Built-in.',
+    'Print 🖨️','print.','Built-in.'),
+  jr(/\binput\s*\(/,'اقرأ','Input',
+    'اقرأ ⌨️','input.','Returns str.',
+    'Read ⌨️','input.','Returns str.'),
+  jr(/\breturn\b/,'إرجاع','Return',
+    'رجّع','return.','Returns value.',
+    'Return','return.','Returns.'),
+  jr(/\btry\s*:/,'حاول','Try',
+    'جرّب','try.','With except.',
+    'Try','try.','With except.'),
+  jr(/\bexcept\b/,'امسك','Except',
+    'امسك','except.','Specify type.',
+    'Catch','except.','Specify type.'),
+  jr(/\bwith\s+open\s*\(/,'ملف','File',
+    'افتح ملف 📂','open.','Context manager.',
+    'Open file 📂','open.','Context manager.'),
+  jr(/\blambda\b/,'دالة','Lambda',
+    'دالة صغيرة','lambda.','One expression.',
+    'Small fn','lambda.','One expression.'),
+  jr(/\brange\s*\(/,'مدى','Range',
+    'أرقام','range.','Lazy.',
+    'Numbers','range.','Lazy.'),
+  jr(/\blen\s*\(/,'طول','Len',
+    'كم عنصر','len.','__len__.',
+    'How many','len.','__len__.'),
+  jr(/\bTrue\b|\bFalse\b|\bNone\b/,'قيمة','Value',
+    'صواب/خطأ/فارغ','bool/None.','Singletons.',
+    'True/False/None','bool/None.','Singletons.'),
+  jr(/\bf["']/,'نص','FString',
+    'نص بمتغيرات','f-string.','Format specs.',
+    'Text with vars','f-string.','Format specs.')
 ];
 
 /* =========================================================
-   8) Helpers
+   7) C Rules
+   ========================================================= */
+const C_RULES = [
+  jr(/^\s*#\s*include\s*<([^>]+)>/, 'مكتبة', 'Include',
+    'نجيب أدوات من مكتبة النظام 📚','تضمين مكتبة نظام.','#include <...> system paths.',
+    'Include system library 📚','System header.','#include <...>.'),
+  jr(/^\s*#\s*include\s*"([^"]+)"/, 'مكتبة', 'Include',
+    'نجيب ملف محلي 📁','تضمين ملف محلي.','#include "..." local first.',
+    'Include local file 📁','Local file.','#include "..." local first.'),
+  jr(/^\s*#\s*define\s+(\w+)/, 'ثابت', 'Macro',
+    'اسم مختصر لقيمة 📌','ماكرو.','Preprocessor macro.',
+    'Short name 📌','Macro.','Preprocessor macro.'),
+  jr(/^\s*#\s*ifndef\s+(\w+)/, 'حماية', 'Guard',
+    'حماية من التكرار 🛡️','include guard.','Include guard.',
+    'Prevent double include 🛡️','Include guard.','Include guard.'),
+  jr(/^\s*#\s*pragma\s+once/, 'حماية', 'Pragma',
+    'حماية حديثة','pragma once.','Widely supported.',
+    'Modern protection','pragma once.','Widely supported.'),
+  jr(/^\s*#\s*ifdef\s+(\w+)/, 'شرط', 'Preprocessor',
+    'لو معرّف','شرط preprocessor.','Conditional compilation.',
+    'If defined','Preprocessor condition.','Conditional compilation.'),
+  jr(/\bint\s+([A-Za-z_]\w*)/, 'متغير', 'Variable',
+    'عدد صحيح','int.','int usually 32-bit.',
+    'Integer','int.','int usually 32-bit.'),
+  jr(/\bchar\s+([A-Za-z_]\w*)/, 'متغير', 'Variable',
+    'حرف','char.','1 byte.',
+    'Char','char.','1 byte.'),
+  jr(/\bfloat\s+([A-Za-z_]\w*)/, 'متغير', 'Variable',
+    'عشري','float.','32-bit IEEE.',
+    'Decimal','float.','32-bit IEEE.'),
+  jr(/\bdouble\s+([A-Za-z_]\w*)/, 'متغير', 'Variable',
+    'عشري دقيق','double.','64-bit IEEE.',
+    'Precise decimal','double.','64-bit IEEE.'),
+  jr(/\bstruct\s+(\w+)/, 'بنية', 'Struct',
+    'قالب متغيرات 🏗️','struct.','Members public.',
+    'Template 🏗️','struct.','Members public.'),
+  jr(/\bunion\s+(\w+)/, 'اتحاد', 'Union',
+    'نفس المكان','union.','Shared memory.',
+    'Same memory','union.','Shared memory.'),
+  jr(/\benum\s+(\w+)/, 'تعداد', 'Enum',
+    'قائمة أسماء','enum.','Named constants.',
+    'Name list','enum.','Named constants.'),
+  jr(/\btypedef\s+/, 'اسم بديل', 'Typedef',
+    'اسم بديل','typedef.','Type alias.',
+    'Type alias','typedef.','Type alias.'),
+  jr(/\bif\s*\(/, 'شرط', 'Condition',
+    'لو صار','if.','Non-zero true.',
+    'If','if.','Non-zero true.'),
+  jr(/\belse\b/, 'وإلا', 'Else',
+    'وإلا','else.','Fallback.',
+    'Otherwise','else.','Fallback.'),
+  jr(/\bfor\s*\(/, 'تكرار', 'Loop',
+    'كرّر 🔁','for.','C-style.',
+    'Repeat 🔁','for.','C-style.'),
+  jr(/\bwhile\s*\(/, 'تكرار', 'Loop',
+    'استمر','while.','Pre-test.',
+    'Continue','while.','Pre-test.'),
+  jr(/\bdo\s*\{/, 'تكرار', 'Loop',
+    'نفّذ مرة ثم تحقق','do-while.','Body at least once.',
+    'Run once then check','do-while.','At least once.'),
+  jr(/\bbreak\s*;/, 'توقف', 'Control',
+    'وقف 🛑','break.','Exit loop.',
+    'Stop 🛑','break.','Exit loop.'),
+  jr(/\bcontinue\s*;/, 'تخطَّ', 'Control',
+    'تخطَّ','continue.','Skip iteration.',
+    'Skip','continue.','Skip.'),
+  jr(/\bgoto\s+(\w+)/, 'اقفز', 'Goto',
+    'اقفز بحذر','goto.','Use carefully.',
+    'Jump carefully','goto.','Use carefully.'),
+  jr(/\breturn\b/, 'إرجاع', 'Return',
+    'رجّع','return.','Returns value.',
+    'Return','return.','Returns value.'),
+  jr(/\bvoid\s+([A-Za-z_]\w*)\s*\(/, 'دالة', 'Function',
+    'دالة ما ترجع','void fn.','Returns nothing.',
+    'Void fn','void fn.','Returns nothing.'),
+  jr(/\b([A-Za-z_]\w*)\s*\([^)]*\)\s*\{/, 'دالة', 'Function',
+    'تعريف دالة','دالة.','Function definition.',
+    'Function definition','Function.','Function definition.'),
+  jr(/\b([A-Za-z_]\w*)\s*\([^)]*\)\s*;/, 'إعلان', 'Prototype',
+    'إعلان دالة','prototype.','Signature.',
+    'Prototype','Prototype.','Signature.'),
+  jr(/\bmalloc\s*\(/, 'ذاكرة', 'Malloc',
+    'نحجز ذاكرة 🧠','malloc.','Check NULL.',
+    'Allocate 🧠','malloc.','Check NULL.'),
+  jr(/\bcalloc\s*\(/, 'ذاكرة', 'Calloc',
+    'حجز مصفّرة','calloc.','Zeros memory.',
+    'Zeroed alloc','calloc.','Zeros memory.'),
+  jr(/\brealloc\s*\(/, 'ذاكرة', 'Realloc',
+    'تغيير الحجم','realloc.','May move.',
+    'Resize','realloc.','May move.'),
+  jr(/\bfree\s*\(/, 'تحرير', 'Free',
+    'حرر الذاكرة','free.','Avoid double-free.',
+    'Free memory','free.','Avoid double-free.'),
+  jr(/\bsizeof\s*\(/, 'حجم', 'Sizeof',
+    'كم بايت؟','sizeof.','Returns size_t.',
+    'How many bytes?','sizeof.','Returns size_t.'),
+  jr(/\bconst\b/, 'ثابت', 'Const',
+    'قيمة ثابتة','const.','Read-only.',
+    'Constant','const.','Read-only.'),
+  jr(/\bstatic\b/, 'محلي', 'Static',
+    'يبقى محفوظ','static.','File-scoped or persistent.',
+    'Persists','static.','File-scoped.'),
+  jr(/\bextern\b/, 'خارجي', 'Extern',
+    'من ملف ثاني','extern.','External symbol.',
+    'From another file','extern.','External.'),
+  jr(/\bvolatile\b/, 'متغير', 'Volatile',
+    'قيمة تتغير خارجياً','volatile.','No optimization.',
+    'Changes externally','volatile.','No optimization.'),
+  jr(/\bprintf\s*\(/, 'طباعة', 'Printf',
+    'اطبع 🖨️','printf.','Format specifiers.',
+    'Print 🖨️','printf.','Format specifiers.'),
+  jr(/\bscanf\s*\(/, 'قراءة', 'Scanf',
+    'اقرأ ⌨️','scanf.','Buffer risk.',
+    'Read ⌨️','scanf.','Buffer risk.'),
+  jr(/\bfgets\s*\(/, 'قراءة', 'Fgets',
+    'اقرأ آمن ✅','fgets.','Safe line read.',
+    'Safe read ✅','fgets.','Safe.'),
+  jr(/\bgets\s*\(/, 'قراءة', 'Gets',
+    '⚠️ خطر! لا تستخدم','⚠️ gets banned.','Removed in C11.',
+    '⚠️ Never use','⚠️ gets banned.','Removed in C11.'),
+  jr(/\bputs\s*\(/, 'طباعة', 'Puts',
+    'اطبع نص','puts.','Adds newline.',
+    'Print text','puts.','Adds newline.'),
+  jr(/\bputchar\s*\(/, 'طباعة', 'Putchar',
+    'اطبع حرف','putchar.','One char.',
+    'Print char','putchar.','One char.'),
+  jr(/\bgetchar\s*\(/, 'قراءة', 'Getchar',
+    'اقرأ حرف','getchar.','One char.',
+    'Read char','getchar.','One char.'),
+  jr(/\bfopen\s*\(/, 'ملف', 'Fopen',
+    'افتح ملف 📂','fopen.','Check NULL.',
+    'Open file 📂','fopen.','Check NULL.'),
+  jr(/\bfclose\s*\(/, 'ملف', 'Fclose',
+    'اقفل الملف','fclose.','Flushes.',
+    'Close file','fclose.','Flushes.'),
+  jr(/\bstrcpy\s*\(|\bstrcat\s*\(/, 'نص', 'Strcpy',
+    '⚠️ خطر overflow','⚠️ strcpy.','No bounds.',
+    '⚠️ Overflow risk','⚠️ strcpy.','No bounds.'),
+  jr(/\bstrncpy\s*\(|\bstrncat\s*\(/, 'نص', 'Strncpy',
+    'نسخ بحد أقصى','strncpy.','Bounded.',
+    'Bounded copy','strncpy.','Bounded.'),
+  jr(/\bstrlen\s*\(/, 'نص', 'Strlen',
+    'طول النص','strlen.','Bytes not chars.',
+    'String length','strlen.','Bytes.'),
+  jr(/\bstrcmp\s*\(|\bstrncmp\s*\(/, 'نص', 'Strcmp',
+    'قارن نصين','strcmp.','0 if equal.',
+    'Compare','strcmp.','0 if equal.'),
+  jr(/\bmemcpy\s*\(/, 'ذاكرة', 'Memcpy',
+    'انسخ بيانات','memcpy.','No overlap.',
+    'Copy data','memcpy.','No overlap.'),
+  jr(/\bmemmove\s*\(/, 'ذاكرة', 'Memmove',
+    'انسخ آمن','memmove.','Handles overlap.',
+    'Safe copy','memmove.','Handles overlap.'),
+  jr(/\bmemset\s*\(/, 'ذاكرة', 'Memset',
+    'عبّي ذاكرة','memset.','Use 0 or -1.',
+    'Fill memory','memset.','Use 0 or -1.')
+];
+
+/* =========================================================
+   8) C++ Rules = C_RULES + extra
+   ========================================================= */
+const CPP_RULES = C_RULES.concat([
+  jr(/#\s*include\s*<iostream>/, 'مكتبة', 'Iostream',
+    'مكتبة الإدخال/الإخراج','iostream.','cin/cout/cerr.',
+    'I/O library','iostream.','cin/cout/cerr.'),
+  jr(/\bstd::cout\s*<</, 'طباعة', 'Cout',
+    'اطبع 🖨️','cout.','Buffered.','Print 🖨️','cout.','Buffered.'),
+  jr(/\bstd::cin\s*>>/, 'قراءة', 'Cin',
+    'اقرأ ⌨️','cin.','Check fail.','Read ⌨️','cin.','Check fail.'),
+  jr(/\bstd::cerr\b/, 'خطأ', 'Cerr',
+    'رسائل الأخطاء','cerr.','Unbuffered.','Errors','cerr.','Unbuffered.'),
+  jr(/\bstd::endl\b/, 'سطر', 'Endl',
+    'سطر + flush','endl.','Prefer \\n.','Newline+flush','endl.','Prefer \\n.'),
+  jr(/\bnamespace\s+(\w+)/, 'مساحة', 'Namespace',
+    'صندوق أسماء','namespace.','Avoid using in headers.',
+    'Name box','namespace.','Avoid using in headers.'),
+  jr(/\busing\s+namespace\s+(\w+)/, 'استخدام', 'Using',
+    'استخدم كل الأسماء','using namespace.','Pollutes scope.',
+    'Use all names','using namespace.','Pollutes scope.'),
+  jr(/\bclass\s+(\w+)/, 'كلاس', 'Class',
+    'قالب 🏗️','class.','Private default.',
+    'Template 🏗️','class.','Private default.'),
+  jr(/\bpublic\s*:/, 'عام', 'Public',
+    'متاح للجميع','public.','Accessible.',
+    'Public','public.','Accessible.'),
+  jr(/\bprivate\s*:/, 'خاص', 'Private',
+    'مخفي','private.','Class only.',
+    'Private','private.','Class only.'),
+  jr(/\bprotected\s*:/, 'محمي', 'Protected',
+    'محمي + وراثة','protected.','Class+derived.',
+    'Protected','protected.','Class+derived.'),
+  jr(/\bvirtual\b/, 'افتراضي', 'Virtual',
+    'قابل للتجاوز','virtual.','Polymorphism.',
+    'Overridable','virtual.','Polymorphism.'),
+  jr(/\boverride\b/, 'تجاوز', 'Override',
+    'أتجاوز الأب','override.','Compiler-checked.',
+    'I override','override.','Checked.'),
+  jr(/\bfinal\b/, 'نهائي', 'Final',
+    'ما يتجاوز','final.','No override.',
+    'No override','final.','No override.'),
+  jr(/~\s*\w+\s*\(/, 'مُدمِّر', 'Destructor',
+    'يشتغل عند التدمير','destructor.','Virtual for bases.',
+    'On destruction','destructor.','Virtual for bases.'),
+  jr(/\bthis\s*->/, 'نفسي', 'This',
+    'الكائن الحالي','this.','Current object.',
+    'Current object','this.','Current object.'),
+  jr(/\btemplate\s*</, 'قالب', 'Template',
+    'قالب عام','template.','C++ generics.',
+    'Generic','template.','Generics.'),
+  jr(/\btypename\s+/, 'نوع', 'Typename',
+    'نوع عام','typename.','Template type.',
+    'Generic type','typename.','Template type.'),
+  jr(/\bstd::vector\s*</, 'مصفوفة', 'Vector',
+    'مصفوفة ديناميكية 📈','vector.','Dynamic array.',
+    'Dynamic array 📈','vector.','Dynamic array.'),
+  jr(/\bstd::string\b/, 'نص', 'String',
+    'نص مرن','string.','RAII string.',
+    'Flexible string','string.','RAII string.'),
+  jr(/\bstd::map\s*</, 'خريطة', 'Map',
+    'قاموس مرتب','map.','O(log n).',
+    'Sorted dict','map.','O(log n).'),
+  jr(/\bstd::unordered_map\s*</, 'خريطة', 'UnorderedMap',
+    'قاموس سريع','unordered_map.','Hash table.',
+    'Fast dict','unordered_map.','Hash.'),
+  jr(/\bstd::set\s*</, 'مجموعة', 'Set',
+    'مجموعة فريدة','set.','Unique sorted.',
+    'Unique set','set.','Unique sorted.'),
+  jr(/\bstd::unique_ptr\s*</, 'مؤشر ذكي', 'UniquePtr',
+    'ينظف نفسه 🧹','unique_ptr.','Exclusive.',
+    'Self-clean 🧹','unique_ptr.','Exclusive.'),
+  jr(/\bstd::shared_ptr\s*</, 'مؤشر ذكي', 'SharedPtr',
+    'مشترك','shared_ptr.','Refcount.',
+    'Shared','shared_ptr.','Refcount.'),
+  jr(/\bstd::weak_ptr\s*</, 'مؤشر ضعيف', 'WeakPtr',
+    'ضعيف','weak_ptr.','Non-owning.',
+    'Weak','weak_ptr.','Non-owning.'),
+  jr(/\bstd::move\s*\(/, 'نقل', 'Move',
+    'نقل ملكية','move.','Cast rvalue.',
+    'Transfer','move.','Cast rvalue.'),
+  jr(/\bnew\s+\w+/, 'إنشاء', 'New',
+    'كائن جديد','new.','Use smart ptr.',
+    'New object','new.','Use smart ptr.'),
+  jr(/\bdelete\s+/, 'حذف', 'Delete',
+    'حذف','delete.','[]for arrays.',
+    'Delete','delete.','[]for arrays.'),
+  jr(/\bnoexcept\b/, 'آمن', 'Noexcept',
+    'ما يرمي','noexcept.','Won\'t throw.',
+    'No throw','noexcept.','Won\'t throw.'),
+  jr(/\bconstexpr\b/, 'ثابت', 'Constexpr',
+    'وقت الترجمة','constexpr.','Compile-time.',
+    'Compile-time','constexpr.','Compile-time.'),
+  jr(/\bauto\s+/, 'تلقائي', 'Auto',
+    'استنتاج النوع','auto.','Type deduction.',
+    'Infer type','auto.','Type deduction.'),
+  jr(/static_cast</, 'تحويل', 'Cast',
+    'تحويل آمن','static_cast.','Compile-checked.',
+    'Safe cast','static_cast.','Compile-checked.'),
+  jr(/dynamic_cast</, 'تحويل', 'Cast',
+    'فحص runtime','dynamic_cast.','RTTI needed.',
+    'Runtime check','dynamic_cast.','RTTI.'),
+  jr(/reinterpret_cast</, 'تحويل', 'Cast',
+    '⚠️ خطير','⚠️ unsafe.','Bit reinterpret.',
+    '⚠️ Danger','⚠️ unsafe.','Bit reinterpret.'),
+  jr(/\bnullptr\b/, 'فارغ', 'Nullptr',
+    'لا يشير لشي','nullptr.','Type-safe.',
+    'Points nowhere','nullptr.','Type-safe.'),
+  jr(/\bstd::thread\b|\bstd::mutex\b|\bstd::lock_guard\b/, 'تزامن', 'Thread',
+    'خيوط متوازية','threading.','Watch races.',
+    'Threading','threading.','Watch races.'),
+  jr(/\bstd::optional\s*</, 'اختياري', 'Optional',
+    'قيمة اختيارية','optional.','C++17.',
+    'Optional value','optional.','C++17.'),
+  jr(/\bstd::string_view\b/, 'نص', 'StringView',
+    'عرض نص','string_view.','Non-owning.',
+    'String view','string_view.','Non-owning.')
+]);
+
+/* =========================================================
+   9) Helpers
    ========================================================= */
 const $ = function(id){ return document.getElementById(id); };
-function esc(s){
-  return String(s).replace(/[&<>"']/g, function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-  });
-}
 function uniq(a){
   const seen = {};
   const out = [];
@@ -1052,13 +1159,15 @@ const LANG_NAMES = {
   javascript:{ar:'JavaScript', en:'JavaScript'},
   python:{ar:'Python', en:'Python'},
   php:{ar:'PHP', en:'PHP'},
+  c:{ar:'C', en:'C'},
+  cpp:{ar:'C++', en:'C++'},
   sql:{ar:'SQL', en:'SQL'},
   json:{ar:'JSON', en:'JSON'},
   text:{ar:'نص', en:'Text'}
 };
 
 /* =========================================================
-   9) Detect language
+   10) detectLang
    ========================================================= */
 function detectLang(code){
   const c = code.trim();
@@ -1068,13 +1177,25 @@ function detectLang(code){
   if(/<(!doctype|html|head|body|div|span|p|a|img|ul|li|table|form|input|button|h[1-6]|section|article|nav|header|footer)\b/i.test(c)) return 'html';
   if(/\b(SELECT|INSERT|UPDATE|DELETE|CREATE\s+TABLE|FROM|WHERE)\b/i.test(c) && !/function|def\s|const\s|let\s/.test(c)) return 'sql';
   if(/^\s*[\w\-.#*,\s\[\]="':>()]+\s*\{[^{}]*:[^{}]*\}/m.test(c) && !/\b(function|const|let|var|def\s)\b/.test(c)) return 'css';
+
+  /* C++ قبل C */
+  if(/#\s*include\s*<(iostream|vector|string|map|set|memory|thread|mutex|algorithm|optional|variant|string_view|filesystem)>/.test(c)
+     || /\bstd::\w+/.test(c)
+     || /\b(cout|cin|cerr|endl|namespace|class|template|public:|private:|protected:|virtual|override|noexcept|constexpr|nullptr|unique_ptr|shared_ptr|weak_ptr)\b/.test(c)
+     || /\busing\s+namespace\s+std\b/.test(c)) return 'cpp';
+
+  /* C */
+  if(/#\s*include\s*<(stdio|stdlib|string|math|stdint|stdbool|stddef|ctype|time|assert|limits|float|errno)\.h>/.test(c)
+     || (/\b(int|char|float|double|long|short|void|unsigned)\s+\w+/.test(c) && /\b(printf|scanf|malloc|free|NULL|sizeof)\b/.test(c))
+     || /\b(int|char|float|double|void)\s+main\s*\(/.test(c)) return 'c';
+
   if(/\b(def|elif|self\.|__init__|import\s+\w+|print\s*\(|lambda|None|True|False)\b/.test(c) && !/\b(function|const|let|var|=>)\b/.test(c)) return 'python';
   if(/\b(function|const|let|var|=>|console\.log|document\.|window\.|async|await)\b/.test(c)) return 'javascript';
   return 'text';
 }
 
 /* =========================================================
-   10) Analyzers
+   11) Analyzers
    ========================================================= */
 function explainHTML(code){
   const items = [];
@@ -1086,12 +1207,8 @@ function explainHTML(code){
     let desc = pick(TAG_INFO[tag]);
     if(!desc){
       desc = LANG === 'ar'
-        ? (LEVEL === 'easy' ? 'وسم <' + tag + '> — نوع من العناصر.'
-           : LEVEL === 'expert' ? 'Element <' + tag + '>. Consult MDN for spec.'
-           : 'وسم <' + tag + '> يصف جزءًا من المحتوى.')
-        : (LEVEL === 'easy' ? 'Tag <' + tag + '> — a type of element.'
-           : LEVEL === 'expert' ? 'Element <' + tag + '>. Consult MDN for spec.'
-           : 'Tag <' + tag + '> describes part of the content.');
+        ? (LEVEL === 'easy' ? 'وسم <' + tag + '>.' : LEVEL === 'expert' ? 'Element <' + tag + '>.' : 'وسم <' + tag + '>.')
+        : (LEVEL === 'easy' ? 'Tag <' + tag + '>.' : LEVEL === 'expert' ? 'Element <' + tag + '>.' : 'Tag <' + tag + '>.');
     }
     const notes = [];
     const aRe = /([\w:-]+)(?:\s*=\s*("([^"]*)"|'([^']*)'|[^\s>]+))?/g;
@@ -1103,13 +1220,13 @@ function explainHTML(code){
       if(info){
         if(LEVEL === 'easy') notes.push(name + ': ' + info);
         else if(LEVEL === 'expert') notes.push(name + '="' + val.slice(0,40) + '" → ' + info);
-        else notes.push(name + ' → ' + info + (val && val !== name ? ' ("' + val.slice(0,40) + '")' : ''));
+        else notes.push(name + ' → ' + info);
       }
     }
     if(notes.length) desc += ' — ' + notes.join(LEVEL === 'easy' ? '. ' : ' • ') + '.';
     items.push({ code: m[0].trim().slice(0,140), desc: desc, cat: 'tag <' + tag + '>' });
   }
-  if(!items.length) items.push({ code: code.slice(0,120), desc: LANG === 'ar' ? 'ما لقيت وسوم HTML واضحة.' : 'No clear HTML tags found.', cat: 'general' });
+  if(!items.length) items.push({ code: code.slice(0,120), desc: LANG === 'ar' ? 'ما لقيت وسوم HTML.' : 'No HTML tags found.', cat: 'general' });
   return items;
 }
 
@@ -1123,22 +1240,20 @@ function explainCSS(code){
     let selDesc;
     const AR = LANG === 'ar';
     if(/^@media/.test(selector)) selDesc = AR
-      ? (LEVEL === 'easy' ? 'يشتغل بس لما تكون الشاشة بحجم معين 📱' : 'استعلام وسائط — يُطبَّق عند تحقق شرط.')
-      : (LEVEL === 'easy' ? 'Applies only when a screen condition matches 📱' : 'Media query — applies when a condition matches.');
+      ? (LEVEL === 'easy' ? 'يشتغل عند حجم معين 📱' : 'Media query.')
+      : (LEVEL === 'easy' ? 'Applies when matched 📱' : 'Media query.');
     else if(/^@keyframes/.test(selector)) selDesc = AR
-      ? (LEVEL === 'easy' ? 'حركة — يتحرك العنصر ✨' : 'تعريف حركة بمراحل.')
-      : (LEVEL === 'easy' ? 'An animation ✨' : 'Keyframes — animation stages.');
-    else if(/^@import/.test(selector)) selDesc = AR ? 'استيراد ملف CSS خارجي.' : 'Imports an external CSS file.';
+      ? (LEVEL === 'easy' ? 'حركة ✨' : 'Keyframes.')
+      : (LEVEL === 'easy' ? 'Animation ✨' : 'Keyframes.');
     else if(selector.charAt(0) === '.') selDesc = AR
-      ? (LEVEL === 'easy' ? 'كلاس «' + selector.slice(1).split(/[\s:>]/)[0] + '» — مجموعة عناصر لهم نفس الشكل' : 'كلاس «' + selector.slice(1).split(/[\s:>]/)[0] + '».')
-      : (LEVEL === 'easy' ? 'Class "' + selector.slice(1).split(/[\s:>]/)[0] + '" — a group of elements' : 'Class "' + selector.slice(1).split(/[\s:>]/)[0] + '".');
+      ? (LEVEL === 'easy' ? 'كلاس «' + selector.slice(1).split(/[\s:>]/)[0] + '»' : 'Class «' + selector.slice(1).split(/[\s:>]/)[0] + '».')
+      : (LEVEL === 'easy' ? 'Class "' + selector.slice(1).split(/[\s:>]/)[0] + '"' : 'Class "' + selector.slice(1).split(/[\s:>]/)[0] + '".');
     else if(selector.charAt(0) === '#') selDesc = AR
-      ? (LEVEL === 'easy' ? 'معرّف «' + selector.slice(1).split(/[\s:>]/)[0] + '» — عنصر واحد بس' : 'معرّف «' + selector.slice(1).split(/[\s:>]/)[0] + '».')
-      : (LEVEL === 'easy' ? 'Id "' + selector.slice(1).split(/[\s:>]/)[0] + '" — a single element' : 'Id "' + selector.slice(1).split(/[\s:>]/)[0] + '".');
-    else if(selector === '*') selDesc = AR ? 'كل العناصر.' : 'All elements.';
+      ? (LEVEL === 'easy' ? 'معرّف «' + selector.slice(1).split(/[\s:>]/)[0] + '»' : 'ID.')
+      : (LEVEL === 'easy' ? 'Id "' + selector.slice(1).split(/[\s:>]/)[0] + '"' : 'ID.');
     else selDesc = AR
-      ? (LEVEL === 'easy' ? 'عنصر «' + selector + '»' : 'مُحدِّد عنصر «' + selector + '».')
-      : (LEVEL === 'easy' ? 'Element "' + selector + '"' : 'Element selector "' + selector + '".');
+      ? (LEVEL === 'easy' ? 'عنصر «' + selector + '»' : 'مُحدِّد «' + selector + '».')
+      : (LEVEL === 'easy' ? 'Element "' + selector + '"' : 'Selector "' + selector + '".');
 
     items.push({ code: selector + ' {', desc: selDesc, cat: AR ? 'مُحدِّد' : 'Selector' });
 
@@ -1152,18 +1267,18 @@ function explainCSS(code){
       const info = pick(CSS_PROP[prop]);
       let desc;
       if(info){
-        if(LEVEL === 'easy') desc = info + ' — القيمة: ' + val;
-        else if(LEVEL === 'expert') desc = info + ' · value: ' + val;
+        if(LEVEL === 'easy') desc = info + ' — ' + val;
+        else if(LEVEL === 'expert') desc = info + ' · ' + val;
         else desc = info + ' → "' + val + '".';
       } else {
         desc = AR
-          ? (LEVEL === 'easy' ? 'خاصية ' + prop + ' = ' + val : 'خاصية «' + prop + '» بقيمة «' + val + '».')
-          : (LEVEL === 'easy' ? 'Property ' + prop + ' = ' + val : 'Property "' + prop + '" with value "' + val + '".');
+          ? (LEVEL === 'easy' ? prop + ' = ' + val : 'خاصية «' + prop + '»: «' + val + '».')
+          : (LEVEL === 'easy' ? prop + ' = ' + val : 'Property "' + prop + '" = "' + val + '".');
       }
       items.push({ code: '  ' + prop + ': ' + val + ';', desc: desc, cat: AR ? 'خاصية' : 'Property' });
     });
   }
-  if(!items.length) items.push({ code: code.slice(0,120), desc: LANG === 'ar' ? 'ما لقيت قواعد CSS واضحة.' : 'No clear CSS rules found.', cat: 'general' });
+  if(!items.length) items.push({ code: code.slice(0,120), desc: LANG === 'ar' ? 'ما لقيت قواعد CSS.' : 'No CSS rules.', cat: 'general' });
   return items;
 }
 
@@ -1191,7 +1306,7 @@ function explainByRules(code, rules, label){
       items.push({ code: raw.slice(0,120), desc: label + ': ' + raw.trim(), cat: LANG === 'ar' ? 'سطر' : 'Line' });
     }
   }
-  if(!items.length) items.push({ code: '', desc: LANG === 'ar' ? 'الكود فارغ.' : 'Code empty.', cat: 'general' });
+  if(!items.length) items.push({ code: '', desc: LANG === 'ar' ? 'الكود فارغ.' : 'Empty.', cat: 'general' });
   return items;
 }
 
@@ -1201,42 +1316,34 @@ function explainText(code){
 }
 
 /* =========================================================
-   11) Fixes builder
+   12) buildFixes
    ========================================================= */
 function buildFixes(code, lang){
   const fixes = [];
-  const AR = LANG === 'ar';
-  const LV = LEVEL;
+  const AR = LANG === 'ar', LV = LEVEL;
 
   function d(ae, an, ax, ee, en, ex){
-    if(AR){
-      if(LV === 'easy') return ae;
-      if(LV === 'expert') return ax;
-      return an;
-    } else {
-      if(LV === 'easy') return ee;
-      if(LV === 'expert') return ex;
-      return en;
-    }
+    if(AR) return LV === 'easy' ? ae : LV === 'expert' ? ax : an;
+    return LV === 'easy' ? ee : LV === 'expert' ? ex : en;
   }
 
-  /* 1. Hardcoded secret */
-  const secretRe = /(?:api[_-]?key|password|secret|token|passwd|pwd)\s*[:=]\s*['"]([^'"]{4,})['"]/i;
-  const sm = code.match(secretRe);
-  if(sm){
+  /* 1. أسرار مكشوفة */
+  const secrets = scanSecrets(code);
+  if(secrets.length){
+    const s = secrets[0];
     fixes.push({
       level:'danger',
-      title: AR ? (LV === 'easy' ? '🔑 مفتاح مكشوف!' : 'مفتاح/كلمة مرور مكشوفة في الكود') : (LV === 'easy' ? '🔑 Exposed secret!' : 'Hardcoded secret in code'),
+      title: AR ? '🔑 بيانات حساسة مكشوفة!' : '🔑 Exposed secrets!',
       desc: d(
-        'لا تحط كلمة السر في الكود مباشرة! أي واحد يشوف الملف يقدر يسرقها 😱',
-        'لا تكتب مفاتيح API أو كلمات المرور مباشرة في الكود — أي شخص يرى الملف يمكنه سرقتها. استخدم متغيرات البيئة.',
-        'Credential leak risk. Rotate this secret immediately, migrate to a secrets manager or env vars, add gitleaks/trufflehog scanning.',
-        "Don't put passwords in code! Anyone who sees the file can steal them 😱",
-        'Never hardcode secrets. Anyone viewing the file can steal them. Use env vars.',
-        'Credential leak risk. Rotate immediately, migrate to secrets manager, add scanning.'
+        'لا تحط كلمة السر في الكود! 😱',
+        'لا تكتب مفاتيح API مباشرة. استخدم .env.',
+        'Credential leak. Rotate immediately. Use vault + secret scanning.',
+        "Don't put passwords in code! 😱",
+        'Never hardcode secrets. Use .env.',
+        'Credential leak. Rotate, use vault.'
       ),
-      bad: sm[0],
-      good: '// .env (never committed)\nAPI_KEY=your_secret_key_here\n\n// In code:\nconst apiKey = process.env.API_KEY;'
+      bad: s.full,
+      good: '// .env (never committed)\nAPI_KEY=your_secret\n\n// In code:\nconst apiKey = process.env.API_KEY;'
     });
   }
 
@@ -1247,231 +1354,433 @@ function buildFixes(code, lang){
       level:'danger',
       title: AR ? 'eval() — خطر أمني' : 'eval() — security risk',
       desc: d(
-        'لا تستخدم eval أبدًا — خطر!',
-        'eval() ينفّذ أي كود يُمرَّر له، مما يفتح بابًا لهجمات injection. استخدم بدائل آمنة.',
-        'eval() enables arbitrary code execution and defeats CSP. Use JSON.parse or a proper parser.',
-        'Never use eval — dangerous!',
-        'eval() runs any code passed to it. Use JSON.parse instead.',
-        'eval() enables arbitrary code execution and defeats CSP.'
+        'لا تستخدم eval أبدًا!',
+        'eval() ينفّذ أي كود — ثغرة injection.',
+        'eval() enables arbitrary code execution. Use JSON.parse or AST.',
+        'Never use eval!',
+        'eval() runs any code. Use JSON.parse.',
+        'eval() = arbitrary execution.'
       ),
       bad: line.trim(),
-      good: '// Instead of:\n// const data = eval("(" + str + ")");\n\n// Use:\nconst data = JSON.parse(str);'
+      good: 'const data = JSON.parse(str);'
     });
   }
 
-  /* 3. innerHTML */
+  /* 3. new Function */
+  if(/new\s+Function\s*\(/.test(code)){
+    fixes.push({
+      level:'danger',
+      title: AR ? 'new Function() خطر' : 'new Function() risk',
+      desc: d(
+        'new Function مثل eval!',
+        'new Function ينفّذ كوداً ديناميكياً.',
+        'new Function compiles at runtime, bypasses CSP.',
+        'new Function like eval!',
+        'new Function dynamic — same risks.',
+        'new Function bypasses CSP.'
+      ),
+      bad: 'const fn = new Function("a", "return a");',
+      good: 'const fn = (a) => a;'
+    });
+  }
+
+  /* 4. innerHTML */
   if(/\.innerHTML\s*=/.test(code) && !/textContent|escapeHtml|sanitize|DOMPurify/.test(code)){
     const line = code.split('\n').filter(function(l){ return /\.innerHTML\s*=/.test(l); })[0] || '.innerHTML = ...';
     fixes.push({
       level:'warn',
-      title: AR ? 'innerHTML قد يسبب ثغرة XSS' : 'innerHTML may cause XSS',
+      title: AR ? 'innerHTML — ثغرة XSS' : 'innerHTML — XSS risk',
       desc: d(
-        'حط نص عادي بدل HTML — أأمن ✅',
-        'إدخال بيانات المستخدم في innerHTML يفتح ثغرة XSS. استخدم textContent.',
-        'innerHTML parses HTML and executes inline event handlers. XSS sink. Use DOMPurify or textContent.',
-        'Use text instead of HTML — safer ✅',
-        'User input in innerHTML opens XSS hole. Use textContent.',
-        'innerHTML parses HTML and executes handlers. XSS sink.'
+        'حط نص عادي بدل HTML ✅',
+        'innerHTML مع بيانات المستخدم = XSS.',
+        'innerHTML parses HTML. XSS sink. Use textContent or DOMPurify.',
+        'Use text instead ✅',
+        'User input in innerHTML = XSS.',
+        'innerHTML = XSS sink.'
       ),
       bad: line.trim(),
-      good: '// Unsafe:\n// el.innerHTML = userInput;\n\n// Safe:\nel.textContent = userInput;'
+      good: 'el.textContent = userInput;\n// Or:\n// el.innerHTML = DOMPurify.sanitize(userInput);'
     });
   }
 
-  /* 4. var */
+  /* 5. var */
   const varLines = code.split('\n').filter(function(l){ return /\bvar\s+\w/.test(l); });
   if(varLines.length && lang === 'javascript'){
-    const sample = varLines[0];
     fixes.push({
       level:'warn',
-      title: AR ? 'استخدم let/const بدل var' : 'Use let/const instead of var',
+      title: AR ? 'استخدم let/const' : 'Use let/const',
       desc: d(
-        varLines.length + ' استخدام لـ var — قديم! غيّره لـ let',
-        varLines.length + ' استخدام لـ var. استخدم let/const لأنها أنظف وأأمن.',
-        varLines.length + ' var bindings. var is function-scoped with hoisting quirks. Use const/let.',
-        varLines.length + ' uses of var — old! Change to let',
-        varLines.length + ' uses of var. Use let/const for safety.',
-        varLines.length + ' var bindings. Prefer const/let.'
+        varLines.length + ' استخدام لـ var — قديم!',
+        varLines.length + ' var. استخدم let/const.',
+        varLines.length + ' var bindings. Function-scoped.',
+        varLines.length + ' var — old!',
+        varLines.length + ' var. Use let/const.',
+        varLines.length + ' var bindings.'
       ),
-      bad: sample.trim(),
-      good: sample.replace(/\bvar\b/, /[+\-*/]=|\+\+|--/.test(sample) ? 'let' : 'const').trim()
+      bad: varLines[0].trim(),
+      good: varLines[0].replace(/\bvar\b/, /[+\-*/]=|\+\+|--/.test(varLines[0]) ? 'let' : 'const').trim()
     });
   }
 
-  /* 5. == */
+  /* 6. == */
   const eqLines = code.split('\n').filter(function(l){ return /[^=!<>]==[^=]/.test(l) && !/===/.test(l); });
   if(eqLines.length && lang === 'javascript'){
-    const sample = eqLines[0];
     fixes.push({
       level:'warn',
       title: AR ? 'استخدم === بدل ==' : 'Use === instead of ==',
       desc: d(
-        'استخدم === (ثلاث تساويات) — أدق!',
-        'المقارنة بـ == تقوم بتحويل تلقائي للنوع وقد تعطي نتائج غريبة.',
-        'Loose equality triggers Abstract Equality Comparison with type coercion ([] == ![] is true).',
-        'Use === (three equals) — stricter!',
-        'Loose == does type coercion and can give odd results.',
-        'Loose equality triggers Abstract Equality Comparison.'
+        'استخدم === أدق!',
+        '== يقوم بتحويل النوع.',
+        'Loose equality uses Abstract Equality Comparison.',
+        'Use === stricter!',
+        '== does type coercion.',
+        'Loose equality uses coercion.'
       ),
-      bad: sample.trim(),
-      good: sample.replace(/([^=!<>])==([^=])/g, '$1===$2').trim()
+      bad: eqLines[0].trim(),
+      good: eqLines[0].replace(/([^=!<>])==([^=])/g, '$1===$2').trim()
     });
   }
 
-  /* 6. for(var) */
-  if(/\bfor\s*\(\s*var\b/.test(code)){
-    const line = code.split('\n').filter(function(l){ return /for\s*\(\s*var\b/.test(l); })[0] || 'for (var i=0;...)';
+  /* 7. gets */
+  if(/\bgets\s*\(/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /\bgets\s*\(/.test(l); })[0] || 'gets(buf);';
     fixes.push({
-      level:'warn',
-      title: AR ? 'var داخل for' : 'var inside for loop',
+      level:'danger',
+      title: AR ? 'gets() — دالة محظورة' : 'gets() — banned',
       desc: d(
-        'استخدم let بدل var في الحلقة 🔄',
-        'var في for يسبب مشاكل مع الإغلاقات والدوال غير المتزامنة.',
-        'var shares one binding across iterations causing closure bugs. let creates per-iteration bindings.',
-        'Use let in the loop 🔄',
-        'var in for causes closure issues with async callbacks.',
-        'var shares one binding across iterations causing closure bugs.'
+        'gets خطيرة! استخدم fgets 🛑',
+        'gets بدون فحص — buffer overflow.',
+        'gets removed in C11. Use fgets(buf, sizeof(buf), stdin).',
+        'gets dangerous! 🛑',
+        'gets no bounds. Use fgets.',
+        'gets removed in C11.'
       ),
       bad: line.trim(),
-      good: line.replace(/\bvar\b/, 'let').trim()
+      good: 'char buf[256];\nif (fgets(buf, sizeof(buf), stdin)) {\n  buf[strcspn(buf, "\\n")] = 0;\n}'
     });
   }
 
-  /* 7. img alt */
-  if(lang === 'html'){
-    const imgs = code.match(/<img\b[^>]*>/g) || [];
-    const badImgs = imgs.filter(function(m){ return !/\balt\s*=/.test(m); });
-    if(badImgs.length){
-      const sample = badImgs[0];
-      fixes.push({
-        level:'warn',
-        title: AR ? 'صور بدون alt' : 'Images without alt',
-        desc: d(
-          'حط وصف للصورة عشان لو ما ظهرت يعرفون إيش فيها 🖼️',
-          badImgs.length + ' صورة بدون alt. الخاصية ضرورية لقارئات الشاشة ومحركات البحث.',
-          badImgs.length + ' <img> without alt. WCAG 2.1 SC 1.1.1 violation. Use descriptive alt.',
-          'Add description to images 🖼️',
-          badImgs.length + ' images without alt. Needed for accessibility.',
-          badImgs.length + ' <img> without alt (WCAG 1.1.1).'
-        ),
-        bad: sample,
-        good: sample.replace(/<img\b/, '<img alt="وصف الصورة هنا"')
-      });
-    }
+  /* 8. scanf %s */
+  if(/\bscanf\s*\(\s*"%s"/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /scanf\s*\(\s*"%s"/.test(l); })[0] || 'scanf("%s", buf);';
+    fixes.push({
+      level:'danger',
+      title: AR ? 'scanf("%s") بدون حد' : 'scanf("%s") no width',
+      desc: d(
+        'scanf بدون حد خطير!',
+        'scanf("%s") = buffer overflow.',
+        'Use width specifier "%255s" or fgets.',
+        'scanf no limit!',
+        'scanf("%s") = overflow.',
+        'Use width or fgets.'
+      ),
+      bad: line.trim(),
+      good: 'char buf[256];\nif (scanf("%255s", buf) == 1) { /* ok */ }'
+    });
   }
 
-  /* 8. html lang */
-  if(lang === 'html' && /<html\b[^>]*>/i.test(code) && !/<html[^>]*\blang\s*=/i.test(code)){
-    const match = code.match(/<html\b[^>]*>/i);
+  /* 9. strcpy */
+  if(/\bstrcpy\s*\(/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /\bstrcpy\s*\(/.test(l); })[0] || 'strcpy(dst, src);';
     fixes.push({
       level:'warn',
-      title: AR ? 'html بدون lang' : 'html without lang',
+      title: AR ? 'strcpy — overflow' : 'strcpy — overflow',
       desc: d(
-        'حدد لغة الصفحة — عربي أو إنجليزي 🌍',
-        'خاصية lang مهمة لقارئات الشاشة ومحركات البحث.',
-        'BCP-47 required for WCAG 3.1.1. Affects screen reader voice, hyphenation, translation.',
-        'Set page language 🌍',
-        'lang attribute matters for accessibility and SEO.',
-        'BCP-47 required for WCAG 3.1.1.'
+        'strcpy خطيرة!',
+        'strcpy بدون فحص — استخدم strncpy.',
+        'strcpy no bounds. Use strncpy + null-terminate.',
+        'strcpy unsafe!',
+        'strcpy no bounds.',
+        'Use strncpy.'
       ),
-      bad: match[0],
-      good: match[0].replace(/<html\b/, '<html lang="ar"')
+      bad: line.trim(),
+      good: 'char dst[256];\nstrncpy(dst, src, sizeof(dst) - 1);\ndst[sizeof(dst) - 1] = \'\\0\';'
     });
   }
 
-  /* 9. !important */
-  const important = (code.match(/!important/g) || []).length;
-  if(lang === 'css' && important > 2){
+  /* 10. sprintf */
+  if(/\bsprintf\s*\(/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /\bsprintf\s*\(/.test(l); })[0] || 'sprintf(buf, ...);';
     fixes.push({
       level:'warn',
-      title: AR ? '!important كثير' : 'Too much !important',
+      title: AR ? 'sprintf — استخدم snprintf' : 'sprintf — use snprintf',
       desc: d(
-        'فيه ' + important + ' استخدام لـ !important — فوضى 😵',
-        important + ' استخدام لـ !important. علامة على صراع في التخصيص.',
-        important + ' !important declarations. Refactor with @layer, :where(), or design tokens.',
-        important + ' uses of !important — chaos 😵',
-        important + ' !important declarations — specificity debt.',
-        important + ' !important declarations. Refactor with @layer.'
+        'sprintf خطيرة — snprintf',
+        'sprintf بدون حد.',
+        'sprintf no bounds. Use snprintf.',
+        'sprintf unsafe',
+        'sprintf no bounds.',
+        'Use snprintf.'
       ),
-      bad: 'color: red !important;',
-      good: '/* Use specificity or @layer */\n@layer components {\n  .btn.primary { color: red; }\n}'
+      bad: line.trim(),
+      good: 'char buf[256];\nsnprintf(buf, sizeof(buf), "%d", n);'
     });
   }
 
-  /* 10. try without catch */
-  if(/\btry\s*\{/.test(code) && !/\bcatch\b|\bexcept\b/.test(code)){
+  /* 11. printf(variable) */
+  if(/\bprintf\s*\(\s*[A-Za-z_]\w*\s*\)/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /\bprintf\s*\(\s*[A-Za-z_]\w*\s*\)/.test(l); })[0] || 'printf(var);';
     fixes.push({
       level:'warn',
-      title: AR ? 'try بدون catch' : 'try without catch',
+      title: AR ? 'format string vuln' : 'Format string vuln',
       desc: d(
-        'لو الخطأ صار، مين يمسكه؟ 🤔',
-        'try بدون catch يعني الخطأ سيُتجاهل بصمت.',
-        'try without catch rethrows and may crash at a higher frame. Use finally for cleanup.',
-        'Who catches the error? 🤔',
-        'try without catch swallows errors silently.',
-        'try without catch rethrows and may crash higher.'
+        'لا تطبع المتغير مباشرة!',
+        'printf(var) ثغرة format string.',
+        'printf(var) allows %n attacks. Use printf("%s", var).',
+        'No direct variable print!',
+        'printf(var) vuln.',
+        'printf(var) = %n attack.'
       ),
-      bad: 'try {\n  doSomething();\n}',
-      good: 'try {\n  doSomething();\n} catch (err) {\n  console.error(err);\n}'
+      bad: line.trim(),
+      good: 'printf("%s", userInput);'
     });
   }
 
-  /* 11. console.log */
-  const logs = (code.match(/console\.(log|debug)/g) || []).length;
-  if(logs > 3){
+  /* 12. malloc بدون فحص */
+  if(/\bmalloc\s*\(/.test(code) && !/if\s*\([^)]*==\s*NULL|if\s*\([^)]*!/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /\bmalloc\s*\(/.test(l); })[0] || 'malloc(...)';
     fixes.push({
-      level:'info',
-      title: AR ? 'console.log كثير' : 'Many console.log',
+      level:'warn',
+      title: AR ? 'malloc بدون فحص' : 'malloc no check',
       desc: d(
-        logs + ' طبعة — تمام للتجربة بس شيليها قبل النشر',
-        logs + ' استدعاء console. أزلها قبل النشر للإنتاج.',
-        logs + ' console calls. Gate behind DEBUG or use structured logger (pino/winston).',
-        logs + ' console calls — remove before shipping',
-        logs + ' console calls. Remove before production.',
-        logs + ' console calls. Use structured logger.'
+        'افحص malloc — قد ترجع NULL',
+        'malloc قد ترجع NULL.',
+        'malloc returns NULL on failure.',
+        'Check malloc',
+        'malloc may return NULL.',
+        'Check malloc for NULL.'
       ),
-      bad: 'console.log("user:", user);\nconsole.log("total:", total);',
-      good: '// Gate behind a flag or use a logger:\nif (DEBUG) console.log(user);'
+      bad: line.trim(),
+      good: 'int *p = (int*)malloc(sizeof(int));\nif (p == NULL) {\n  fprintf(stderr, "OOM\\n");\n  return -1;\n}'
     });
   }
 
-  /* 12. alert */
-  if(/\balert\s*\(/.test(code)){
+  /* 13. C++ new بدون delete */
+  if(lang === 'cpp' && /\bnew\s+[A-Za-z_]\w*/.test(code) && !/std::(unique_ptr|shared_ptr|make_unique|make_shared)/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /\bnew\s+[A-Za-z_]/.test(l); })[0] || 'auto *p = new Widget();';
     fixes.push({
-      level:'info',
-      title: AR ? 'استخدم رسائل مخصصة بدل alert' : 'Use custom messages instead of alert',
+      level:'warn',
+      title: AR ? 'new بدون delete' : 'new without delete',
       desc: d(
-        'alert مملة! استخدم رسالة أنيقة داخل الصفحة 💬',
-        'alert() تجمّد الصفحة وتزعج المستخدم. استخدم نوافذ مخصصة.',
-        'alert() blocks main thread, dismisses on focus loss, cannot be styled. Use aria-modal or toast.',
-        'alert is annoying! Use inline message 💬',
-        'alert() freezes page and annoys users.',
-        'alert() blocks main thread. Use aria-modal.'
+        'استخدم unique_ptr 🧹',
+        'new بدون delete — تسريب.',
+        'Use std::make_unique<T>().',
+        'Use unique_ptr 🧹',
+        'new without delete leaks.',
+        'Use make_unique.'
       ),
-      bad: 'alert("تم الحفظ!");',
-      good: 'showToast("تم الحفظ!", "success");'
+      bad: line.trim(),
+      good: 'auto p = std::make_unique<Widget>();'
     });
   }
 
-  /* 13. while(true) */
+  /* 14. C++ virtual بدون destructor */
+  if(lang === 'cpp' && /\bclass\s+\w+/.test(code) && /\bvirtual\b/.test(code) && !/virtual\s+~\w+/.test(code)){
+    fixes.push({
+      level:'warn',
+      title: AR ? 'virtual بدون destructor' : 'virtual without dtor',
+      desc: d(
+        'أضف virtual destructor',
+        'كلاس virtual يحتاج destructor virtual.',
+        'Base class virtual must have virtual destructor (C.35).',
+        'Add virtual dtor',
+        'virtual class needs virtual dtor.',
+        'Virtual dtor required.'
+      ),
+      bad: 'class Base {\npublic:\n  virtual void f();\n};',
+      good: 'class Base {\npublic:\n  virtual void f();\n  virtual ~Base() = default;\n};'
+    });
+  }
+
+  /* 15. C++ char* = "..." */
+  if(lang === 'cpp' && /\bchar\s*\*\s*\w+\s*=\s*"/.test(code)){
+    const line = code.split('\n').filter(function(l){ return /\bchar\s*\*\s*\w+\s*=\s*"/.test(l); })[0] || 'char *s = "hello";';
+    fixes.push({
+      level:'warn',
+      title: AR ? 'char* = "..." خطر' : 'char* = "..." risky',
+      desc: d(
+        'لا تعدل نص ثابت!',
+        'char* لنص ثابت — UB.',
+        'String literal is read-only. Use const char* or std::string.',
+        'Do not modify literal!',
+        'char* to literal — UB.',
+        'Use const char* or std::string.'
+      ),
+      bad: line.trim(),
+      good: 'const char *s = "hello";\n// Or:\nstd::string s = "hello";'
+    });
+  }
+
+  /* 16. حلقة لا نهائية */
   if(/while\s*\(\s*true\s*\)/.test(code) && !/break/.test(code)){
     fixes.push({
       level:'warn',
       title: AR ? 'حلقة لا نهائية' : 'Infinite loop',
       desc: d(
-        'هذي الحلقة ما توقف! أضف break 🛑',
-        'حلقة لا نهائية بدون شرط خروج — قد تجمّد الصفحة.',
-        'Unbounded loop with no exit; blocks event loop and freezes the tab. Add break or max-iterations counter.',
-        'This loop never stops! Add break 🛑',
-        'Infinite loop without exit — freezes the page.',
-        'Unbounded loop; blocks the event loop.'
+        'أضف break 🛑',
+        'حلقة بدون خروج.',
+        'Unbounded loop; blocks event loop.',
+        'Add break 🛑',
+        'No exit condition.',
+        'Unbounded loop.'
       ),
       bad: 'while (true) {\n  doWork();\n}',
       good: 'while (true) {\n  if (shouldStop()) break;\n  doWork();\n}'
     });
   }
 
-  /* 14. Long function */
+  /* 17. HTTP */
+  if(/(?:http:\/\/)(?!localhost|127\.0\.0\.1|0\.0\.0\.0)/.test(code)){
+    fixes.push({
+      level:'warn',
+      title: AR ? 'HTTP غير مشفّر' : 'Insecure HTTP',
+      desc: d(
+        'استخدم HTTPS 🔒',
+        'HTTP غير مشفّر.',
+        'Plain HTTP cleartext. Use HSTS.',
+        'Use HTTPS 🔒',
+        'HTTP unencrypted.',
+        'HTTP cleartext.'
+      ),
+      bad: 'fetch("http://api.example.com/data");',
+      good: 'fetch("https://api.example.com/data");'
+    });
+  }
+
+  /* 18. localStorage أسرار */
+  if(/localStorage\.setItem\s*\(\s*['"][^'"]*(?:password|token|secret|key)/i.test(code)){
+    fixes.push({
+      level:'warn',
+      title: AR ? 'localStorage غير آمن' : 'localStorage insecure',
+      desc: d(
+        'لا تحفظ أسرار في المتصفح!',
+        'localStorage غير مشفّر.',
+        'XSS = full exfiltration. Use HttpOnly cookies.',
+        'Never store secrets in browser!',
+        'localStorage unencrypted.',
+        'XSS = exfiltration. Use HttpOnly.'
+      ),
+      bad: 'localStorage.setItem("authToken", token);',
+      good: '// Server: Set-Cookie: token=...; HttpOnly; Secure; SameSite=Strict'
+    });
+  }
+
+  /* 19. console.log */
+  const logs = (code.match(/console\.(log|debug)/g) || []).length;
+  if(logs > 3){
+    fixes.push({
+      level:'info',
+      title: AR ? 'console.log كثير' : 'Many console.log',
+      desc: d(
+        logs + ' طبعة — شيليها',
+        logs + ' console — أزلها للإنتاج.',
+        logs + ' console calls. Use structured logger.',
+        logs + ' console — remove',
+        logs + ' console — remove.',
+        logs + ' console calls.'
+      ),
+      bad: 'console.log("x:", x);',
+      good: 'if (DEBUG) console.log(x);'
+    });
+  }
+
+  /* 20. alert */
+  if(/\balert\s*\(/.test(code)){
+    fixes.push({
+      level:'info',
+      title: AR ? 'alert مملة' : 'alert is annoying',
+      desc: d(
+        'استخدم رسالة أنيقة 💬',
+        'alert() تجمّد الصفحة.',
+        'alert() blocks thread. Use aria-modal.',
+        'Use pretty message 💬',
+        'alert() freezes page.',
+        'alert() blocks thread.'
+      ),
+      bad: 'alert("done");',
+      good: 'showToast("done", "success");'
+    });
+  }
+
+  /* 21. !important */
+  const important = (code.match(/!important/g) || []).length;
+  if(lang === 'css' && important > 2){
+    fixes.push({
+      level:'warn',
+      title: AR ? '!important كثير' : 'Too much !important',
+      desc: d(
+        important + ' استخدام 😵',
+        important + ' !important.',
+        important + ' !important. Use @layer.',
+        important + ' uses 😵',
+        important + ' !important.',
+        important + ' !important.'
+      ),
+      bad: 'color: red !important;',
+      good: '@layer components {\n  .btn.primary { color: red; }\n}'
+    });
+  }
+
+  /* 22. try بدون catch */
+  if(/\btry\s*\{/.test(code) && !/\bcatch\b|\bexcept\b/.test(code)){
+    fixes.push({
+      level:'warn',
+      title: AR ? 'try بدون catch' : 'try without catch',
+      desc: d(
+        'مين يمسك الخطأ؟ 🤔',
+        'try بدون catch — يُتجاهل.',
+        'try without catch rethrows.',
+        'Who catches? 🤔',
+        'try without catch.',
+        'try without catch rethrows.'
+      ),
+      bad: 'try {\n  doSomething();\n}',
+      good: 'try {\n  doSomething();\n} catch (err) {\n  console.error(err);\n}'
+    });
+  }
+
+  /* 23. html بدون lang */
+  if(lang === 'html' && /<html\b[^>]*>/i.test(code) && !/<html[^>]*\blang\s*=/i.test(code)){
+    const match = code.match(/<html\b[^>]*>/i);
+    fixes.push({
+      level:'warn',
+      title: AR ? 'html بدون lang' : 'html without lang',
+      desc: d(
+        'حدد لغة الصفحة 🌍',
+        'lang مهم لإمكانية الوصول.',
+        'WCAG 3.1.1 requires lang.',
+        'Set lang 🌍',
+        'lang for accessibility.',
+        'WCAG 3.1.1.'
+      ),
+      bad: match[0],
+      good: match[0].replace(/<html\b/, '<html lang="ar"')
+    });
+  }
+
+  /* 24. صورة بدون alt */
+  if(lang === 'html'){
+    const imgs = code.match(/<img\b[^>]*>/g) || [];
+    const badImgs = imgs.filter(function(m){ return !/\balt\s*=/.test(m); });
+    if(badImgs.length){
+      fixes.push({
+        level:'warn',
+        title: AR ? 'صور بدون alt' : 'Images without alt',
+        desc: d(
+          'حط وصف للصورة 🖼️',
+          badImgs.length + ' صورة بدون alt.',
+          badImgs.length + ' <img> no alt (WCAG 1.1.1).',
+          'Add alt 🖼️',
+          badImgs.length + ' no alt.',
+          badImgs.length + ' no alt.'
+        ),
+        bad: badImgs[0],
+        good: badImgs[0].replace(/<img\b/, '<img alt="وصف"')
+      });
+    }
+  }
+
+  /* 25. دالة طويلة */
   const lines = code.split('\n');
   let inFunc = false, funcName = '', funcLen = 0, bc = 0;
   for(let i = 0; i < lines.length; i++){
@@ -1486,17 +1795,17 @@ function buildFixes(code, lang){
         if(funcLen > 40){
           fixes.push({
             level:'info',
-            title: AR ? 'دالة طويلة: ' + funcName : 'Long function: ' + funcName,
+            title: AR ? 'دالة طويلة: ' + funcName : 'Long fn: ' + funcName,
             desc: d(
-              'دالة «' + funcName + '» فيها ' + funcLen + ' سطر — قسمها ✂️',
-              'الدالة «' + funcName + '» فيها ' + funcLen + ' سطر. قسمها لدوال أصغر.',
-              funcName + '() spans ' + funcLen + ' lines. Extract sub-functions; aim for <20 lines per SRP.',
-              'Function "' + funcName + '" is ' + funcLen + ' lines — split it ✂️',
-              'Function "' + funcName + '" is ' + funcLen + ' lines. Split it.',
-              funcName + '() spans ' + funcLen + ' lines. Extract sub-functions.'
+              funcName + ' فيها ' + funcLen + ' سطر ✂️',
+              'الدالة ' + funcLen + ' سطر — قسمها.',
+              funcName + '() = ' + funcLen + ' lines. Extract.',
+              funcName + ' is ' + funcLen + ' lines ✂️',
+              'Function is ' + funcLen + ' lines.',
+              funcName + '() = ' + funcLen + ' lines.'
             ),
-            bad: 'function ' + funcName + '() {\n  // ...' + funcLen + ' lines...\n}',
-            good: 'function ' + funcName + '() {\n  const data = loadData();\n  const result = processData(data);\n  return formatOutput(result);\n}'
+            bad: 'function ' + funcName + '() {\n  // ' + funcLen + ' lines\n}',
+            good: 'function ' + funcName + '() {\n  const data = load();\n  return process(data);\n}'
           });
         }
         inFunc = false;
@@ -1508,18 +1817,48 @@ function buildFixes(code, lang){
 }
 
 /* =========================================================
-   12) Deep analysis
+   13) Deep analyze
    ========================================================= */
 function calcNesting(lines){
   let max = 0, cur = 0;
+  let inString = false, inComment = false, stringChar = '';
   for(let i = 0; i < lines.length; i++){
     const line = lines[i];
-    const open = (line.match(/[\{\(\[]/g) || []).length;
-    const close = (line.match(/[\}\)\]]/g) || []).length;
-    cur += open - close;
-    if(cur > max) max = cur;
+    if(/^\s*(\/\/|#|\*|<!--)/.test(line)) continue;
+    for(let j = 0; j < line.length; j++){
+      const c = line[j], next = line[j+1];
+      if(inComment){
+        if(c === '*' && next === '/'){ inComment = false; j++; }
+        continue;
+      }
+      if(inString){
+        if(c === '\\'){ j++; continue; }
+        if(c === stringChar){ inString = false; }
+        continue;
+      }
+      if(c === '/' && next === '/') break;
+      if(c === '/' && next === '*'){ inComment = true; j++; continue; }
+      if(c === '"' || c === "'" || c === '`'){ inString = true; stringChar = c; continue; }
+      if(c === '{' || c === '(' || c === '[') cur++;
+      if(c === '}' || c === ')' || c === ']') cur--;
+      if(cur > max) max = cur;
+    }
   }
-  return max;
+  return Math.max(0, max);
+}
+
+function computeScore(x){
+  let s = 100;
+  s -= x.security.length * 15;
+  s -= x.warnings.length * 7;
+  s -= x.issues.length * 5;
+  s -= x.tips.length * 2;
+  if(x.metrics.nestingDepth > 5) s -= 10;
+  else if(x.metrics.nestingDepth > 3) s -= 4;
+  if(x.metrics.avgLineLength > 100) s -= 6;
+  if(x.metrics.comments === 0 && x.metrics.codeLines > 30) s -= 5;
+  if(x.metrics.functions > 0 && x.metrics.avgFuncLength > 40) s -= 8;
+  return Math.max(0, Math.min(100, s));
 }
 
 function generateOverview(lang, metrics, funcs, classes, vars){
@@ -1530,11 +1869,11 @@ function generateOverview(lang, metrics, funcs, classes, vars){
     if(AR){
       p.push('هذا كود ' + ln + ' 👋');
       if(metrics.codeLines) p.push('فيه ' + metrics.codeLines + ' سطر.');
-      if(funcs.length) p.push('فيه ' + funcs.length + ' دالة (وصفة جاهزة).');
-      if(classes.length) p.push('فيه ' + classes.length + ' كلاس (قالب).');
-      if(vars.length) p.push('يستخدم ' + vars.length + ' صندوق لتخزين القيم.');
+      if(funcs.length) p.push('فيه ' + funcs.length + ' دالة.');
+      if(classes.length) p.push('فيه ' + classes.length + ' كلاس.');
+      if(vars.length) p.push('يستخدم ' + vars.length + ' متغير.');
     } else {
-      p.push('This is ' + ln + ' code 👋');
+      p.push('This is ' + ln + ' 👋');
       if(metrics.codeLines) p.push(metrics.codeLines + ' lines.');
       if(funcs.length) p.push(funcs.length + ' function(s).');
       if(classes.length) p.push(classes.length + ' class(es).');
@@ -1543,12 +1882,12 @@ function generateOverview(lang, metrics, funcs, classes, vars){
   } else if(LV === 'expert'){
     if(AR){
       p.push(ln + ' · ' + metrics.codeLines + ' SLOC · avg ' + metrics.avgLineLength + ' chars/line · max nesting ' + metrics.nestingDepth + '.');
-      p.push(funcs.length + ' functions, ' + classes.length + ' classes, ' + vars.length + ' bindings, ' + metrics.comments + ' comments (' + Math.round(metrics.comments / Math.max(1, metrics.totalLines) * 100) + '%).');
-      if(metrics.maxLineLength > 120) p.push('Longest line ' + metrics.maxLineLength + ' chars — consider extraction.');
-      if(metrics.nestingDepth > 4) p.push('Deep nesting — refactor via guard clauses or strategy pattern.');
+      p.push(funcs.length + ' functions, ' + classes.length + ' classes, ' + vars.length + ' bindings, ' + metrics.comments + ' comments.');
+      if(metrics.maxLineLength > 120) p.push('Longest line ' + metrics.maxLineLength + ' chars.');
+      if(metrics.nestingDepth > 4) p.push('Deep nesting — refactor via guard clauses.');
     } else {
       p.push(ln + ' · ' + metrics.codeLines + ' SLOC · avg ' + metrics.avgLineLength + ' chars/line · max nesting ' + metrics.nestingDepth + '.');
-      p.push(funcs.length + ' functions, ' + classes.length + ' classes, ' + vars.length + ' bindings, ' + metrics.comments + ' comments (' + Math.round(metrics.comments / Math.max(1, metrics.totalLines) * 100) + '%).');
+      p.push(funcs.length + ' functions, ' + classes.length + ' classes, ' + vars.length + ' bindings, ' + metrics.comments + ' comments.');
       if(metrics.maxLineLength > 120) p.push('Longest line ' + metrics.maxLineLength + ' chars.');
     }
   } else {
@@ -1557,26 +1896,14 @@ function generateOverview(lang, metrics, funcs, classes, vars){
       if(funcs.length) p.push('يعرّف ' + funcs.length + ' دالة.');
       if(classes.length) p.push(classes.length + ' كلاس.');
       if(vars.length) p.push(vars.length + ' متغير.');
-      if(metrics.comments) p.push(metrics.comments + ' تعليق.');
     } else {
-      p.push(ln + ' code with ' + metrics.codeLines + ' active lines.');
+      p.push(ln + ' with ' + metrics.codeLines + ' active lines.');
       if(funcs.length) p.push(funcs.length + ' function(s).');
       if(classes.length) p.push(classes.length + ' class(es).');
       if(vars.length) p.push(vars.length + ' variable(s).');
     }
   }
   return p.join(' ');
-}
-
-function computeScore(x){
-  let s = 100;
-  s -= x.security.length * 18;
-  s -= x.warnings.length * 8;
-  s -= x.issues.length * 6;
-  s -= x.tips.length * 2;
-  if(x.metrics.nestingDepth > 5) s -= 8;
-  if(x.metrics.avgLineLength > 100) s -= 5;
-  return Math.max(0, Math.min(100, s));
 }
 
 function deepAnalyze(code, langChoice){
@@ -1601,6 +1928,20 @@ function deepAnalyze(code, langChoice){
     (code.match(/^\s*from\s+([\w.]+)\s+import/gm) || [])
   ));
 
+  let avgFuncLength = 0;
+  if(funcs.length){
+    let total = 0, count = 0;
+    for(let i = 0; i < funcs.length; i++){
+      const fnRe = new RegExp('(?:function\\s+' + funcs[i] + '|def\\s+' + funcs[i] + ')[^{]*\\{([^}]*(?:\\{[^}]*\\}[^}]*)*)\\}', 'm');
+      const fm = code.match(fnRe);
+      if(fm){
+        total += fm[1].split('\n').length;
+        count++;
+      }
+    }
+    avgFuncLength = count ? Math.round(total / count) : 0;
+  }
+
   const metrics = {
     totalLines: lines.length,
     codeLines: nonEmpty.length,
@@ -1610,124 +1951,196 @@ function deepAnalyze(code, langChoice){
     classes: classes.length,
     maxLineLength: Math.max.apply(null, [0].concat(lines.map(function(l){ return l.length; }))),
     avgLineLength: nonEmpty.length ? Math.round(nonEmpty.reduce(function(a, l){ return a + l.length; }, 0) / nonEmpty.length) : 0,
-    nestingDepth: calcNesting(lines)
+    nestingDepth: calcNesting(lines),
+    avgFuncLength: avgFuncLength
   };
+
+  /* فحص أمني */
+  const threats = scanForThreats(code);
+  const secrets = scanSecrets(code);
 
   const issues = [], warnings = [], tips = [], security = [];
   const AR = LANG === 'ar', LV = LEVEL;
 
-  const secrets = code.match(/(?:api[_-]?key|password|secret|token|passwd|pwd)\s*[:=]\s*['"][^'"]{4,}['"]/gi);
-  if(secrets) security.push({
-    level:'danger',
-    text: AR
-      ? (LV === 'easy' ? 'فيه ' + secrets.length + ' مفتاح مكتوب مباشرة — خطر! 🔑'
-         : LV === 'expert' ? 'Credential leak: ' + secrets.length + ' hardcoded secret(s). Rotate & migrate to vault.'
-         : 'تم العثور على ' + secrets.length + ' قيمة تبدو كسر مكتوب مباشرة.')
-      : (LV === 'easy' ? 'Found ' + secrets.length + ' hardcoded secret(s)! 🔑'
-         : LV === 'expert' ? 'Credential leak: ' + secrets.length + ' hardcoded secret(s).'
-         : 'Found ' + secrets.length + ' hardcoded secrets.')
-  });
+  /* تهديدات حسب المستوى */
+  for(let i = 0; i < threats.length; i++){
+    const th = threats[i];
+    if(LV === 'easy' && th.level !== 'danger') continue;
+    if(LV === 'normal' && th.level === 'info') continue;
+    if(th.level === 'danger') security.push({ level:'danger', text: th.text });
+    else if(th.level === 'warn') warnings.push({ level:'warn', text: th.text });
+    else tips.push({ level:'info', text: th.text });
+  }
 
-  if(/\beval\s*\(/.test(code)) security.push({
-    level:'danger',
-    text: AR
-      ? (LV === 'easy' ? 'يستخدم eval — خطر كبير!' : 'استخدام eval() خطر أمني كبير.')
-      : (LV === 'easy' ? 'Uses eval — big danger!' : 'eval() is a major security risk.')
-  });
-
-  if(/\.innerHTML\s*=/.test(code) && !/esc|sanitize|textContent|DOMPurify/.test(code))
+  /* أسرار */
+  if(secrets.length){
     security.push({
-      level:'warn',
+      level:'danger',
       text: AR
-        ? (LV === 'easy' ? 'يستخدم innerHTML — قد يكون خطر' : 'استخدام innerHTML قد يفتح ثغرة XSS.')
-        : (LV === 'easy' ? 'Uses innerHTML — risky' : 'innerHTML may open XSS hole.')
+        ? 'تم كشف ' + secrets.length + ' بيانات حساسة: ' + secrets.map(function(s){ return s.key; }).join(', ')
+        : 'Found ' + secrets.length + ' secret(s): ' + secrets.map(function(s){ return s.key; }).join(', ')
     });
+  }
 
-  const varCount = (code.match(/\bvar\s+/g) || []).length;
-  if(varCount > 0 && lang === 'javascript') warnings.push({
-    level:'warn',
-    text: AR
-      ? (LV === 'easy' ? 'فيه ' + varCount + ' استخدام لـ var — استخدم let بدلها' : varCount + ' استخدام لـ var — يُفضَّل let/const.')
-      : (LV === 'easy' ? varCount + ' uses of var — use let' : varCount + ' uses of var — prefer let/const.')
-  });
-
-  const looseEq = (code.match(/[^=!<>]==[^=]/g) || []).length;
-  if(looseEq > 0 && lang === 'javascript') warnings.push({
-    level:'warn',
-    text: AR
-      ? (LV === 'easy' ? looseEq + ' استخدام لـ == — استخدم === أدق' : looseEq + ' استخدام لـ == — استخدم ===.')
-      : (LV === 'easy' ? looseEq + ' uses of == — prefer ===' : looseEq + ' uses of == — prefer ===.')
-  });
-
-  const logs = (code.match(/console\.(log|debug)/g) || []).length;
-  if(logs > 3) tips.push({
-    level:'info',
-    text: AR
-      ? (LV === 'easy' ? logs + ' طبعة console — شيليها قبل النشر' : logs + ' استدعاء console.log — أزلها قبل النشر.')
-      : (LV === 'easy' ? logs + ' console calls — remove before ship' : logs + ' console.log calls — remove before production.')
-  });
-
-  if(metrics.nestingDepth > 4) warnings.push({
-    level:'warn',
-    text: AR
-      ? (LV === 'easy' ? 'الكود داخل بعضه كثير — صعب تقرأه' : 'عمق التداخل ' + metrics.nestingDepth + ' مستويات.')
-      : (LV === 'easy' ? 'Deeply nested — hard to read' : 'Nesting depth ' + metrics.nestingDepth + '.')
-  });
-
-  if(/\bfor\s*\(\s*var\b/.test(code)) warnings.push({
-    level:'warn',
-    text: AR
-      ? (LV === 'easy' ? 'var داخل for — استخدم let' : 'استخدام var في for يسبب مشاكل الإغلاق.')
-      : (LV === 'easy' ? 'var inside for — use let' : 'var in for loop causes closure bugs.')
-  });
-
-  if(/\btry\s*\{/.test(code) && !/\bcatch\b/.test(code) && !/\bexcept\b/.test(code))
-    warnings.push({
+  /* JavaScript */
+  if(lang === 'javascript'){
+    const varCount = (code.match(/\bvar\s+/g) || []).length;
+    if(varCount > 0) warnings.push({
       level:'warn',
-      text: AR
-        ? (LV === 'easy' ? 'try بدون catch — لو صار خطأ ما أحد يمسكه' : 'try بدون catch/except سيفشل بصمت.')
-        : (LV === 'easy' ? 'try without catch' : 'try without catch fails silently.')
+      text: AR ? varCount + ' استخدام لـ var — استخدم let/const.' : varCount + ' uses of var — prefer let/const.'
     });
+    const looseEq = (code.match(/[^=!<>]==[^=]/g) || []).length;
+    if(looseEq > 0) warnings.push({
+      level:'warn',
+      text: AR ? looseEq + ' استخدام لـ == — استخدم ===.' : looseEq + ' uses of == — prefer ===.'
+    });
+    if(/\bfor\s*\(\s*var\b/.test(code)) warnings.push({
+      level:'warn',
+      text: AR ? 'var داخل for — استخدم let.' : 'var inside for — use let.'
+    });
+    if(/\btry\s*\{/.test(code) && !/\bcatch\b/.test(code) && !/\bexcept\b/.test(code)) warnings.push({
+      level:'warn',
+      text: AR ? 'try بدون catch — الخطأ سيُتجاهل.' : 'try without catch — error ignored.'
+    });
+  }
 
-  if(/\balert\s*\(/.test(code)) tips.push({
-    level:'info',
-    text: AR
-      ? (LV === 'easy' ? 'alert مملة — استخدم رسالة أنيقة' : 'alert مزعج — استخدم نوافذ مخصصة.')
-      : (LV === 'easy' ? 'alert is annoying' : 'alert is disruptive — use custom dialogs.')
-  });
-
-  if(lang === 'html' && !/<html[^>]*\blang\s*=/.test(code)) issues.push({
-    level:'warn',
-    text: AR
-      ? (LV === 'easy' ? 'حدد لغة الصفحة عربي/إنجليزي 🌍' : 'وسم html يفتقد خاصية lang.')
-      : (LV === 'easy' ? 'Set page language 🌍' : 'html tag missing lang.')
-  });
-
+  /* HTML */
   if(lang === 'html'){
+    if(!/<html[^>]*\blang\s*=/.test(code)) issues.push({
+      level:'warn',
+      text: AR ? 'html بدون lang — مهم لإمكانية الوصول.' : 'html without lang — accessibility.'
+    });
     const imgs = (code.match(/<img\b/g) || []).length;
     const alts = (code.match(/<img[^>]*\balt\s*=/g) || []).length;
     if(imgs > alts) issues.push({
       level:'warn',
-      text: AR
-        ? (LV === 'easy' ? (imgs - alts) + ' صورة بدون وصف — حط alt' : (imgs - alts) + ' من ' + imgs + ' صورة بدون alt.')
-        : (LV === 'easy' ? (imgs - alts) + ' images without alt' : (imgs - alts) + ' of ' + imgs + ' images missing alt.')
+      text: AR ? (imgs - alts) + ' صورة بدون alt.' : (imgs - alts) + ' images missing alt.'
+    });
+    if(!/<!DOCTYPE\s+html/i.test(code)) issues.push({
+      level:'warn',
+      text: AR ? 'مفقود <!DOCTYPE html> — quirks mode.' : 'Missing <!DOCTYPE html>.'
+    });
+    if(!/<meta[^>]*charset/i.test(code)) issues.push({
+      level:'warn',
+      text: AR ? 'مفقود meta charset.' : 'Missing meta charset.'
+    });
+    if(!/<meta[^>]*viewport/i.test(code) && /<head/i.test(code)) issues.push({
+      level:'info',
+      text: AR ? 'مفقود meta viewport.' : 'Missing meta viewport.'
+    });
+    const inlineEvents = (code.match(/\son\w+\s*=\s*["']/g) || []).length;
+    if(inlineEvents > 0) tips.push({
+      level:'info',
+      text: AR ? inlineEvents + ' event handler مباشر — استخدم addEventListener.' : inlineEvents + ' inline handlers.'
     });
   }
 
-  const important = (code.match(/!important/g) || []).length;
-  if(important > 2) warnings.push({
-    level:'warn',
-    text: AR
-      ? (LV === 'easy' ? important + ' استخدام لـ !important — فوضى' : important + ' استخدام لـ !important — نظّم التنسيق.')
-      : (LV === 'easy' ? important + ' !important — chaos' : important + ' !important uses — organize styles.')
+  /* CSS */
+  if(lang === 'css'){
+    const important = (code.match(/!important/g) || []).length;
+    if(important > 2) warnings.push({
+      level:'warn',
+      text: AR ? important + ' استخدام لـ !important.' : important + ' !important declarations.'
+    });
+    if(/(?:^|\s)(?:width|height)\s*:\s*\d+px/m.test(code) && !/\bmax-width\b/.test(code)) tips.push({
+      level:'info',
+      text: AR ? 'أبعاد ثابتة بالبكسل — جرّب وحدات نسبية.' : 'Fixed px — try relative units.'
+    });
+  }
+
+  /* Python */
+  if(lang === 'python'){
+    if(/\bexcept\s*:/m.test(code)) warnings.push({
+      level:'warn',
+      text: AR ? 'except بدون نوع — يخفي كل الأخطاء.' : 'Bare except — hides all errors.'
+    });
+    if(/\bprint\s*\(/.test(code) && !/if\s+__name__/.test(code)) tips.push({
+      level:'info',
+      text: AR ? 'استخدم if __name__ == "__main__".' : 'Use if __name__ == "__main__" guard.'
+    });
+  }
+
+  /* C / C++ */
+  if(lang === 'c' || lang === 'cpp'){
+    const isCpp = lang === 'cpp';
+
+    if(/\bvoid\s+main\s*\(/.test(code)) warnings.push({
+      level:'warn',
+      text: AR ? 'void main() غير معياري — استخدم int main().' : 'void main() non-standard — use int main().'
+    });
+
+    if(/\bmalloc\s*\(/.test(code) && !/if\s*\([^)]*==\s*NULL|if\s*\([^)]*!/.test(code)) warnings.push({
+      level:'warn',
+      text: AR ? 'malloc بدون فحص NULL.' : 'malloc without NULL check.'
+    });
+
+    if(/\bfree\s*\(/.test(code)){
+      const freeCount = (code.match(/\bfree\s*\(/g) || []).length;
+      const mallocCount = (code.match(/\b(malloc|calloc|realloc)\s*\(/g) || []).length;
+      if(mallocCount > freeCount) warnings.push({
+        level:'warn',
+        text: AR
+          ? 'تسريب محتمل: ' + mallocCount + ' حجز vs ' + freeCount + ' تحرير.'
+          : 'Potential leak: ' + mallocCount + ' allocs vs ' + freeCount + ' frees.'
+      });
+    }
+
+    if(isCpp){
+      const newCount = (code.match(/\bnew\s+[A-Za-z_]/g) || []).length;
+      const deleteCount = (code.match(/\bdelete\s+/g) || []).length;
+      if(newCount > deleteCount) warnings.push({
+        level:'warn',
+        text: AR
+          ? 'تسريب: ' + newCount + ' new vs ' + deleteCount + ' delete. استخدم smart pointers.'
+          : 'Leak: ' + newCount + ' new vs ' + deleteCount + ' delete. Use smart pointers.'
+      });
+
+      if(/\bclass\s+\w+/.test(code) && /\bvirtual\b/.test(code) && !/virtual\s+~\w+/.test(code) &&
+         !/std::shared_ptr|std::unique_ptr/.test(code)) warnings.push({
+        level:'warn',
+        text: AR
+          ? 'كلاس virtual بدون destructor — خطر تسريب.'
+          : 'Class with virtual but non-virtual destructor.'
+      });
+
+      if(/using\s+namespace\s+std/.test(code) && /#\s*pragma\s+once|#\s*ifndef/.test(code)) warnings.push({
+        level:'warn',
+        text: AR
+          ? 'using namespace std في header.'
+          : 'using namespace std in header.'
+      });
+
+      if(/\bchar\s*\*\s*\w+\s*=\s*"/.test(code)) warnings.push({
+        level:'warn',
+        text: AR
+          ? 'char* = "..." — UB عند التعديل.'
+          : 'char* = "..." — UB if modified.'
+      });
+    }
+
+    if(/\bfor\s*\([^;]*;\s*\w+\s*<=\s*\w+\s*;/.test(code) && /\[\s*\w+\s*\]/.test(code)) warnings.push({
+      level:'warn',
+      text: AR
+        ? '<= في حلقة على مصفوفة — off-by-one!'
+        : '<= in array loop — off-by-one!'
+    });
+  }
+
+  /* دالة طويلة */
+  if(metrics.avgFuncLength > 40) tips.push({
+    level:'info',
+    text: AR ? 'متوسط طول الدوال ' + metrics.avgFuncLength + ' سطر.' : 'Avg function length ' + metrics.avgFuncLength + ' lines.'
   });
 
+  /* الشرح حسب اللغة */
   let items;
   if(lang === 'html') items = explainHTML(code);
   else if(lang === 'css') items = explainCSS(code);
   else if(lang === 'javascript') items = explainByRules(code, JS_RULES, 'JavaScript');
   else if(lang === 'python') items = explainByRules(code, PY_RULES, 'Python');
   else if(lang === 'php') items = explainByRules(code, JS_RULES, 'PHP');
+  else if(lang === 'c') items = explainByRules(code, C_RULES, 'C');
+  else if(lang === 'cpp') items = explainByRules(code, CPP_RULES, 'C++');
   else items = explainText(code);
 
   const fixes = buildFixes(code, lang);
@@ -1738,18 +2151,24 @@ function deepAnalyze(code, langChoice){
     lang: lang, metrics: metrics, items: items,
     issues: issues, warnings: warnings, tips: tips, security: security, fixes: fixes,
     vars: vars, funcs: funcs, classes: classes, imports: imports,
-    overview: overview, score: score
+    overview: overview, score: score, secrets: secrets
   };
 }
 
 /* =========================================================
-   13) Render
+   14) Render
    ========================================================= */
 function levelClass(l){
   if(l === 'danger') return 'danger';
   if(l === 'warn') return 'warn';
   if(l === 'ok') return 'ok';
   return 'info';
+}
+function levelLabel(l){
+  if(l === 'danger') return t('danger');
+  if(l === 'warn') return t('warn');
+  if(l === 'info') return t('info');
+  return t('tip');
 }
 
 function renderAnalysis(a){
@@ -1760,6 +2179,10 @@ function renderAnalysis(a){
   const ln = LANG_NAMES[lang] ? LANG_NAMES[lang][LANG] : lang;
 
   let html = '';
+
+  if(security.length > 0){
+    html += '<div class="err" style="margin-bottom:14px">' + t('securityWarning') + '</div>';
+  }
 
   const scoreClass = score >= 80 ? 'good' : score >= 55 ? 'mid' : 'bad';
   const scoreMsg = score >= 80 ? t('scorePerfect') : score >= 55 ? t('scoreGood') : score >= 35 ? t('scoreMid') : t('scoreBad');
@@ -1794,9 +2217,10 @@ function renderAnalysis(a){
     + '</div>';
 
   if(security.length){
-    html += '<div class="section-title">' + t('sectionSecurity') + ' (' + security.length + ')</div>';
+    html += '<div class="section-title">' + t('sectionThreats') + ' (' + security.length + ')</div>';
     security.forEach(function(s){
-      html += '<div class="item" style="border-inline-start-color:var(--danger)"><p><span class="cat danger">' + t('danger') + '</span>' + s.text + '</p></div>';
+      html += '<div class="item" style="border-inline-start-color:var(--danger);background:rgba(248,113,113,.08)">'
+        + '<p><span class="cat danger">' + t('danger') + '</span>' + esc(s.text) + '</p></div>';
     });
   }
 
@@ -1816,14 +2240,16 @@ function renderAnalysis(a){
   if(issues.length || warnings.length){
     html += '<div class="section-title">' + t('sectionIssues') + ' (' + (issues.length + warnings.length) + ')</div>';
     issues.concat(warnings).forEach(function(w){
-      html += '<div class="item" style="border-inline-start-color:var(--warn)"><p><span class="cat ' + levelClass(w.level) + '">' + (w.level === 'danger' ? t('danger') : t('warn')) + '</span>' + w.text + '</p></div>';
+      html += '<div class="item" style="border-inline-start-color:var(--warn)">'
+        + '<p><span class="cat ' + levelClass(w.level) + '">' + levelLabel(w.level) + '</span>' + esc(w.text) + '</p></div>';
     });
   }
 
   if(tips.length){
     html += '<div class="section-title">' + t('sectionTips') + ' (' + tips.length + ')</div>';
     tips.forEach(function(tp){
-      html += '<div class="item" style="border-inline-start-color:var(--ok)"><p><span class="cat ok">' + t('tip') + '</span>' + tp.text + '</p></div>';
+      html += '<div class="item" style="border-inline-start-color:var(--ok)">'
+        + '<p><span class="cat ok">' + t('tip') + '</span>' + esc(tp.text) + '</p></div>';
     });
   }
 
@@ -1851,7 +2277,7 @@ function renderAnalysis(a){
 }
 
 /* =========================================================
-   14) UI wiring
+   15) UI wiring
    ========================================================= */
 const codeEl = $('code');
 const resultEl = $('result');
@@ -1864,11 +2290,7 @@ function updateStats(){
   const d = langEl.value === 'auto' ? detectLang(c) : langEl.value;
   $('statLang').textContent = c.trim() ? (LANG_NAMES[d] ? LANG_NAMES[d][LANG] : d) : '—';
 }
-
-function updatePlaceholder(){
-  codeEl.placeholder = t('phText');
-}
-
+function updatePlaceholder(){ codeEl.placeholder = t('phText'); }
 function updateLevelHint(){
   const el = $('levelHint');
   if(!el) return;
@@ -1940,6 +2362,10 @@ function runAnalysis(){
     resultEl.innerHTML = '<div class="err">' + t('noCode') + '</div>';
     return;
   }
+  if(code.length > 200000){
+    resultEl.innerHTML = '<div class="err">' + t('codeTooBig') + '</div>';
+    return;
+  }
   window.__lastCode = code;
 
   const btn = $('explainBtn');
@@ -1963,7 +2389,6 @@ function runAnalysis(){
   }, 100);
 }
 
-/* Wire events */
 $('themeDark').addEventListener('click', function(){ applyTheme('dark'); });
 $('themeLight').addEventListener('click', function(){ applyTheme('light'); });
 $('langAr').addEventListener('click', function(){ applyLang('ar'); });
@@ -2000,10 +2425,9 @@ $('exampleBtn').addEventListener('click', function(){
     '  }',
     '  ',
     '  let subtotal = 0;',
-    '  for (var i = 0; i < items.length; i++) {',
+    '  for (let i = 0; i < items.length; i++) {',
     '    const item = items[i];',
-    '    if (item.price == null) {',
-    '      console.log("تخطي عنصر:", item);',
+    '    if (item.price === null || item.price === undefined) {',
     '      continue;',
     '    }',
     '    subtotal += item.price * (item.quantity || 1);',
@@ -2021,15 +2445,7 @@ $('exampleBtn').addEventListener('click', function(){
     '];',
     '',
     'const result = calculateTotal(cart);',
-    'console.log("النتيجة:", result);',
-    '',
-    'const apiKey = "sk-1234567890abcdef";',
-    'fetch("https://api.example.com/data?key=" + apiKey)',
-    '  .then(r => r.json())',
-    '  .then(data => console.log(data));',
-    '',
-    'document.getElementById("output").innerHTML = result.total;',
-    'alert("تم الحساب!");'
+    'document.getElementById("output").textContent = result.total;'
   ].join('\n');
   langEl.value = 'auto';
   updateStats();
@@ -2051,9 +2467,7 @@ $('copyBtn').addEventListener('click', function(){
   }
 });
 
-/* =========================================================
-   15) Init
-   ========================================================= */
+/* Init */
 (function init(){
   let savedTheme = 'dark', savedLang = 'ar';
   try{
